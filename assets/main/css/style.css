@@ -1,8 +1,11 @@
 :root {
-  --font-heading: "", sans-serif;
-  --font-body: "", sans-serif;
+  --font-heading: "Aboreto", sans-serif;
+  --font-body: "Manrope", sans-serif;
   --color-black: #000000;
   --color-white: #ffffff;
+  --color-text: #232323;
+  --color-bg: #fffdf2;
+  --color-bg-2: #766b5d;
   --space-8: 8px;
   --space-16: 16px;
   --space-24: 24px;
@@ -77,6 +80,51 @@
     margin: 0 auto;
   }
 }
+.heading-0 {
+  font-size: 100px;
+  line-height: 100%;
+  font-family: var(--font-heading);
+}
+
+.heading-1 {
+  font-size: 80px;
+  line-height: 100%;
+  font-family: var(--font-heading);
+}
+
+.heading-2 {
+  font-size: 53px;
+  line-height: 60px;
+  font-family: var(--font-heading);
+}
+
+.heading-4 {
+  font-size: 28px;
+  line-height: 34px;
+  font-family: var(--font-heading);
+}
+
+.heading-5 {
+  font-size: 20px;
+  line-height: 30px;
+  font-family: var(--font-heading);
+}
+
+.b1 {
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.b2 {
+  font-size: 13px;
+  line-height: 25px;
+}
+
+.b-tag {
+  font-size: 12px;
+  line-height: 29px;
+}
+
 /* ================================
    Margin
    ================================ */
@@ -830,6 +878,16 @@ body {
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: auto !important;
   -moz-osx-font-smoothing: grayscale !important;
+}
+
+*,
+body {
+  color: var(--color-text);
+}
+
+::selection {
+  background-color: var(--color-text);
+  color: var(--color-bg-2);
 }
 
 .lightpick {

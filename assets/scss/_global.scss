@@ -1,0 +1,9 @@
+*,
+body {
+  color: var(--color-text);
+}
+
+::selection {
+  background-color: var(--color-text);
+  color: var(--color-bg-2);
+}
