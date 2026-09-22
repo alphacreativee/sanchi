@@ -5,6 +5,7 @@ import {
   getDateLightPick,
   headerMenu,
   bannerSlider,
+  sectionTreatmentSlider,
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -78,6 +79,7 @@ function init() {
   createFilterTab();
   headerMenu();
   bannerSlider();
+  sectionTreatmentSlider();
   getDateLightPick();
 }
 

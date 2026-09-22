@@ -884,6 +884,7 @@ body {
 *,
 body {
   color: var(--color-text);
+  font-family: var(--font-body);
 }
 
 ::selection {
@@ -936,6 +937,20 @@ body {
 .hover-underline-black:hover::after,
 .hover-underline-black:focus-visible::after {
   background-color: var(--color-text);
+}
+
+.hover-underline-white.underline-default::after,
+.hover-underline-black.underline-default::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.hover-underline-white.underline-default:hover::after,
+.hover-underline-white.underline-default:focus-visible::after,
+.hover-underline-black.underline-default:hover::after,
+.hover-underline-black.underline-default:focus-visible::after {
+  transform: scaleX(0);
+  transform-origin: right center;
 }
 
 .button-global {
@@ -1119,10 +1134,16 @@ body {
 }
 .banner {
   width: 100%;
-  height: 100svh;
-  min-height: 640px;
-  padding: 82px 20px 0;
+  height: calc(100svh - 82px);
+  min-height: 558px;
+  margin-top: 82px;
+  padding: 0 16px;
   background-color: var(--color-bg);
+}
+@media (max-width: 991px) {
+  .banner {
+    height: 640px;
+  }
 }
 .banner-slider, .banner-slide {
   width: 100%;
@@ -1214,8 +1235,8 @@ body {
 @media (max-width: 767px) {
   .banner {
     min-height: 600px;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 16px;
+    padding-left: 16px;
   }
   .banner-content {
     width: calc(100% - 32px);
@@ -1239,6 +1260,327 @@ body {
 }
 @media (prefers-reduced-motion: reduce) {
   .banner-arrow {
+    transition: none;
+  }
+}
+.sectionIntro {
+  padding: 120px 20px;
+  background-color: var(--color-bg);
+  text-align: center;
+}
+.sectionIntro-inner {
+  width: min(680px, 100%);
+  margin: 0 auto;
+}
+.sectionIntro-desc {
+  color: var(--color-text);
+}
+.sectionIntro-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+  gap: 40px;
+}
+.sectionIntro-link {
+  line-height: 1;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@media (max-width: 1199px) {
+  .sectionIntro {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+@media (max-width: 991px) {
+  .sectionIntro {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+@media (max-width: 767px) {
+  .sectionIntro {
+    padding-top: 64px;
+    padding-right: 24px;
+    padding-bottom: 64px;
+    padding-left: 24px;
+  }
+  .sectionIntro-actions {
+    margin-top: 24px;
+    gap: 24px;
+  }
+}
+.sectionTreatment {
+  overflow: hidden;
+  padding: 0 0 120px 35px;
+  background-color: var(--color-bg);
+}
+.sectionTreatment-title {
+  margin-bottom: 54px;
+  padding-right: 20px;
+  color: var(--color-text);
+  text-align: center;
+  text-transform: uppercase;
+}
+.sectionTreatment-slider {
+  overflow: visible;
+}
+.sectionTreatment-card {
+  position: relative;
+  height: auto;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+.sectionTreatment-card.swiper-slide-next {
+  opacity: 0.3;
+}
+.sectionTreatment-cardLink {
+  display: block;
+  height: 100%;
+  color: inherit;
+}
+.sectionTreatment-cardLink:hover, .sectionTreatment-cardLink:focus-visible {
+  color: inherit;
+}
+.sectionTreatment-image {
+  width: 100%;
+  aspect-ratio: 1.2/1;
+  overflow: hidden;
+}
+.sectionTreatment-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+.sectionTreatment-card:hover .sectionTreatment-image img {
+  transform: scale(1.035);
+}
+.sectionTreatment-content {
+  padding: 22px 0 0;
+}
+.sectionTreatment-name {
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+.sectionTreatment-desc {
+  margin-top: 10px;
+  color: var(--color-text);
+}
+.sectionTreatment-link {
+  margin-top: 18px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sectionTreatment-card:hover .sectionTreatment-link::after {
+  transform: scaleX(0);
+  transform-origin: right center;
+}
+
+@media (min-width: 768px) {
+  .sectionTreatment-card.swiper-slide-next {
+    opacity: 1;
+  }
+  .sectionTreatment-card.swiper-slide-next + .sectionTreatment-card {
+    opacity: 0.3;
+  }
+}
+.sectionTreatment-slider.is-end .sectionTreatment-card {
+  opacity: 1;
+}
+
+@media (max-width: 991px) {
+  .sectionTreatment {
+    padding-bottom: 80px;
+  }
+  .sectionTreatment-title {
+    margin-bottom: 40px;
+  }
+}
+@media (max-width: 1199px) and (min-width: 992px) {
+  .sectionTreatment {
+    padding-bottom: 100px;
+  }
+}
+@media (max-width: 767px) {
+  .sectionTreatment {
+    padding-left: 16px;
+    padding-bottom: 64px;
+  }
+  .sectionTreatment-title {
+    margin-bottom: 32px;
+    padding-right: 16px;
+    font-size: 36px;
+    line-height: 1.15;
+  }
+  .sectionTreatment-content {
+    padding-top: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sectionTreatment-image img,
+  .sectionTreatment-card {
+    transition: none;
+  }
+}
+.sectionOffer {
+  padding: 0 20px 120px;
+  background-color: var(--color-bg);
+}
+.sectionOffer-heading {
+  width: min(620px, 100%);
+  margin: 0 auto 64px;
+  text-align: center;
+}
+.sectionOffer-title {
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+.sectionOffer-intro {
+  margin-top: 16px;
+  color: var(--color-text);
+}
+.sectionOffer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.sectionOffer-item {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(280px, 1fr);
+  min-height: 440px;
+}
+.sectionOffer-item:nth-child(odd) .sectionOffer-content {
+  background-color: var(--color-bg-2);
+}
+.sectionOffer-item:nth-child(odd) .sectionOffer-name,
+.sectionOffer-item:nth-child(odd) .sectionOffer-desc {
+  color: var(--color-bg);
+}
+.sectionOffer-item:nth-child(even) {
+  grid-template-columns: minmax(280px, 1fr) minmax(0, 3fr);
+}
+.sectionOffer-item:nth-child(even) .sectionOffer-image {
+  order: 2;
+}
+.sectionOffer-item:nth-child(even) .sectionOffer-content {
+  order: 1;
+  background-color: var(--color-bg);
+}
+.sectionOffer-item:nth-child(even) .sectionOffer-name,
+.sectionOffer-item:nth-child(even) .sectionOffer-desc {
+  color: var(--color-text);
+}
+.sectionOffer-image {
+  min-width: 0;
+  overflow: hidden;
+}
+.sectionOffer-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+.sectionOffer-item:hover .sectionOffer-image img {
+  transform: scale(1.025);
+}
+.sectionOffer-content {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 48px;
+}
+.sectionOffer-name {
+  text-transform: uppercase;
+}
+.sectionOffer-desc {
+  margin-top: 24px;
+}
+.sectionOffer-link {
+  margin-top: auto;
+  padding-top: 48px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1199px) {
+  .sectionOffer {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  .sectionOffer-heading {
+    margin-bottom: 48px;
+  }
+  .sectionOffer-item {
+    grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+    min-height: 380px;
+  }
+  .sectionOffer-item:nth-child(even) {
+    grid-template-columns: minmax(260px, 1fr) minmax(0, 2fr);
+  }
+  .sectionOffer-content {
+    padding: 40px;
+  }
+}
+@media (max-width: 991px) {
+  .sectionOffer {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .sectionOffer-item {
+    grid-template-columns: minmax(0, 1.6fr) minmax(240px, 1fr);
+  }
+  .sectionOffer-item:nth-child(even) {
+    grid-template-columns: minmax(240px, 1fr) minmax(0, 1.6fr);
+  }
+  .sectionOffer-content {
+    padding: 32px;
+  }
+}
+@media (max-width: 767px) {
+  .sectionOffer {
+    padding: 64px 24px;
+  }
+  .sectionOffer-heading {
+    margin-bottom: 48px;
+  }
+  .sectionOffer-list {
+    gap: 24px;
+  }
+  .sectionOffer-item, .sectionOffer-item:nth-child(even) {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .sectionOffer-item .sectionOffer-image, .sectionOffer-item:nth-child(even) .sectionOffer-image {
+    order: 1;
+  }
+  .sectionOffer-item .sectionOffer-content, .sectionOffer-item:nth-child(even) .sectionOffer-content {
+    order: 2;
+  }
+  .sectionOffer-image {
+    aspect-ratio: 1.35/1;
+  }
+  .sectionOffer-content {
+    min-height: 300px;
+    padding: 32px 24px;
+  }
+  .sectionOffer-desc {
+    margin-top: 16px;
+  }
+  .sectionOffer-link {
+    padding-top: 32px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sectionOffer-image img {
     transition: none;
   }
 }

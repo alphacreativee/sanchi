@@ -3,6 +3,7 @@
 *,
 body {
   color: var(--color-text);
+  font-family: var(--font-body);
 }
 
 ::selection {
@@ -53,6 +54,20 @@ body {
   &::after {
     background-color: var(--color-text);
   }
+}
+
+.hover-underline-white.underline-default::after,
+.hover-underline-black.underline-default::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.hover-underline-white.underline-default:hover::after,
+.hover-underline-white.underline-default:focus-visible::after,
+.hover-underline-black.underline-default:hover::after,
+.hover-underline-black.underline-default:focus-visible::after {
+  transform: scaleX(0);
+  transform-origin: right center;
 }
 
 .button-global {
