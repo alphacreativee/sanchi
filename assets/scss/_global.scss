@@ -1,3 +1,5 @@
+@use "./variable";
+
 *,
 body {
   color: var(--color-text);
@@ -6,4 +8,83 @@ body {
 ::selection {
   background-color: var(--color-text);
   color: var(--color-bg-2);
+}
+
+.hover-underline-white,
+.hover-underline-black {
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -8px;
+    left: 0;
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after,
+  &:focus-visible::after,
+  &.active::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+}
+
+.hover-underline-white,
+.hover-underline-white:hover,
+.hover-underline-white:focus-visible {
+  color: var(--color-bg);
+
+  &::after {
+    background-color: var(--color-bg);
+  }
+}
+
+.hover-underline-black,
+.hover-underline-black:hover,
+.hover-underline-black:focus-visible {
+  color: var(--color-text);
+
+  &::after {
+    background-color: var(--color-text);
+  }
+}
+
+.button-global {
+  @extend .b-tag;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 0 28px;
+  border: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease;
+
+  &:hover,
+  &:focus-visible {
+    border: 0;
+    background-color: var(--color-text);
+    color: var(--color-bg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-underline-white::after,
+  .hover-underline-black::after,
+  .button-global {
+    transition: none;
+  }
 }

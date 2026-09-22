@@ -1,1 +1,40 @@
-<div class="header-container">header nè</div>
+<div class="header-container">
+  <a class="header-logo" href="./index.html" aria-label="Sanchi Privé - Trang chủ">
+    <img src="./assets/images/logo.svg" alt="Sanchi Privé Wellness House by Fuji" />
+  </a>
+
+  <div class="header-main" id="header-navigation">
+    <nav class="header-menu" aria-label="Điều hướng chính">
+      <ul>
+        <li><a class="b-tag hover-underline-white" href="./lieu-trinh.html">Liệu trình</a></li>
+        <li><a class="b-tag hover-underline-white" href="./khong-gian.html">Không gian</a></li>
+        <li><a class="b-tag hover-underline-white" href="./cam-hung.html">Cảm hứng</a></li>
+        <li><a class="b-tag hover-underline-white" href="./ve-sanchi-prive.html">Về Sanchi Privé</a></li>
+        <li><a class="b-tag hover-underline-white" href="./uu-dai.html">Ưu đãi</a></li>
+        <li><a class="b-tag hover-underline-white" href="./lien-he.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+
+    <button
+      class="header-booking b-tag hover-underline-white"
+      type="button"
+      data-popup-target="#booking-popup"
+      aria-haspopup="dialog"
+      aria-controls="booking-popup"
+    >
+      Đặt lịch
+    </button>
+  </div>
+
+  <button
+    class="header-hamburger"
+    type="button"
+    aria-label="Mở menu"
+    aria-controls="header-navigation"
+    aria-expanded="false"
+    data-header-toggle
+  >
+    <span></span>
+    <span></span>
+  </button>
+</div>

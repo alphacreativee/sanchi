@@ -103,6 +103,66 @@ export function headerScroll() {
   return trigger;
 }
 
+export function headerMenu() {
+  document.addEventListener("click", (event) => {
+    const toggle = event.target.closest("[data-header-toggle]");
+    if (!toggle) return;
+
+    const navigation = document.getElementById("header-navigation");
+    if (!navigation) return;
+
+    const isOpen = navigation.classList.toggle("show");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "Đóng menu" : "Mở menu");
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+
+    const navigation = document.getElementById("header-navigation");
+    const toggle = document.querySelector("[data-header-toggle]");
+    if (!navigation?.classList.contains("show") || !toggle) return;
+
+    navigation.classList.remove("show");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Mở menu");
+    toggle.focus();
+  });
+}
+
+export function bannerSlider() {
+  const sliders = document.querySelectorAll(".banner-slider");
+  if (!sliders.length || typeof Swiper === "undefined") return [];
+
+  return Array.from(sliders).map((slider) => {
+    const slides = slider.querySelectorAll(".swiper-slide");
+    const prevArrow = slider.querySelector(".swiper-button-prev");
+    const nextArrow = slider.querySelector(".swiper-button-next");
+    const hasMultipleSlides = slides.length > 1;
+
+    [prevArrow, nextArrow].forEach((arrow) => {
+      if (arrow) arrow.hidden = !hasMultipleSlides;
+    });
+
+    return new Swiper(slider, {
+      effect: "fade",
+      fadeEffect: {
+        crossFade: true,
+      },
+      speed: 900,
+      loop: hasMultipleSlides,
+      allowTouchMove: hasMultipleSlides,
+      watchOverflow: true,
+      navigation: hasMultipleSlides
+        ? {
+            nextEl: nextArrow,
+            prevEl: prevArrow,
+          }
+        : undefined,
+    });
+  });
+}
+
 /////// thêm class select-tab vào thì vẫn filter theo đúng type đó, không show hết item.
 export function createFilterTab() {
   document.querySelectorAll(".filter-section").forEach((section) => {
@@ -168,11 +228,16 @@ export function createFilterTab() {
 }
 
 export function getDateLightPick() {
+  const datepicker = document.getElementById("datepicker");
+  if (!datepicker) return null;
+
   var picker = new Lightpick({
-    field: document.getElementById("datepicker"),
+    field: datepicker,
     minDate: new Date(),
     singleDate: false,
     numberOfMonths: 2,
     // lang: "en-US",
   });
+
+  return picker;
 }
