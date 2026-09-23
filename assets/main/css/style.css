@@ -2039,6 +2039,7 @@ input:-webkit-autofill:active {
   position: relative;
   display: inline-block;
   color: var(--color-bg);
+  line-height: 100%;
 }
 .footer-list a::after {
   content: "";
