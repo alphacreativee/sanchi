@@ -11,6 +11,15 @@ export function customDropdown() {
     const displayText = dropdown.querySelector(".dropdown-custom-text");
 
     const isSelectType = dropdown.classList.contains("dropdown-custom-select");
+    const hiddenInput = isSelectType
+      ? dropdown.querySelector('input[type="hidden"]')
+      : null;
+
+    if (isSelectType && displayText && !dropdown.dataset.placeholder) {
+      dropdown.dataset.placeholder = displayText.textContent.trim();
+    }
+
+    if (!btnDropdown || !dropdownMenu) return;
 
     btnDropdown.addEventListener("click", function (e) {
       e.stopPropagation();
@@ -28,9 +37,14 @@ export function customDropdown() {
         e.stopPropagation();
 
         if (isSelectType) {
-          const optionText = item.textContent;
+          const optionText = item.textContent.trim();
           displayText.textContent = optionText;
+          if (hiddenInput) {
+            hiddenInput.value = item.dataset.value || optionText;
+            hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
+          }
           dropdown.classList.add("selected");
+          dropdown.classList.remove("is-invalid");
         } else {
           const currentImgEl = valueSelect.querySelector("img");
           const currentImg = currentImgEl ? currentImgEl.src : "";
@@ -205,6 +219,162 @@ export function sectionTreatmentSlider() {
   });
 }
 
+export function sectionTestimonialSlider() {
+  const sliders = document.querySelectorAll(".sectionTestimonial-slider");
+  if (!sliders.length || typeof Swiper === "undefined") return [];
+
+  return Array.from(sliders).map((slider) => {
+    const pagination = slider.querySelector(".sectionTestimonial-pagination");
+
+    return new Swiper(slider, {
+      speed: 700,
+      autoHeight: true,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      pagination: {
+        el: pagination,
+        clickable: true,
+      },
+    });
+  });
+}
+
+export function sectionGalleryLightbox() {
+  const galleryLinks = document.querySelectorAll(".sectionGallery-link");
+  if (!galleryLinks.length || typeof GLightbox === "undefined") return null;
+
+  return GLightbox({
+    selector: ".sectionGallery-link",
+    touchNavigation: true,
+    keyboardNavigation: true,
+    closeOnOutsideClick: true,
+    loop: true,
+    zoomable: true,
+    openEffect: "zoom",
+    closeEffect: "zoom",
+    slideEffect: "fade",
+  });
+}
+
+export function formReservation() {
+  const forms = document.querySelectorAll("[data-reservation-form]");
+  if (!forms.length) return [];
+
+  return Array.from(forms).map((form) => {
+    const submitButton = form.querySelector(".formReservation-submit");
+    const successMessage = form.querySelector(".formReservation-success");
+    const requiredInputs = form.querySelectorAll(
+      ".formReservation-input[required]",
+    );
+    const requiredDropdowns = form.querySelectorAll(
+      ".formReservation-dropdown[data-required]",
+    );
+    let submitTimer = null;
+    let successTimer = null;
+
+    const hideSuccess = () => {
+      if (successMessage) successMessage.hidden = true;
+    };
+
+    const resetForm = () => {
+      form.reset();
+
+      requiredInputs.forEach((input) => {
+        input.classList.remove("is-invalid");
+        input.lightpickInstance?.reset();
+      });
+
+      requiredDropdowns.forEach((dropdown) => {
+        const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+        const displayText = dropdown.querySelector(".dropdown-custom-text");
+        const dropdownMenu = dropdown.querySelector(".dropdown-custom-menu");
+        const dropdownButton = dropdown.querySelector(".dropdown-custom-btn");
+
+        if (hiddenInput) hiddenInput.value = "";
+        if (displayText && dropdown.dataset.placeholder) {
+          displayText.textContent = dropdown.dataset.placeholder;
+        }
+
+        dropdown.classList.remove("selected", "is-invalid");
+        dropdownMenu?.classList.remove("dropdown--active");
+        dropdownButton?.classList.remove("--active");
+      });
+    };
+
+    requiredInputs.forEach((input) => {
+      input.addEventListener("input", () => {
+        input.classList.remove("is-invalid");
+        hideSuccess();
+      });
+    });
+
+    requiredDropdowns.forEach((dropdown) => {
+      const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+      hiddenInput?.addEventListener("change", hideSuccess);
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!submitButton || submitButton.classList.contains("loading")) return;
+
+      window.clearTimeout(successTimer);
+      hideSuccess();
+      let isValid = true;
+      let firstInvalidControl = null;
+
+      requiredInputs.forEach((input) => {
+        const isEmpty = !input.value.trim();
+        input.classList.toggle("is-invalid", isEmpty);
+        if (isEmpty) {
+          isValid = false;
+          firstInvalidControl ||= input;
+        }
+      });
+
+      requiredDropdowns.forEach((dropdown) => {
+        const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+        const isEmpty = !hiddenInput?.value.trim();
+        dropdown.classList.toggle("is-invalid", isEmpty);
+        if (isEmpty) {
+          isValid = false;
+          firstInvalidControl ||= dropdown.querySelector(
+            ".dropdown-custom-btn",
+          );
+        }
+      });
+
+      if (!isValid) {
+        firstInvalidControl?.focus();
+        return;
+      }
+
+      submitButton.classList.add("loading");
+      submitButton.disabled = true;
+
+      window.clearTimeout(submitTimer);
+      submitTimer = window.setTimeout(() => {
+        submitButton.classList.remove("loading");
+        submitButton.disabled = false;
+        if (successMessage) {
+          successMessage.hidden = false;
+          successTimer = window.setTimeout(() => {
+            successMessage.hidden = true;
+            resetForm();
+          }, 5000);
+        } else {
+          resetForm();
+        }
+      }, 3000);
+    });
+
+    return form;
+  });
+}
+
 /////// thêm class select-tab vào thì vẫn filter theo đúng type đó, không show hết item.
 export function createFilterTab() {
   document.querySelectorAll(".filter-section").forEach((section) => {
@@ -270,16 +440,27 @@ export function createFilterTab() {
 }
 
 export function getDateLightPick() {
-  const datepicker = document.getElementById("datepicker");
-  if (!datepicker) return null;
+  const datepickers = document.querySelectorAll("[data-lightpick]");
+  if (!datepickers.length || typeof Lightpick === "undefined") return [];
 
-  var picker = new Lightpick({
-    field: datepicker,
-    minDate: new Date(),
-    singleDate: false,
-    numberOfMonths: 2,
-    // lang: "en-US",
+  return Array.from(datepickers).map((datepicker) => {
+    const picker = new Lightpick({
+      field: datepicker,
+      minDate: new Date(),
+      singleDate: true,
+      numberOfMonths: 1,
+      format: "DD/MM/YYYY",
+      orientation: "auto",
+      onSelect: (date) => {
+        if (!date) return;
+        datepicker.value = date.format("DD/MM/YYYY");
+        datepicker.classList.remove("is-invalid");
+        datepicker.dispatchEvent(new Event("input", { bubbles: true }));
+        datepicker.dispatchEvent(new Event("change", { bubbles: true }));
+      },
+    });
+
+    datepicker.lightpickInstance = picker;
+    return picker;
   });
-
-  return picker;
 }

@@ -11,6 +11,16 @@ body {
   color: var(--color-bg-2);
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-color: transparent !important;
+  background-image: none !important;
+  -webkit-background-clip: text;
+  transition: background-color 9999s ease-out 0s;
+}
+
 .hover-underline-white,
 .hover-underline-black {
   position: relative;
@@ -20,7 +30,7 @@ body {
     content: "";
     position: absolute;
     right: 0;
-    bottom: -8px;
+    bottom: -4px;
     left: 0;
     height: 1px;
     transform: scaleX(0);
@@ -96,10 +106,312 @@ body {
   }
 }
 
+.formReservation-modal {
+  .modal-dialog {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 48px);
+    max-width: 600px;
+    min-height: calc(100% - 32px);
+    margin-top: 16px;
+    margin-right: auto;
+    margin-bottom: 16px;
+    margin-left: auto;
+  }
+}
+
+.formReservation {
+  position: relative;
+  height: auto;
+  max-height: calc(100dvh - 32px);
+  overflow: visible;
+  padding: 64px;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--color-bg-2);
+
+  &-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 32px;
+    height: 32px;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 32px;
+      height: 1px;
+      background-color: var(--color-bg);
+      transition: opacity 0.3s ease;
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    &:hover::before,
+    &:hover::after,
+    &:focus-visible::before,
+    &:focus-visible::after {
+      opacity: 0.6;
+    }
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  &-title {
+    color: var(--color-bg);
+    text-transform: uppercase;
+  }
+
+  &-fields {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    gap: 20px;
+  }
+
+  &-field {
+    display: block;
+    width: 100%;
+  }
+
+  &-input,
+  .dropdown-custom-btn {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 253, 242, 0.75);
+    border-radius: 0;
+    color: var(--color-bg);
+    text-align: left;
+    transition: border-color 0.3s ease;
+  }
+
+  &-input::placeholder {
+    color: var(--color-bg);
+    opacity: 1;
+  }
+
+  &-input:-webkit-autofill,
+  &-input:-webkit-autofill:hover,
+  &-input:-webkit-autofill:focus,
+  &-input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--color-bg);
+    caret-color: var(--color-bg);
+  }
+
+  &-dateField {
+    position: relative;
+
+    .formReservation-input {
+      padding-right: 24px;
+      cursor: pointer;
+    }
+
+    .formReservation-chevron {
+      position: absolute;
+      top: 14px;
+      right: 3px;
+      pointer-events: none;
+    }
+  }
+
+  &-input:focus,
+  .dropdown-custom-btn:focus-visible {
+    border-bottom-color: var(--color-bg);
+  }
+
+  &-input.is-invalid,
+  .formReservation-dropdown.is-invalid .dropdown-custom-btn {
+    border-bottom-color: var(--color-error);
+  }
+
+  &-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px;
+  }
+
+  &-dropdown {
+    position: relative;
+
+    .dropdown-custom-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .dropdown-custom-text {
+      overflow: hidden;
+      color: var(--color-bg);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .dropdown-custom-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      left: 0;
+      z-index: 10;
+      max-height: 170px;
+      overflow-y: auto;
+      padding: 6px 0;
+      background-color: var(--color-bg);
+      box-shadow: 0 10px 24px rgba(35, 35, 35, 0.18);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease,
+        transform 0.25s ease;
+
+      &.dropdown--active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+
+    .dropdown-custom-item {
+      display: block;
+      width: 100%;
+      padding: 9px 16px;
+      color: var(--color-text);
+      text-align: left;
+      transition:
+        color 0.25s ease,
+        background-color 0.25s ease;
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--color-text);
+        color: var(--color-bg);
+      }
+    }
+  }
+
+  &-chevron {
+    width: 8px;
+    height: 8px;
+    margin-right: 3px;
+    flex: 0 0 8px;
+    border-right: 1px solid var(--color-bg);
+    border-bottom: 1px solid var(--color-bg);
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 0.25s ease;
+  }
+
+  .dropdown-custom-btn.--active &-chevron {
+    transform: translateY(2px) rotate(225deg);
+  }
+
+  &-submit {
+    position: relative;
+    width: 100%;
+    margin-top: 40px;
+    flex: 0 0 50px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: none;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: formReservationSpin 0.7s linear infinite;
+    }
+
+    &.loading {
+      cursor: wait;
+      pointer-events: none;
+
+      .formReservation-submitText {
+        opacity: 0;
+      }
+
+      &::after {
+        display: block;
+      }
+    }
+  }
+
+  &-submitText {
+    color: inherit;
+    transition: opacity 0.2s ease;
+  }
+
+  &-success {
+    margin-top: 12px;
+    color: var(--color-bg);
+    text-align: center;
+  }
+}
+
+.modal-backdrop.show {
+  opacity: 0.65;
+}
+
+@keyframes formReservationSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 575px) {
+  .formReservation-modal .modal-dialog {
+    width: calc(100% - 32px);
+  }
+
+  .formReservation {
+    height: auto;
+    overflow-y: auto;
+    padding: 64px 24px 32px;
+
+    &-row {
+      gap: 20px;
+    }
+
+    &-submit {
+      margin-top: 32px;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hover-underline-white::after,
   .hover-underline-black::after,
-  .button-global {
+  .button-global,
+  .formReservation-close::before,
+  .formReservation-close::after,
+  .formReservation-input,
+  .formReservation .dropdown-custom-btn,
+  .formReservation .dropdown-custom-menu,
+  .formReservation .dropdown-custom-item,
+  .formReservation-chevron {
     transition: none;
   }
 }

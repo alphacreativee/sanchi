@@ -6,6 +6,9 @@ import {
   headerMenu,
   bannerSlider,
   sectionTreatmentSlider,
+  sectionTestimonialSlider,
+  sectionGalleryLightbox,
+  formReservation,
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -80,6 +83,9 @@ function init() {
   headerMenu();
   bannerSlider();
   sectionTreatmentSlider();
+  sectionTestimonialSlider();
+  sectionGalleryLightbox();
+  formReservation();
   getDateLightPick();
 }
 
