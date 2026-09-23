@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liệu trình | Sanchi Privé</title>
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Liệu trình | Sanchi Privé" />
+    <meta
+      property="og:description"
+      content="Khám phá các liệu trình chăm sóc sức khỏe và phục hồi chuyên sâu tại Sanchi Privé."
+    />
+    <meta property="og:image" content="./assets/images/del/banner.webp" />
+
+    <link rel="stylesheet" href="./assets/libs/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lenis.css" />
+    <link rel="stylesheet" href="./assets/libs/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lightpick.min.css" />
+    <link rel="stylesheet" href="./assets/fonts/Manrope/style.css" />
+    <link rel="stylesheet" href="./assets/fonts/Aboreto/style.css" />
+    <link rel="stylesheet" href="./assets/main/css/style.min.css" />
+
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+    </script>
+  </head>
+
+  <body>
+    <script>
+      fetch("./components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+          const currentPage = window.location.pathname.split("/").pop();
+
+          document.querySelectorAll(".header-menu a").forEach((link) => {
+            const linkPage = link.getAttribute("href").replace("./", "");
+            if (linkPage === currentPage) link.classList.add("active");
+          });
+        });
+    </script>
+    <header id="header" class="header position-fixed"></header>
+
+    <main>
+      <section class="banner short-banner" aria-label="Liệu trình">
+        <div class="banner-slide">
+          <img
+            class="banner-image"
+            src="./assets/images/del/banner.webp"
+            alt="Không gian liệu trình tại Sanchi Privé"
+          />
+          <div class="banner-content">
+            <h1 class="banner-title heading-2">Liệu trình</h1>
+          </div>
+        </div>
+      </section>
+
+      <section class="sectionIntro sectionIntro--wide">
+        <div class="sectionIntro-inner">
+          <div class="sectionIntro-content b1">
+            <p>
+              Tọa lạc trong một không gian ở Shilla Hanoi yên tĩnh và tinh tế,
+              Sanchi Privé mang đến một điểm dừng thư giãn dành cho những ai muốn
+              tạm rời xa nhịp sống bận rộn. Lấy cảm hứng từ tinh thần chăm sóc sức
+              khỏe của Nhật Bản, Sanchi Privé được xây dựng như một không gian cân
+              bằng, nơi cơ thể được thả lỏng và tâm trí tìm lại sự bình yên.
+            </p>
+            <p>
+              Sanchi Privé sở hữu những không gian trị liệu riêng tư và khu vực
+              thư giãn được thiết kế hài hòa, mang đến cảm giác thoải mái và trọn
+              vẹn trong từng trải nghiệm. Mỗi liệu trình được chăm chút kỹ lưỡng,
+              kết hợp các kỹ thuật massage truyền thống cùng phương pháp chăm sóc
+              hiện đại, hướng đến sự phục hồi và tái tạo năng lượng cho cơ thể.
+            </p>
+            <p>
+              Các liệu trình tại Sanchi Privé là sự kết hợp giữa tinh hoa chăm sóc
+              sức khỏe phương Đông và những tiêu chuẩn wellness đương đại. Từ
+              massage thư giãn, chăm sóc cơ thể đến các liệu trình chuyên sâu, mỗi
+              trải nghiệm đều được thiết kế để giúp bạn giải tỏa căng thẳng, phục
+              hồi thể chất và cân bằng tinh thần.
+            </p>
+            <p>
+              Bước qua cánh cửa Sanchi Privé, bạn sẽ bước vào một thế giới chậm
+              rãi và nhẹ nhàng hơn — nơi hương thơm dịu nhẹ, âm thanh thư thái và
+              sự chăm sóc tận tâm cùng tạo nên một hành trình wellness trọn vẹn.
+            </p>
+          </div>
+          <div class="sectionIntro-actions">
+            <a
+              class="sectionIntro-link b-tag hover-underline-black underline-default"
+              href="#sectionReservation"
+            >
+              Xem menu
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="sectionReservation" id="sectionReservation">
+        <div class="sectionReservation-inner">
+          <div class="sectionReservation-content">
+            <div class="formReservation formReservation--inline">
+              <form class="formReservation-form" data-reservation-form novalidate>
+                <h2 class="formReservation-title heading-2">Đặt lịch</h2>
+
+                <div class="formReservation-fields">
+                  <label class="formReservation-field">
+                    <span class="visually-hidden">Họ và tên</span>
+                    <input
+                      class="formReservation-input b1"
+                      type="text"
+                      name="fullName"
+                      placeholder="Họ và tên"
+                      autocomplete="name"
+                      required
+                    />
+                  </label>
+
+                  <label class="formReservation-field">
+                    <span class="visually-hidden">Số điện thoại</span>
+                    <input
+                      class="formReservation-input b1"
+                      type="tel"
+                      name="phone"
+                      placeholder="Số điện thoại"
+                      autocomplete="tel"
+                      required
+                    />
+                  </label>
+
+                  <div class="dropdown-custom-select formReservation-dropdown" data-required>
+                    <input type="hidden" name="service" required />
+                    <button class="dropdown-custom-btn b1" type="button">
+                      <span class="dropdown-custom-text">Dịch vụ</span>
+                      <span class="formReservation-chevron" aria-hidden="true"></span>
+                    </button>
+                    <div class="dropdown-custom-menu">
+                      <button class="dropdown-custom-item b1" type="button" data-value="massage">Massage</button>
+                      <button class="dropdown-custom-item b1" type="button" data-value="tri-lieu">Trị liệu</button>
+                      <button class="dropdown-custom-item b1" type="button" data-value="phuc-hoi">Phục hồi</button>
+                    </div>
+                  </div>
+
+                  <div class="formReservation-row">
+                    <label class="formReservation-field formReservation-dateField">
+                      <span class="visually-hidden">Ngày đến</span>
+                      <input
+                        class="formReservation-input b1"
+                        type="text"
+                        name="date"
+                        placeholder="Ngày đến"
+                        data-lightpick
+                        readonly
+                        required
+                      />
+                      <span class="formReservation-chevron" aria-hidden="true"></span>
+                    </label>
+
+                    <div class="dropdown-custom-select formReservation-dropdown" data-required>
+                      <input type="hidden" name="time" required />
+                      <button class="dropdown-custom-btn b1" type="button">
+                        <span class="dropdown-custom-text">Giờ đến</span>
+                        <span class="formReservation-chevron" aria-hidden="true"></span>
+                      </button>
+                      <div class="dropdown-custom-menu">
+                        <button class="dropdown-custom-item b1" type="button" data-value="09:00">09:00</button>
+                        <button class="dropdown-custom-item b1" type="button" data-value="12:00">12:00</button>
+                        <button class="dropdown-custom-item b1" type="button" data-value="15:00">15:00</button>
+                        <button class="dropdown-custom-item b1" type="button" data-value="18:00">18:00</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="formReservation-submit button-global" type="submit">
+                  <span class="formReservation-submitText">Đặt lịch</span>
+                </button>
+                <p class="formReservation-success b1" aria-live="polite" hidden>
+                  Đặt lịch thành công. Chúng tôi sẽ liên hệ với bạn sớm.
+                </p>
+              </form>
+            </div>
+          </div>
+
+          <div class="sectionReservation-image">
+            <img
+              src="./assets/images/del/banner.webp"
+              alt="Không gian đặt lịch tại Sanchi Privé"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="sectionOffer">
+        <div class="sectionOffer-heading">
+          <h2 class="sectionOffer-title heading-2">Ưu đãi nổi bật</h2>
+          <p class="sectionOffer-intro b1">
+            Tận hưởng không gian thư giãn và chăm sóc sức khỏe đỉnh cao với các
+            gói ưu đãi đặc quyền trong tháng.
+          </p>
+        </div>
+
+        <div class="sectionOffer-list">
+          <div class="sectionOffer-item">
+            <div class="sectionOffer-image">
+              <img
+                src="./assets/images/del/banner.webp"
+                alt="Ưu đãi hành trình chăm sóc sức khỏe chuyên sâu"
+              />
+            </div>
+            <div class="sectionOffer-content">
+              <h3 class="sectionOffer-name heading-5">
+                Hành trình chăm sóc sức khỏe chuyên sâu
+              </h3>
+              <p class="sectionOffer-desc b2">
+                Sanchi Privé mang đến những liệu trình thư giãn chuyên sâu, giúp
+                cơ thể phục hồi năng lượng và tìm lại sự cân bằng.
+              </p>
+              <a class="sectionOffer-link b-tag" href="./uu-dai.html">
+                <span class="hover-underline-white underline-default">Chi tiết</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="sectionOffer-item">
+            <div class="sectionOffer-image">
+              <img
+                src="./assets/images/del/banner.webp"
+                alt="Ưu đãi chăm sóc sức khỏe dành riêng"
+              />
+            </div>
+            <div class="sectionOffer-content">
+              <h3 class="sectionOffer-name heading-5">
+                Không gian thư giãn dành riêng cho bạn
+              </h3>
+              <p class="sectionOffer-desc b2">
+                Tận hưởng những khoảnh khắc nghỉ ngơi trọn vẹn với các gói chăm
+                sóc được thiết kế riêng cho nhu cầu và nhịp sống của bạn.
+              </p>
+              <a class="sectionOffer-link b-tag" href="./uu-dai.html">
+                <span class="hover-underline-black underline-default">Chi tiết</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div
+      class="modal fade formReservation-modal"
+      id="formReservationModal"
+      tabindex="-1"
+      aria-labelledby="formReservationTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content formReservation">
+          <button
+            class="formReservation-close"
+            type="button"
+            data-bs-dismiss="modal"
+            aria-label="Đóng"
+          ><span aria-hidden="true"></span></button>
+
+          <form class="formReservation-form" data-reservation-form novalidate>
+            <h2 class="formReservation-title heading-4" id="formReservationTitle">Đặt lịch</h2>
+            <div class="formReservation-fields">
+              <label class="formReservation-field">
+                <span class="visually-hidden">Họ và tên</span>
+                <input class="formReservation-input b1" type="text" name="fullName" placeholder="Họ và tên" autocomplete="name" required />
+              </label>
+              <label class="formReservation-field">
+                <span class="visually-hidden">Số điện thoại</span>
+                <input class="formReservation-input b1" type="tel" name="phone" placeholder="Số điện thoại" autocomplete="tel" required />
+              </label>
+              <div class="dropdown-custom-select formReservation-dropdown" data-required>
+                <input type="hidden" name="service" required />
+                <button class="dropdown-custom-btn b1" type="button">
+                  <span class="dropdown-custom-text">Dịch vụ</span>
+                  <span class="formReservation-chevron" aria-hidden="true"></span>
+                </button>
+                <div class="dropdown-custom-menu">
+                  <button class="dropdown-custom-item b1" type="button" data-value="massage">Massage</button>
+                  <button class="dropdown-custom-item b1" type="button" data-value="tri-lieu">Trị liệu</button>
+                  <button class="dropdown-custom-item b1" type="button" data-value="phuc-hoi">Phục hồi</button>
+                </div>
+              </div>
+              <div class="formReservation-row">
+                <label class="formReservation-field formReservation-dateField">
+                  <span class="visually-hidden">Ngày đến</span>
+                  <input class="formReservation-input b1" type="text" name="date" placeholder="Ngày đến" data-lightpick readonly required />
+                  <span class="formReservation-chevron" aria-hidden="true"></span>
+                </label>
+                <div class="dropdown-custom-select formReservation-dropdown" data-required>
+                  <input type="hidden" name="time" required />
+                  <button class="dropdown-custom-btn b1" type="button">
+                    <span class="dropdown-custom-text">Giờ đến</span>
+                    <span class="formReservation-chevron" aria-hidden="true"></span>
+                  </button>
+                  <div class="dropdown-custom-menu">
+                    <button class="dropdown-custom-item b1" type="button" data-value="09:00">09:00</button>
+                    <button class="dropdown-custom-item b1" type="button" data-value="12:00">12:00</button>
+                    <button class="dropdown-custom-item b1" type="button" data-value="15:00">15:00</button>
+                    <button class="dropdown-custom-item b1" type="button" data-value="18:00">18:00</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="formReservation-submit button-global" type="submit">
+              <span class="formReservation-submitText">Đặt lịch</span>
+            </button>
+            <p class="formReservation-success b1" aria-live="polite" hidden>
+              Đặt lịch thành công. Chúng tôi sẽ liên hệ với bạn sớm.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      fetch("./components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+    <footer id="footer"></footer>
+
+    <script src="./assets/libs/jquery-3.7.1.js"></script>
+    <script src="./assets/libs/lenis.min.js"></script>
+    <script src="./assets/libs/gsap.min.js"></script>
+    <script src="./assets/libs/ScrollTrigger.min.js"></script>
+    <script src="./assets/libs/SplitText.min.js"></script>
+    <script src="./assets/libs/bootstrap.bundle.min.js"></script>
+    <script src="./assets/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/libs/moment.min.js"></script>
+    <script src="./assets/libs/lightpick.min.js"></script>
+    <script type="module" src="./assets/main/js/script.min.js"></script>
+  </body>
+</html>

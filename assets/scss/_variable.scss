@@ -9,6 +9,7 @@
   --color-bg: #fffdf2;
   --color-bg-2: #766b5d;
   --color-error: #c94a4a;
+  --section-spacing: 120px;
   //spacing
   --space-8: 8px;
   --space-16: 16px;
@@ -36,6 +37,11 @@
     --space-72: 64px;
     --space-80: 72px;
     --spacing-padding: 64px 16px;
+  }
+}
+@media (max-width: 767px) {
+  :root {
+    --section-spacing: 64px;
   }
 }
 // font variable
@@ -128,4 +134,31 @@
   font-size: 12px;
   line-height: 29px;
   letter-spacing: 1.2px;
+}
+
+@media (max-width: 767px) {
+  .heading-0 {
+    font-size: 80px;
+    line-height: 100%;
+  }
+
+  .heading-1 {
+    font-size: 53px;
+    line-height: 60px;
+  }
+
+  .heading-2 {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .heading-4 {
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  .heading-5 {
+    font-size: 20px;
+    line-height: 30px;
+  }
 }

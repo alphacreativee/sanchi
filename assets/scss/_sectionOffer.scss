@@ -1,5 +1,5 @@
 .sectionOffer {
-  padding: 0 20px 120px;
+  padding: 0 20px var(--section-spacing);
   background-color: var(--color-bg);
 
   &-heading {
@@ -169,7 +169,7 @@
 
 @media (max-width: 767px) {
   .sectionOffer {
-    padding: 0 24px 64px;
+    padding: 0 24px var(--section-spacing);
 
     &-heading {
       margin-bottom: 48px;

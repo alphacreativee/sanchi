@@ -388,7 +388,8 @@ input:-webkit-autofill:active {
 
   .formReservation {
     height: auto;
-    overflow-y: auto;
+    max-height: none;
+    overflow: visible;
     padding: 64px 24px 32px;
 
     &-row {

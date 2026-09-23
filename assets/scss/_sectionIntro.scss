@@ -1,5 +1,5 @@
 .sectionIntro {
-  padding: 120px 20px;
+  padding: var(--section-spacing) 20px;
   background-color: var(--color-bg);
   text-align: center;
 
@@ -10,6 +10,18 @@
 
   &-desc {
     color: var(--color-text);
+  }
+
+  &-content {
+    color: var(--color-text);
+
+    p {
+      color: inherit;
+
+      + p {
+        margin-top: 24px;
+      }
+    }
   }
 
   &-actions {
@@ -25,6 +37,16 @@
     letter-spacing: 1.8px;
     text-transform: uppercase;
     font-weight: 600;
+  }
+}
+
+.sectionIntro--wide {
+  .sectionIntro-inner {
+    width: min(1180px, 100%);
+  }
+
+  .sectionIntro-content {
+    text-align: left;
   }
 }
 
@@ -44,9 +66,9 @@
 
 @media (max-width: 767px) {
   .sectionIntro {
-    padding-top: 64px;
+    padding-top: var(--section-spacing);
     padding-right: 24px;
-    padding-bottom: 64px;
+    padding-bottom: var(--section-spacing);
     padding-left: 24px;
 
     &-actions {

@@ -1,5 +1,5 @@
 .sectionGallery {
-  padding: 0 20px 120px;
+  padding: 0 20px var(--section-spacing);
   background-color: var(--color-bg);
 
   &-title {
@@ -59,14 +59,20 @@
   }
 }
 
+@media (max-width: 767px) {
+  .sectionGallery {
+    padding-right: 24px;
+    padding-bottom: var(--section-spacing);
+    padding-left: 24px;
+  }
+}
+
 @media (max-width: 575px) {
   .sectionGallery {
-    padding: 0 24px 64px;
+    padding: 0 24px var(--section-spacing);
 
     &-title {
       margin-bottom: 40px;
-      font-size: 36px;
-      line-height: 1.15;
     }
 
     &-grid {

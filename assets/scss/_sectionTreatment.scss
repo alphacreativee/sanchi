@@ -1,6 +1,6 @@
 .sectionTreatment {
   overflow: hidden;
-  padding: 0 0 120px 35px;
+  padding: 0 0 var(--section-spacing) 35px;
   background-color: var(--color-bg);
 
   &-title {
@@ -117,13 +117,11 @@
 @media (max-width: 767px) {
   .sectionTreatment {
     padding-left: 16px;
-    padding-bottom: 64px;
+    padding-bottom: var(--section-spacing);
 
     &-title {
       margin-bottom: 32px;
       padding-right: 16px;
-      font-size: 36px;
-      line-height: 1.15;
     }
 
     &-content {

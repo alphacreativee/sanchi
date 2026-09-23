@@ -1,5 +1,5 @@
 .sectionTestimonial {
-  padding: 0 20px 120px;
+  padding: 0 20px var(--section-spacing);
   background-color: var(--color-bg);
   text-align: center;
 
@@ -44,15 +44,11 @@
 
 @media (max-width: 767px) {
   .sectionTestimonial {
-    padding: 0 24px 64px;
+    padding: 0 24px var(--section-spacing);
 
     &-slider {
       padding-bottom: 48px;
     }
 
-    &-quote {
-      font-size: 22px;
-      line-height: 1.35;
-    }
   }
 }
