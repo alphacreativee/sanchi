@@ -1,0 +1,121 @@
+.gallery {
+  &-inner {
+    padding: 100px 20px;
+  }
+
+  &-lightbox {
+    background-color: var(--color-bg);
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .swiper-arrow-custom {
+      &::after {
+        content: unset;
+        font-size: 0;
+      }
+      svg {
+        width: 18px;
+        height: 34px;
+      }
+    }
+    .lightbox-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100svh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+      flex-direction: column;
+    }
+    .lightbox-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 20px;
+    }
+    &.hidden {
+      display: none;
+    }
+    .lightbox-main {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-end;
+      width: calc(66.6666666667% - 80px);
+      height: 80%;
+      .swiper-lightbox {
+        width: 100%;
+      }
+    }
+    .icon-close-lightbox {
+      cursor: pointer;
+    }
+    .swiper-button-next {
+      transform: rotate(180deg);
+      right: 20px;
+    }
+    .swiper-button-prev {
+      left: 20px;
+    }
+  }
+  .filter-section {
+  }
+  .filter-list-button {
+    gap: 40px;
+    margin-bottom: 64px;
+  }
+  .filter-button {
+    cursor: pointer;
+  }
+  .filter-item {
+    display: grid;
+    grid-gap: 32px;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    grid-auto-rows: 12px;
+
+    &-box {
+      cursor: pointer;
+      &:nth-child(6n + 1) {
+        grid-column: span 1;
+        grid-row: span 11;
+      }
+      &:nth-child(6n + 2) {
+        grid-column: span 1;
+        grid-row: span 8;
+      }
+      &:nth-child(6n + 3) {
+        grid-column: span 1;
+        grid-row: span 11;
+      }
+      &:nth-child(6n + 4) {
+        grid-column: span 1;
+        grid-row: span 11;
+      }
+      &:nth-child(6n + 5) {
+        grid-column: span 1;
+        grid-row: span 8;
+      }
+      &:nth-child(6n + 6) {
+        grid-column: span 1;
+        grid-row: span 8;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
