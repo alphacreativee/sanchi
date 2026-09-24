@@ -1,0 +1,460 @@
+.inspirationDetail {
+  background-color: var(--color-bg);
+
+  &-hero {
+    width: 100%;
+    height: 380px;
+    margin-top: 82px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.75fr) minmax(280px, 0.9fr);
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: var(--section-spacing) 20px;
+    gap: 80px;
+  }
+
+  &-main {
+    min-width: 0;
+  }
+
+  &-title {
+    margin-bottom: 32px;
+    color: var(--color-text);
+    text-transform: uppercase;
+  }
+
+  &-content {
+    color: var(--color-text);
+
+    &::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    &,
+    p,
+    li,
+    a,
+    blockquote,
+    figcaption,
+    caption,
+    th,
+    td,
+    dt,
+    dd,
+    address,
+    pre,
+    code,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: 15px;
+      line-height: 24px;
+      font-family: var(--font-body);
+    }
+
+    > * + * {
+      margin-top: 24px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    strong,
+    b,
+    dt,
+    th {
+      font-weight: 700;
+    }
+
+    em,
+    i,
+    cite {
+      font-style: italic;
+    }
+
+    a {
+      color: var(--color-text);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: opacity 0.3s ease;
+
+      &:hover,
+      &:focus-visible {
+        opacity: 0.6;
+      }
+    }
+
+    ul,
+    ol {
+      padding-left: 24px;
+    }
+
+    ul {
+      list-style: disc;
+    }
+
+    ol {
+      list-style: decimal;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    blockquote {
+      padding-left: 24px;
+      border-left: 2px solid var(--color-bg-2);
+    }
+
+    hr {
+      height: 1px;
+      border: 0;
+      background-color: rgba(35, 35, 35, 0.2);
+    }
+
+    img,
+    video,
+    iframe,
+    figure,
+    .wp-caption {
+      max-width: 100%;
+    }
+
+    img {
+      height: auto;
+    }
+
+    iframe,
+    video {
+      width: 100%;
+    }
+
+    figure,
+    .wp-caption {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    figcaption,
+    .wp-caption-text {
+      margin-top: 8px;
+      color: rgba(35, 35, 35, 0.7);
+      text-align: center;
+    }
+
+    .alignleft {
+      float: left;
+      margin: 0 24px 24px 0;
+    }
+
+    .alignright {
+      float: right;
+      margin: 0 0 24px 24px;
+    }
+
+    .aligncenter {
+      display: block;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .alignnone {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .gallery-columns-1 {
+      grid-template-columns: 1fr;
+    }
+
+    .gallery-columns-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery-columns-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .gallery-item {
+      margin: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border: 1px solid rgba(35, 35, 35, 0.2);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 16px;
+      background-color: rgba(35, 35, 35, 0.06);
+      white-space: pre-wrap;
+    }
+
+    code {
+      padding: 2px 4px;
+      background-color: rgba(35, 35, 35, 0.06);
+    }
+
+    sub,
+    sup {
+      position: relative;
+      font-size: 75%;
+      line-height: 0;
+      vertical-align: baseline;
+    }
+
+    sup {
+      top: -0.5em;
+    }
+
+    sub {
+      bottom: -0.25em;
+    }
+  }
+
+  &-booking {
+    min-width: 176px;
+    margin-top: 48px;
+    background-color: var(--color-text);
+    color: var(--color-bg);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-bg-2);
+      color: var(--color-bg);
+    }
+  }
+
+  &-aside {
+    position: sticky;
+    top: 106px;
+    align-self: start;
+  }
+
+  &-asideImage {
+    width: 100%;
+    aspect-ratio: 0.9 / 1;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &-caption {
+    margin-top: 16px;
+    color: var(--color-text);
+    text-align: center;
+  }
+}
+
+.inspirationRelated {
+  padding: 0 20px var(--section-spacing);
+  background-color: var(--color-bg);
+
+  &-heading {
+    display: grid;
+    grid-template-columns: minmax(40px, 1fr) auto minmax(40px, 1fr);
+    align-items: center;
+    max-width: 1360px;
+    margin: 0 auto 80px;
+    gap: 64px;
+
+    &::before,
+    &::after {
+      content: "";
+      height: 1px;
+      background-color: var(--color-text);
+      opacity: 0.2;
+    }
+  }
+
+  &-title {
+    color: var(--color-text);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 1360px;
+    margin: 0 auto;
+    gap: 64px;
+  }
+
+  &-card {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.9fr) minmax(0, 1.1fr);
+    min-width: 0;
+    gap: 24px;
+  }
+
+  &-image {
+    overflow: hidden;
+    aspect-ratio: 1.25 / 1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &-content {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  &-name {
+    color: var(--color-text);
+    text-transform: uppercase;
+  }
+
+  &-desc {
+    margin-top: 16px;
+    color: var(--color-text);
+  }
+
+  &-link {
+    margin-top: auto;
+    color: var(--color-text);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}
+
+@media (max-width: 1199px) {
+  .inspirationDetail {
+    &-inner {
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.8fr);
+      gap: 48px;
+    }
+  }
+
+  .inspirationRelated {
+    &-heading {
+      margin-bottom: 64px;
+      gap: 40px;
+    }
+
+    &-list {
+      gap: 40px;
+    }
+
+    &-card {
+      grid-template-columns: 1fr;
+    }
+
+    &-link {
+      margin-top: 24px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .inspirationDetail {
+    &-hero {
+      height: 280px;
+    }
+
+    &-inner {
+      grid-template-columns: 1fr;
+      padding-right: 24px;
+      padding-left: 24px;
+      gap: 48px;
+    }
+
+    &-title {
+      margin-bottom: 24px;
+    }
+
+    &-aside {
+      position: static;
+    }
+
+    &-asideImage {
+      aspect-ratio: 1.2 / 1;
+    }
+
+    &-booking {
+      width: 100%;
+      margin-top: 40px;
+    }
+
+    &-content {
+      .alignleft,
+      .alignright {
+        float: none;
+        margin-right: 0;
+        margin-left: 0;
+      }
+
+      .gallery,
+      .gallery-columns-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  }
+
+  .inspirationRelated {
+    padding-right: 24px;
+    padding-left: 24px;
+
+    &-heading {
+      margin-bottom: 48px;
+      gap: 20px;
+    }
+
+    &-list {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    &-card {
+      gap: 24px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inspirationDetail-content a {
+    transition: none;
+  }
+}
