@@ -2193,6 +2193,381 @@ input:-webkit-autofill:active {
     padding-bottom: 48px;
   }
 }
+.inspirationDetail {
+  background-color: var(--color-bg);
+}
+.inspirationDetail-hero {
+  width: 100%;
+  height: 380px;
+  margin-top: 82px;
+  overflow: hidden;
+}
+.inspirationDetail-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.inspirationDetail-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(280px, 0.9fr);
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: var(--section-spacing) 20px;
+  gap: 80px;
+}
+.inspirationDetail-main {
+  min-width: 0;
+}
+.inspirationDetail-title {
+  margin-bottom: 32px;
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+.inspirationDetail-content {
+  color: var(--color-text);
+}
+.inspirationDetail-content::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.inspirationDetail-content,
+.inspirationDetail-content p,
+.inspirationDetail-content li,
+.inspirationDetail-content a,
+.inspirationDetail-content blockquote,
+.inspirationDetail-content figcaption,
+.inspirationDetail-content caption,
+.inspirationDetail-content th,
+.inspirationDetail-content td,
+.inspirationDetail-content dt,
+.inspirationDetail-content dd,
+.inspirationDetail-content address,
+.inspirationDetail-content pre,
+.inspirationDetail-content code,
+.inspirationDetail-content h1,
+.inspirationDetail-content h2,
+.inspirationDetail-content h3,
+.inspirationDetail-content h4,
+.inspirationDetail-content h5,
+.inspirationDetail-content h6 {
+  font-size: 15px;
+  line-height: 24px;
+  font-family: var(--font-body);
+}
+.inspirationDetail-content > * + * {
+  margin-top: 24px;
+}
+.inspirationDetail-content h1,
+.inspirationDetail-content h2,
+.inspirationDetail-content h3,
+.inspirationDetail-content h4,
+.inspirationDetail-content h5,
+.inspirationDetail-content h6,
+.inspirationDetail-content strong,
+.inspirationDetail-content b,
+.inspirationDetail-content dt,
+.inspirationDetail-content th {
+  font-weight: 700;
+}
+.inspirationDetail-content em,
+.inspirationDetail-content i,
+.inspirationDetail-content cite {
+  font-style: italic;
+}
+.inspirationDetail-content a {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: opacity 0.3s ease;
+}
+.inspirationDetail-content a:hover, .inspirationDetail-content a:focus-visible {
+  opacity: 0.6;
+}
+.inspirationDetail-content ul,
+.inspirationDetail-content ol {
+  padding-left: 24px;
+}
+.inspirationDetail-content ul {
+  list-style: disc;
+}
+.inspirationDetail-content ol {
+  list-style: decimal;
+}
+.inspirationDetail-content li + li {
+  margin-top: 8px;
+}
+.inspirationDetail-content blockquote {
+  padding-left: 24px;
+  border-left: 2px solid var(--color-bg-2);
+}
+.inspirationDetail-content hr {
+  height: 1px;
+  border: 0;
+  background-color: rgba(35, 35, 35, 0.2);
+}
+.inspirationDetail-content img,
+.inspirationDetail-content video,
+.inspirationDetail-content iframe,
+.inspirationDetail-content figure,
+.inspirationDetail-content .wp-caption {
+  max-width: 100%;
+}
+.inspirationDetail-content img {
+  height: auto;
+}
+.inspirationDetail-content iframe,
+.inspirationDetail-content video {
+  width: 100%;
+}
+.inspirationDetail-content figure,
+.inspirationDetail-content .wp-caption {
+  margin-right: 0;
+  margin-left: 0;
+}
+.inspirationDetail-content figcaption,
+.inspirationDetail-content .wp-caption-text {
+  margin-top: 8px;
+  color: rgba(35, 35, 35, 0.7);
+  text-align: center;
+}
+.inspirationDetail-content .alignleft {
+  float: left;
+  margin: 0 24px 24px 0;
+}
+.inspirationDetail-content .alignright {
+  float: right;
+  margin: 0 0 24px 24px;
+}
+.inspirationDetail-content .aligncenter {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+.inspirationDetail-content .alignnone {
+  margin-right: 0;
+  margin-left: 0;
+}
+.inspirationDetail-content .gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.inspirationDetail-content .gallery-columns-1 {
+  grid-template-columns: 1fr;
+}
+.inspirationDetail-content .gallery-columns-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.inspirationDetail-content .gallery-columns-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.inspirationDetail-content .gallery-item {
+  margin: 0;
+}
+.inspirationDetail-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.inspirationDetail-content th,
+.inspirationDetail-content td {
+  padding: 12px;
+  border: 1px solid rgba(35, 35, 35, 0.2);
+  text-align: left;
+  vertical-align: top;
+}
+.inspirationDetail-content pre {
+  overflow-x: auto;
+  padding: 16px;
+  background-color: rgba(35, 35, 35, 0.06);
+  white-space: pre-wrap;
+}
+.inspirationDetail-content code {
+  padding: 2px 4px;
+  background-color: rgba(35, 35, 35, 0.06);
+}
+.inspirationDetail-content sub,
+.inspirationDetail-content sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+.inspirationDetail-content sup {
+  top: -0.5em;
+}
+.inspirationDetail-content sub {
+  bottom: -0.25em;
+}
+.inspirationDetail-booking {
+  min-width: 176px;
+  margin-top: 48px;
+  background-color: var(--color-text);
+  color: var(--color-bg);
+}
+.inspirationDetail-booking:hover, .inspirationDetail-booking:focus-visible {
+  background-color: var(--color-bg-2);
+  color: var(--color-bg);
+}
+.inspirationDetail-aside {
+  position: sticky;
+  top: 106px;
+  align-self: start;
+}
+.inspirationDetail-asideImage {
+  width: 100%;
+  aspect-ratio: 0.9/1;
+  overflow: hidden;
+}
+.inspirationDetail-asideImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.inspirationDetail-caption {
+  margin-top: 16px;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.inspirationRelated {
+  padding: 0 20px var(--section-spacing);
+  background-color: var(--color-bg);
+}
+.inspirationRelated-heading {
+  display: grid;
+  grid-template-columns: minmax(40px, 1fr) auto minmax(40px, 1fr);
+  align-items: center;
+  max-width: 1360px;
+  margin: 0 auto 80px;
+  gap: 64px;
+}
+.inspirationRelated-heading::before, .inspirationRelated-heading::after {
+  content: "";
+  height: 1px;
+  background-color: var(--color-text);
+  opacity: 0.2;
+}
+.inspirationRelated-title {
+  color: var(--color-text);
+  text-align: center;
+  text-transform: uppercase;
+}
+.inspirationRelated-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 1360px;
+  margin: 0 auto;
+  gap: 64px;
+}
+.inspirationRelated-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.9fr) minmax(0, 1.1fr);
+  min-width: 0;
+  gap: 24px;
+}
+.inspirationRelated-image {
+  overflow: hidden;
+  aspect-ratio: 1.25/1;
+}
+.inspirationRelated-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.inspirationRelated-content {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.inspirationRelated-name {
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+.inspirationRelated-desc {
+  margin-top: 16px;
+  color: var(--color-text);
+}
+.inspirationRelated-link {
+  margin-top: auto;
+  color: var(--color-text);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1199px) {
+  .inspirationDetail-inner {
+    grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.8fr);
+    gap: 48px;
+  }
+  .inspirationRelated-heading {
+    margin-bottom: 64px;
+    gap: 40px;
+  }
+  .inspirationRelated-list {
+    gap: 40px;
+  }
+  .inspirationRelated-card {
+    grid-template-columns: 1fr;
+  }
+  .inspirationRelated-link {
+    margin-top: 24px;
+  }
+}
+@media (max-width: 767px) {
+  .inspirationDetail-hero {
+    height: 280px;
+  }
+  .inspirationDetail-inner {
+    grid-template-columns: 1fr;
+    padding-right: 24px;
+    padding-left: 24px;
+    gap: 48px;
+  }
+  .inspirationDetail-title {
+    margin-bottom: 24px;
+  }
+  .inspirationDetail-aside {
+    position: static;
+  }
+  .inspirationDetail-asideImage {
+    aspect-ratio: 1.2/1;
+  }
+  .inspirationDetail-booking {
+    width: 100%;
+    margin-top: 40px;
+  }
+  .inspirationDetail-content .alignleft,
+  .inspirationDetail-content .alignright {
+    float: none;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .inspirationDetail-content .gallery,
+  .inspirationDetail-content .gallery-columns-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .inspirationRelated {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+  .inspirationRelated-heading {
+    margin-bottom: 48px;
+    gap: 20px;
+  }
+  .inspirationRelated-list {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .inspirationRelated-card {
+    gap: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .inspirationDetail-content a {
+    transition: none;
+  }
+}
 #footer {
   background-color: var(--color-bg-2);
   color: var(--color-bg);
