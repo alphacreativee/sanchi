@@ -190,32 +190,32 @@ export function sectionTreatmentSlider() {
     };
 
     return new Swiper(slider, {
-        speed: 800,
-        grabCursor: true,
-        loop: false,
-        observer: true,
-        observeParents: true,
-        slidesPerView: 1.4,
-        spaceBetween: 16,
-        slidesOffsetAfter: 25,
-        breakpoints: {
-          768: {
-            slidesPerView: 2.4,
-            spaceBetween: 20,
-          },
-          1200: {
-            slidesPerView: 2.65,
-            spaceBetween: 20,
-          },
+      speed: 800,
+      grabCursor: true,
+      loop: false,
+      observer: true,
+      observeParents: true,
+      slidesPerView: 1.4,
+      spaceBetween: 16,
+      slidesOffsetAfter: 25,
+      breakpoints: {
+        768: {
+          slidesPerView: 2.4,
+          spaceBetween: 20,
         },
-        on: {
-          init: syncEndState,
-          progress: syncEndState,
-          reachEnd: syncEndState,
-          fromEdge: syncEndState,
-          resize: syncEndState,
+        1200: {
+          slidesPerView: 2.65,
+          spaceBetween: 20,
         },
-      });
+      },
+      on: {
+        init: syncEndState,
+        progress: syncEndState,
+        reachEnd: syncEndState,
+        fromEdge: syncEndState,
+        resize: syncEndState,
+      },
+    });
   });
 }
 
@@ -376,6 +376,68 @@ export function formReservation() {
 }
 
 /////// thêm class select-tab vào thì vẫn filter theo đúng type đó, không show hết item.
+// export function createFilterTab() {
+//   document.querySelectorAll(".filter-section").forEach((section) => {
+//     let result;
+
+//     const targetSelector = section.dataset.target;
+//     if (targetSelector) {
+//       result = document.querySelector(targetSelector);
+//     } else {
+//       result = section.querySelector(".filter-section-result");
+//       if (!result) {
+//         result = section.nextElementSibling;
+//         if (!result?.classList.contains("filter-section-result")) return;
+//       }
+//     }
+
+//     if (!result) return;
+//     //check select tab
+//     const isSelectTab = section.classList.contains("select-tab");
+//     const buttons = section.querySelectorAll(".filter-button[data-type]");
+
+//     const activeBtn = section.querySelector(".filter-button.active");
+//     if (activeBtn) {
+//       const activeType = activeBtn.dataset.type;
+//       if (activeType !== "all") {
+//         result.querySelectorAll(".filter-item").forEach((item) => {
+//           item.style.display = item.classList.contains(activeType)
+//             ? ""
+//             : "none";
+//         });
+//       }
+//     }
+
+//     buttons.forEach((btn) => {
+//       btn.addEventListener("click", function () {
+//         section
+//           .querySelectorAll(".filter-button")
+//           .forEach((b) => b.classList.remove("active"));
+//         this.classList.add("active");
+
+//         const type = this.dataset.type;
+//         const items = result.querySelectorAll(".filter-item");
+
+//         gsap
+//           .timeline()
+//           .to(result, { autoAlpha: 0, duration: 0.3 })
+//           .call(() => {
+//             items.forEach((item) => {
+//               // Nếu là select-tab thì không có trường hợp "all" → luôn filter theo type
+//               if (!isSelectTab && type === "all") {
+//                 item.style.display = "";
+//               } else {
+//                 item.style.display = item.classList.contains(type)
+//                   ? ""
+//                   : "none";
+//               }
+//             });
+//           })
+//           .to(result, { autoAlpha: 1, duration: 0.3 });
+//       });
+//     });
+//   });
+// }
 export function createFilterTab() {
   document.querySelectorAll(".filter-section").forEach((section) => {
     let result;
@@ -392,19 +454,36 @@ export function createFilterTab() {
     }
 
     if (!result) return;
-    //check select tab
+
     const isSelectTab = section.classList.contains("select-tab");
     const buttons = section.querySelectorAll(".filter-button[data-type]");
+
+    const applyFilter = (type) => {
+      const items = result.querySelectorAll(".filter-item");
+
+      items.forEach((item) => {
+        let show;
+        if (type === "all") {
+          show = isSelectTab ? item.classList.contains("all") : true;
+        } else {
+          show = item.classList.contains(type);
+        }
+        item.style.display = show ? "" : "none";
+      });
+
+      items.forEach((item) => {
+        if (item.style.display === "none") return;
+
+        const sliderEl = item.querySelector(".accommodations-slider");
+        if (sliderEl) reinitAccommodationSlider(sliderEl);
+      });
+    };
 
     const activeBtn = section.querySelector(".filter-button.active");
     if (activeBtn) {
       const activeType = activeBtn.dataset.type;
-      if (activeType !== "all") {
-        result.querySelectorAll(".filter-item").forEach((item) => {
-          item.style.display = item.classList.contains(activeType)
-            ? ""
-            : "none";
-        });
+      if (activeType !== "all" || isSelectTab) {
+        applyFilter(activeType);
       }
     }
 
@@ -416,24 +495,17 @@ export function createFilterTab() {
         this.classList.add("active");
 
         const type = this.dataset.type;
-        const items = result.querySelectorAll(".filter-item");
 
         gsap
           .timeline()
           .to(result, { autoAlpha: 0, duration: 0.3 })
           .call(() => {
-            items.forEach((item) => {
-              // Nếu là select-tab thì không có trường hợp "all" → luôn filter theo type
-              if (!isSelectTab && type === "all") {
-                item.style.display = "";
-              } else {
-                item.style.display = item.classList.contains(type)
-                  ? ""
-                  : "none";
-              }
-            });
+            applyFilter(type);
           })
-          .to(result, { autoAlpha: 1, duration: 0.3 });
+          .to(result, { autoAlpha: 1, duration: 0.3 })
+          .call(() => {
+            ScrollTrigger.refresh();
+          });
       });
     });
   });

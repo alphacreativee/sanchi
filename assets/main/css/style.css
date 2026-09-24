@@ -2757,3 +2757,117 @@ input:-webkit-autofill:active {
   height: 100svh;
   overflow: hidden;
 }
+
+.gallery-inner {
+  padding: 100px 20px;
+}
+.gallery-lightbox {
+  background-color: var(--color-bg);
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gallery-lightbox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery-lightbox .swiper-arrow-custom::after {
+  content: unset;
+  font-size: 0;
+}
+.gallery-lightbox .swiper-arrow-custom svg {
+  width: 18px;
+  height: 34px;
+}
+.gallery-lightbox .lightbox-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  flex-direction: column;
+}
+.gallery-lightbox .lightbox-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 20px;
+}
+.gallery-lightbox.hidden {
+  display: none;
+}
+.gallery-lightbox .lightbox-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-end;
+  width: calc(66.6666666667% - 80px);
+  height: 80%;
+}
+.gallery-lightbox .lightbox-main .swiper-lightbox {
+  width: 100%;
+}
+.gallery-lightbox .icon-close-lightbox {
+  cursor: pointer;
+}
+.gallery-lightbox .swiper-button-next {
+  transform: rotate(180deg);
+  right: 20px;
+}
+.gallery-lightbox .swiper-button-prev {
+  left: 20px;
+}
+.gallery .filter-list-button {
+  gap: 40px;
+  margin-bottom: 64px;
+}
+.gallery .filter-button {
+  cursor: pointer;
+}
+.gallery .filter-item {
+  display: grid;
+  grid-gap: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  grid-auto-rows: 12px;
+}
+.gallery .filter-item-box {
+  cursor: pointer;
+}
+.gallery .filter-item-box:nth-child(6n+1) {
+  grid-column: span 1;
+  grid-row: span 11;
+}
+.gallery .filter-item-box:nth-child(6n+2) {
+  grid-column: span 1;
+  grid-row: span 8;
+}
+.gallery .filter-item-box:nth-child(6n+3) {
+  grid-column: span 1;
+  grid-row: span 11;
+}
+.gallery .filter-item-box:nth-child(6n+4) {
+  grid-column: span 1;
+  grid-row: span 11;
+}
+.gallery .filter-item-box:nth-child(6n+5) {
+  grid-column: span 1;
+  grid-row: span 8;
+}
+.gallery .filter-item-box:nth-child(6n+6) {
+  grid-column: span 1;
+  grid-row: span 8;
+}
+.gallery .filter-item-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

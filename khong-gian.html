@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Không gian | Sanchi Privé</title>
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Liệu trình | Sanchi Privé" />
+    <meta
+      property="og:description"
+      content="Khám phá các liệu trình chăm sóc sức khỏe và phục hồi chuyên sâu tại Sanchi Privé."
+    />
+    <meta property="og:image" content="./assets/images/del/banner.webp" />
+
+    <link rel="stylesheet" href="./assets/libs/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lenis.css" />
+    <link rel="stylesheet" href="./assets/libs/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lightpick.min.css" />
+    <link rel="stylesheet" href="./assets/fonts/Manrope/style.css" />
+    <link rel="stylesheet" href="./assets/fonts/Aboreto/style.css" />
+    <link rel="stylesheet" href="./assets/main/css/style.min.css" />
+
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+    </script>
+  </head>
+
+  <body>
+    <script>
+      fetch("./components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+          const currentPage = window.location.pathname.split("/").pop();
+
+          document.querySelectorAll(".header-menu a").forEach((link) => {
+            const linkPage = link.getAttribute("href").replace("./", "");
+            if (linkPage === currentPage) link.classList.add("active");
+          });
+        });
+    </script>
+    <header id="header" class="header position-fixed"></header>
+
+    <main>
+      <section class="banner short-banner" aria-label="">
+        <div class="banner-slide">
+          <img
+            class="banner-image"
+            src="./assets/images/del/banner.webp"
+            alt="Không gian  tại Sanchi Privé"
+          />
+          <div class="banner-content">
+            <h1 class="banner-title heading-2">không gian</h1>
+          </div>
+        </div>
+      </section>
+      <section class="gallery">
+        <div class="gallery-inner">
+          <div
+            class="filter-section select-tab d-flex align-items-center justify-content-center"
+            data-target="#galleryList"
+          >
+            <div class="filter-list-button d-flex align-items-center">
+              <div class="filter-button b2-font active" data-type="all">
+                Tổng hợp
+              </div>
+              <div class="filter-button b2-font" data-type="don-khach">
+                Đón khách
+              </div>
+              <div class="filter-button b2-font" data-type="tri-lieu">
+                Trị liệu
+              </div>
+              <div class="filter-button b2-font" data-type="w-t">
+                Waiting & Tea Lounge
+              </div>
+              <div class="filter-button b2-font" data-type="other">
+                Các khu vực khác
+              </div>
+            </div>
+          </div>
+          <div id="galleryList" class="filter-section-result">
+            <div class="filter-item all">
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-1.jpg" alt="" />
+              </div>
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-1.jpg" alt="" />
+              </div>
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-3.jpg" alt="" />
+              </div>
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-1.jpg" alt="" />
+              </div>
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-1.jpg" alt="" />
+              </div>
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-1.jpg" alt="" />
+              </div>
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-1.jpg" alt="" />
+              </div>
+            </div>
+            <div class="filter-item don-khach">
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-2.jpg" alt="" />
+              </div>
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-2.jpg" alt="" />
+              </div>
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-2.jpg" alt="" />
+              </div>
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-2.jpg" alt="" />
+              </div>
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-2.jpg" alt="" />
+              </div>
+              <div class="filter-item-box">
+                <img src="./assets/images/del/gallery-2.jpg" alt="" />
+              </div>
+            </div>
+            <div class="filter-item tri-lieu"></div>
+            <div class="filter-item other"></div>
+          </div>
+        </div>
+      </section>
+      <div class="gallery-lightbox hidden">
+        <div class="lightbox-overlay"></div>
+        <div class="lightbox-inner">
+          <div class="lightbox-head">
+            <div class="lightbox-logo">
+              <a href="./index.html">
+                <img src="./assets/images/logo-2.svg" alt="" />
+              </a>
+            </div>
+            <div class="icon-close-lightbox">
+              <svg
+                width="26"
+                height="25"
+                viewBox="0 0 26 25"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3.72461 21.2939L21.7246 3.29394"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M3.72461 3.29443L21.7246 21.2944"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <div class="lightbox-main">
+            <div class="swiper swiper-lightbox">
+              <div class="swiper-wrapper">
+                <!-- Slides được build bằng JS -->
+              </div>
+            </div>
+            <div class="swiper-nav-inner">
+              <div class="empty"></div>
+              <div class="swiper-slide-title"></div>
+              <div class="swiper-nav">
+                <div class="swiper-button-prev swiper-arrow-custom">
+                  <svg viewBox="0 0 18 34" fill="none" aria-hidden="true">
+                    <path d="M17 1L1 17L17 33" stroke="currentColor" />
+                  </svg>
+                </div>
+                <div
+                  class="swiper-fraction btn-font color-black font-body"
+                ></div>
+                <div class="swiper-button-next swiper-arrow-custom">
+                  <svg viewBox="0 0 18 34" fill="none" aria-hidden="true">
+                    <path d="M17 1L1 17L17 33" stroke="currentColor" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      fetch("./components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+    <footer id="footer"></footer>
+
+    <script src="./assets/libs/jquery-3.7.1.js"></script>
+    <script src="./assets/libs/lenis.min.js"></script>
+    <script src="./assets/libs/gsap.min.js"></script>
+    <script src="./assets/libs/ScrollTrigger.min.js"></script>
+    <script src="./assets/libs/SplitText.min.js"></script>
+    <script src="./assets/libs/bootstrap.bundle.min.js"></script>
+    <script src="./assets/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/libs/moment.min.js"></script>
+    <script src="./assets/libs/lightpick.min.js"></script>
+    <script type="module" src="./assets/main/js/gallery.min.js"></script>
+    <script type="module" src="./assets/main/js/script.min.js"></script>
+  </body>
+</html>
