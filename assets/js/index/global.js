@@ -441,7 +441,108 @@ export function formReservation() {
 //     });
 //   });
 // }
+// export function createFilterTab() {
+//   document.querySelectorAll(".filter-section").forEach((section) => {
+//     let result;
+
+//     const targetSelector = section.dataset.target;
+//     if (targetSelector) {
+//       result = document.querySelector(targetSelector);
+//     } else {
+//       result = section.querySelector(".filter-section-result");
+//       if (!result) {
+//         result = section.nextElementSibling;
+//         if (!result?.classList.contains("filter-section-result")) return;
+//       }
+//     }
+
+//     if (!result) return;
+
+//     const isSelectTab = section.classList.contains("select-tab");
+//     const buttons = section.querySelectorAll(".filter-button[data-type]");
+//     const mobileToggle = section.querySelector(".filter-mobile-toggle");
+//     const mobileLabel = section.querySelector(".filter-mobile-label");
+
+//     const closeMobileFilter = () => {
+//       section.classList.remove("is-open");
+//       mobileToggle?.setAttribute("aria-expanded", "false");
+//     };
+
+//     if (mobileToggle) {
+//       mobileToggle.addEventListener("click", (event) => {
+//         event.stopPropagation();
+//         const isOpen = section.classList.toggle("is-open");
+//         mobileToggle.setAttribute("aria-expanded", String(isOpen));
+//       });
+
+//       document.addEventListener("click", (event) => {
+//         if (!section.contains(event.target)) closeMobileFilter();
+//       });
+
+//       section.addEventListener("keydown", (event) => {
+//         if (event.key === "Escape") closeMobileFilter();
+//       });
+//     }
+
+//     const applyFilter = (type) => {
+//       const items = result.querySelectorAll(".filter-item");
+
+//       items.forEach((item) => {
+//         let show;
+//         if (type === "all") {
+//           show = isSelectTab ? item.classList.contains("all") : true;
+//         } else {
+//           show = item.classList.contains(type);
+//         }
+//         item.style.display = show ? "" : "none";
+//       });
+
+//       items.forEach((item) => {
+//         if (item.style.display === "none") return;
+
+//         const sliderEl = item.querySelector(".accommodations-slider");
+//         if (sliderEl) reinitAccommodationSlider(sliderEl);
+//       });
+//     };
+
+//     const activeBtn = section.querySelector(".filter-button.active");
+//     if (activeBtn) {
+//       if (mobileLabel) mobileLabel.textContent = activeBtn.textContent.trim();
+//       const activeType = activeBtn.dataset.type;
+//       if (activeType !== "all" || isSelectTab) {
+//         applyFilter(activeType);
+//       }
+//     }
+
+//     buttons.forEach((btn) => {
+//       btn.addEventListener("click", function () {
+//         section
+//           .querySelectorAll(".filter-button")
+//           .forEach((b) => b.classList.remove("active"));
+//         this.classList.add("active");
+
+//         if (mobileLabel) mobileLabel.textContent = this.textContent.trim();
+//         closeMobileFilter();
+
+//         const type = this.dataset.type;
+
+//         gsap
+//           .timeline()
+//           .to(result, { autoAlpha: 0, duration: 0.3 })
+//           .call(() => {
+//             applyFilter(type);
+//           })
+//           .to(result, { autoAlpha: 1, duration: 0.3 })
+//           .call(() => {
+//             ScrollTrigger.refresh();
+//           });
+//       });
+//     });
+//   });
+// }
 export function createFilterTab() {
+  gsap.registerPlugin(ScrollTrigger);
+
   document.querySelectorAll(".filter-section").forEach((section) => {
     let result;
 
@@ -459,6 +560,7 @@ export function createFilterTab() {
     if (!result) return;
 
     const isSelectTab = section.classList.contains("select-tab");
+    const isAnimationTab = section.classList.contains("animation-tab");
     const buttons = section.querySelectorAll(".filter-button[data-type]");
     const mobileToggle = section.querySelector(".filter-mobile-toggle");
     const mobileLabel = section.querySelector(".filter-mobile-label");
@@ -505,6 +607,95 @@ export function createFilterTab() {
       });
     };
 
+    const getVisibleRevealBoxes = () => {
+      const visibleItems = [...result.querySelectorAll(".filter-item")].filter(
+        (item) => item.style.display !== "none",
+      );
+      return visibleItems.flatMap((item) => [
+        ...item.querySelectorAll(".reveal-element-item"),
+      ]);
+    };
+
+    // Set trạng thái ẩn ban đầu — gọi ngay sau applyFilter, lúc result còn vô hình
+    const prepareFilterImagesState = () => {
+      if (!isAnimationTab) return;
+
+      getVisibleRevealBoxes().forEach((box) => {
+        const overlay = box.querySelector(".reveal-overlay");
+        const media = box.querySelector("img, video");
+        if (!overlay || !media) return;
+
+        gsap.set(overlay, {
+          scaleX: 0,
+          transformOrigin: "left",
+          overwrite: "auto",
+        });
+        gsap.set(media, { opacity: 0, scale: 1.05, overwrite: "auto" });
+      });
+    };
+
+    // Chạy animation reveal cho 1 box
+    const revealBox = (box) => {
+      const overlay = box.querySelector(".reveal-overlay");
+      const media = box.querySelector("img, video");
+      if (!overlay || !media) return;
+
+      gsap
+        .timeline()
+        .to(overlay, {
+          scaleX: 1,
+          transformOrigin: "left",
+          duration: 0.5,
+          ease: "power2.out",
+        })
+        .to(overlay, {
+          scaleX: 0,
+          transformOrigin: "right",
+          duration: 0.5,
+          ease: "power2.inOut",
+        })
+        .to(
+          media,
+          { opacity: 1, scale: 1, duration: 0.8, ease: "none" },
+          "-=0.3",
+        );
+    };
+
+    // Chỉ chạy ngay cho box đang trong viewport; box ngoài viewport đợi cuộn tới mới chạy
+    const playFilterImagesReveal = () => {
+      if (!isAnimationTab) return;
+
+      const boxes = getVisibleRevealBoxes();
+      const viewportLimit = window.innerHeight * 0.85;
+
+      // Huỷ ScrollTrigger cũ (nếu có) gắn trên các box này, tránh chồng trigger qua nhiều lần filter
+      boxes.forEach((box) => {
+        if (box._revealST) {
+          box._revealST.kill();
+          box._revealST = null;
+        }
+      });
+
+      let inViewIndex = 0; // đếm riêng cho stagger của các box đang hiện ngay
+
+      boxes.forEach((box) => {
+        const rect = box.getBoundingClientRect();
+        const isInViewport = rect.top < viewportLimit && rect.bottom > 0;
+
+        if (isInViewport) {
+          const i = inViewIndex++;
+          gsap.delayedCall(i * 0.06, () => revealBox(box));
+        } else {
+          box._revealST = ScrollTrigger.create({
+            trigger: box,
+            start: "top 85%",
+            once: true,
+            onEnter: () => revealBox(box),
+          });
+        }
+      });
+    };
+
     const activeBtn = section.querySelector(".filter-button.active");
     if (activeBtn) {
       if (mobileLabel) mobileLabel.textContent = activeBtn.textContent.trim();
@@ -512,6 +703,12 @@ export function createFilterTab() {
       if (activeType !== "all" || isSelectTab) {
         applyFilter(activeType);
       }
+    }
+
+    // Chạy reveal cho trạng thái filter ban đầu (khi vừa load trang)
+    if (isAnimationTab) {
+      prepareFilterImagesState();
+      playFilterImagesReveal();
     }
 
     buttons.forEach((btn) => {
@@ -531,16 +728,17 @@ export function createFilterTab() {
           .to(result, { autoAlpha: 0, duration: 0.3 })
           .call(() => {
             applyFilter(type);
+            prepareFilterImagesState();
           })
           .to(result, { autoAlpha: 1, duration: 0.3 })
           .call(() => {
+            playFilterImagesReveal();
             ScrollTrigger.refresh();
           });
       });
     });
   });
 }
-
 export function getDateLightPick() {
   const datepickers = document.querySelectorAll("[data-lightpick]");
   if (!datepickers.length || typeof Lightpick === "undefined") return [];
@@ -580,9 +778,6 @@ export function revealAnimationBox() {
 
     if (!overlay || !media) return;
 
-    gsap.set(overlay, { scaleX: 0, transformOrigin: "left" });
-    gsap.set(media, { opacity: 0, scale: 1.1 });
-
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: element,
@@ -592,11 +787,12 @@ export function revealAnimationBox() {
       },
     });
 
-    tl.fromTo(
-      overlay,
-      { scaleX: 0, transformOrigin: "left" },
-      { scaleX: 1, duration: 0.8, ease: "power2.out" },
-    )
+    tl.to(overlay, {
+      scaleX: 1,
+      transformOrigin: "left",
+      duration: 0.8,
+      ease: "power2.out",
+    })
       .to(
         overlay,
         {
@@ -607,9 +803,8 @@ export function revealAnimationBox() {
         },
         "+=0.1",
       )
-      .fromTo(
+      .to(
         media,
-        { opacity: 0, scale: 1.05 },
         { opacity: 1, scale: 1, duration: 1, ease: "power2.out" },
         "-=0.4",
       );

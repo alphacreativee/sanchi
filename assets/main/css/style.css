@@ -1269,11 +1269,13 @@ input:-webkit-autofill:active {
     transition: none;
   }
 }
-.reveal-element {
+.reveal-element,
+.reveal-element-item {
   position: relative;
   overflow: hidden;
 }
-.reveal-element .reveal-overlay {
+.reveal-element .reveal-overlay,
+.reveal-element-item .reveal-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -1281,6 +1283,15 @@ input:-webkit-autofill:active {
   height: 100%;
   z-index: 3;
   background-color: var(--color-bg-2);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.reveal-element img,
+.reveal-element video,
+.reveal-element-item img,
+.reveal-element-item video {
+  opacity: 0;
+  transform: scale(1.1);
 }
 
 #header {
