@@ -1,5 +1,5 @@
 .sectionReservation {
-  padding: 0 0 var(--section-spacing) 20px;
+  padding: 0 0 var(--section-spacing);
   background-color: var(--color-bg);
 
   &-inner {
@@ -21,12 +21,13 @@
     &::before {
       content: "";
       position: absolute;
-      bottom: -120px;
-      left: -120px;
-      width: 360px;
-      height: 360px;
-      background: url("../../images/logo.svg") center / contain no-repeat;
-      opacity: 0.06;
+      bottom: 0;
+      left: -220px;
+      width: 440px;
+      height: 440px;
+      background: url("../../images/icons/logo-artwork.svg") center / contain
+        no-repeat;
+      opacity: 1;
       pointer-events: none;
     }
   }
@@ -111,6 +112,12 @@
 
     &-content {
       padding: 48px;
+
+      &::before {
+        left: -180px;
+        width: 360px;
+        height: 360px;
+      }
     }
   }
 }
@@ -125,13 +132,19 @@
 
     &-content {
       padding: 40px 32px;
+
+      &::before {
+        left: -150px;
+        width: 300px;
+        height: 300px;
+      }
     }
   }
 }
 
 @media (max-width: 767px) {
   .sectionReservation {
-    padding: 0 24px var(--section-spacing);
+    padding: 0 0 var(--section-spacing);
 
     &-inner {
       display: flex;
@@ -142,11 +155,19 @@
     &-image {
       order: 1;
       aspect-ratio: 1.2 / 1;
+      margin: 0 24px;
     }
 
     &-content {
       order: 2;
-      padding: 48px 0 0;
+      padding: 48px 24px 0;
+
+      &::before {
+        bottom: 0;
+        left: -140px;
+        width: 280px;
+        height: 280px;
+      }
     }
 
     .formReservation--inline {

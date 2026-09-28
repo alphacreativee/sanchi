@@ -126,6 +126,11 @@
       width: calc(100% - 32px);
     }
 
+    &:not(.short-banner) .banner-title {
+      font-size: 48px;
+      line-height: 1.1;
+    }
+
     &-booking {
       min-width: 140px;
     }
