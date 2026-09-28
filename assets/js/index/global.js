@@ -581,7 +581,7 @@ export function revealAnimationBox() {
     if (!overlay || !media) return;
 
     gsap.set(overlay, { scaleX: 0, transformOrigin: "left" });
-    gsap.set(media, { opacity: 0, scale: 1.05 });
+    gsap.set(media, { opacity: 0, scale: 1.1 });
 
     const tl = gsap.timeline({
       scrollTrigger: {
