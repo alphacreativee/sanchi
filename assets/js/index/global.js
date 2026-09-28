@@ -21,6 +21,9 @@ export function customDropdown() {
 
     if (!btnDropdown || !dropdownMenu) return;
 
+    dropdownMenu.setAttribute("data-pointer-event", "");
+    dropdownMenu.setAttribute("data-lenis-prevent", "");
+
     btnDropdown.addEventListener("click", function (e) {
       e.stopPropagation();
       closeAllDropdowns(dropdown);
