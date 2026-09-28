@@ -417,9 +417,11 @@ input:-webkit-autofill:active {
   }
 }
 // reveal animation
-.reveal-element {
+.reveal-element,
+.reveal-element-item {
   position: relative;
   overflow: hidden;
+
   .reveal-overlay {
     position: absolute;
     top: 0;
@@ -428,5 +430,13 @@ input:-webkit-autofill:active {
     height: 100%;
     z-index: 3;
     background-color: var(--color-bg-2);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  img,
+  video {
+    opacity: 0;
+    transform: scale(1.1);
   }
 }
