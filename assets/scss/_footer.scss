@@ -141,14 +141,14 @@
   .footer {
     &-main {
       grid-template-columns: 1fr;
-      padding: 64px 24px;
+      padding: 64px 16px;
       gap: 48px;
     }
 
     &-bottomInner {
       align-items: flex-start;
       flex-direction: column;
-      padding: 20px 24px;
+      padding: 20px 16px;
       gap: 12px;
     }
   }

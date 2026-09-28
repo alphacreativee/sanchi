@@ -61,15 +61,15 @@
 
 @media (max-width: 767px) {
   .sectionGallery {
-    padding-right: 24px;
+    padding-right: 16px;
     padding-bottom: var(--section-spacing);
-    padding-left: 24px;
+    padding-left: 16px;
   }
 }
 
 @media (max-width: 575px) {
   .sectionGallery {
-    padding: 0 24px var(--section-spacing);
+    padding: 0 16px var(--section-spacing);
 
     &-title {
       margin-bottom: 40px;
@@ -82,7 +82,7 @@
   }
 
   .glightbox-container .gslide-image img {
-    max-width: calc(100vw - 48px);
+    max-width: calc(100vw - 32px);
     max-height: calc(100vh - 120px);
   }
 }

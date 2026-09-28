@@ -155,12 +155,12 @@
     &-image {
       order: 1;
       aspect-ratio: 1.2 / 1;
-      margin: 0 24px;
+      margin: 0 16px;
     }
 
     &-content {
       order: 2;
-      padding: 48px 24px 0;
+      padding: 48px 16px 0;
 
       &::before {
         bottom: 0;
