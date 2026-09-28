@@ -2926,13 +2926,16 @@ input:-webkit-autofill:active {
   gap: 40px;
   margin-bottom: 64px;
 }
+.gallery .filter-mobile-toggle {
+  display: none;
+}
 .gallery .filter-button {
   cursor: pointer;
   color: var(--color-text);
 }
 .gallery .filter-item {
   display: grid;
-  grid-gap: 32px;
+  gap: 24px;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   grid-auto-rows: 12px;
 }
@@ -2969,6 +2972,89 @@ input:-webkit-autofill:active {
   object-fit: cover;
 }
 
+@media (max-width: 767px) {
+  .gallery-inner {
+    padding: 64px 16px;
+  }
+  .gallery .filter-section {
+    position: relative;
+    align-items: stretch !important;
+    flex-direction: column;
+    margin-bottom: 32px;
+  }
+  .gallery .filter-mobile-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    padding: 0 16px;
+    border: 1px solid rgba(35, 35, 35, 0.2);
+    background-color: var(--color-white);
+    color: var(--color-text);
+    text-align: left;
+  }
+  .gallery .filter-mobile-chevron {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    width: 8px;
+    height: 8px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: translateY(-70%) rotate(45deg);
+    transition: transform 0.25s ease;
+  }
+  .gallery .filter-list-button {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    left: 0;
+    z-index: 20;
+    display: none !important;
+    align-items: stretch !important;
+    flex-direction: column;
+    margin-bottom: 0;
+    padding: 8px 0;
+    gap: 0;
+    background-color: var(--color-white);
+    box-shadow: 0 10px 24px rgba(35, 35, 35, 0.12);
+  }
+  .gallery .filter-button {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 12px 0;
+    text-align: center;
+  }
+  .gallery .filter-button::after {
+    bottom: 10px;
+  }
+  .gallery .filter-section.is-open .filter-list-button {
+    display: flex !important;
+  }
+  .gallery .filter-section.is-open .filter-mobile-chevron {
+    transform: translateY(-30%) rotate(225deg);
+  }
+  .gallery .filter-item {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 1200px) {
+  .gallery .filter-section {
+    position: sticky;
+    top: 82px;
+    z-index: 20;
+    margin-right: -20px;
+    margin-bottom: 44px;
+    margin-left: -20px;
+    padding: 20px;
+    background-color: var(--color-white);
+  }
+  .gallery .filter-list-button {
+    margin-bottom: 0;
+  }
+}
 .layout-post {
   padding: 100px 20px;
 }

@@ -460,6 +460,29 @@ export function createFilterTab() {
 
     const isSelectTab = section.classList.contains("select-tab");
     const buttons = section.querySelectorAll(".filter-button[data-type]");
+    const mobileToggle = section.querySelector(".filter-mobile-toggle");
+    const mobileLabel = section.querySelector(".filter-mobile-label");
+
+    const closeMobileFilter = () => {
+      section.classList.remove("is-open");
+      mobileToggle?.setAttribute("aria-expanded", "false");
+    };
+
+    if (mobileToggle) {
+      mobileToggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const isOpen = section.classList.toggle("is-open");
+        mobileToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!section.contains(event.target)) closeMobileFilter();
+      });
+
+      section.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeMobileFilter();
+      });
+    }
 
     const applyFilter = (type) => {
       const items = result.querySelectorAll(".filter-item");
@@ -484,6 +507,7 @@ export function createFilterTab() {
 
     const activeBtn = section.querySelector(".filter-button.active");
     if (activeBtn) {
+      if (mobileLabel) mobileLabel.textContent = activeBtn.textContent.trim();
       const activeType = activeBtn.dataset.type;
       if (activeType !== "all" || isSelectTab) {
         applyFilter(activeType);
@@ -496,6 +520,9 @@ export function createFilterTab() {
           .querySelectorAll(".filter-button")
           .forEach((b) => b.classList.remove("active"));
         this.classList.add("active");
+
+        if (mobileLabel) mobileLabel.textContent = this.textContent.trim();
+        closeMobileFilter();
 
         const type = this.dataset.type;
 
