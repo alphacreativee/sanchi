@@ -536,3 +536,52 @@ export function getDateLightPick() {
     return picker;
   });
 }
+export function revealAnimationBox() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const elements = document.querySelectorAll(".reveal-element");
+
+  elements.forEach((element) => {
+    if (element.dataset.revealInitialized) return;
+    element.dataset.revealInitialized = true;
+
+    const overlay = element.querySelector(".reveal-overlay");
+    const media = element.querySelector("img, video");
+
+    if (!overlay || !media) return;
+
+    gsap.set(overlay, { scaleX: 0, transformOrigin: "left" });
+    gsap.set(media, { opacity: 0, scale: 1.05 });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: element,
+        start: "top 85%",
+        once: true,
+        // markers: true,
+      },
+    });
+
+    tl.fromTo(
+      overlay,
+      { scaleX: 0, transformOrigin: "left" },
+      { scaleX: 1, duration: 0.8, ease: "power2.out" },
+    )
+      .to(
+        overlay,
+        {
+          scaleX: 0,
+          transformOrigin: "right",
+          duration: 0.6,
+          ease: "power2.inOut",
+        },
+        "+=0.1",
+      )
+      .fromTo(
+        media,
+        { opacity: 0, scale: 1.05 },
+        { opacity: 1, scale: 1, duration: 1, ease: "power2.out" },
+        "-=0.4",
+      );
+  });
+}

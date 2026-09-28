@@ -9,6 +9,7 @@ import {
   sectionTestimonialSlider,
   sectionGalleryLightbox,
   formReservation,
+  revealAnimationBox,
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -92,6 +93,7 @@ function init() {
 document.addEventListener("DOMContentLoaded", () => {
   init();
   initSwiper();
+  revealAnimationBox();
 });
 
 let isLinkClicked = false;
