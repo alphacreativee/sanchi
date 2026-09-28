@@ -1529,6 +1529,10 @@ input:-webkit-autofill:active {
   .banner-content {
     width: calc(100% - 32px);
   }
+  .banner:not(.short-banner) .banner-title {
+    font-size: 48px;
+    line-height: 1.1;
+  }
   .banner-booking {
     min-width: 140px;
   }
@@ -1803,7 +1807,7 @@ input:-webkit-autofill:active {
 }
 .sectionTreatment-image {
   width: 100%;
-  aspect-ratio: 1.2/1;
+  aspect-ratio: 1.4/1;
   overflow: hidden;
 }
 .sectionTreatment-image img {
