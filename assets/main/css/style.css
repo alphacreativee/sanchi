@@ -1429,7 +1429,7 @@ input:-webkit-autofill:active {
   .header-menu ul {
     align-items: flex-start;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
   }
   .header-menu li:not(:last-child)::after {
     display: none;
