@@ -65,7 +65,19 @@
               class="filter-section d-flex align-items-center justify-content-center"
               data-target="#listPost"
             >
-              <div class="filter-list-button d-flex align-items-center">
+              <button
+                class="filter-mobile-toggle b1"
+                type="button"
+                aria-expanded="false"
+                aria-controls="inspirationFilterOptions"
+              >
+                <span class="filter-mobile-label">Tổng hợp</span>
+                <span class="filter-mobile-chevron" aria-hidden="true"></span>
+              </button>
+              <div
+                class="filter-list-button d-flex align-items-center"
+                id="inspirationFilterOptions"
+              >
                 <div
                   class="filter-button b2-font hover-underline-black active"
                   data-type="all"
@@ -94,7 +106,10 @@
             </div>
           </div>
           <div class="layout-post-grid filter-section-result" id="listPost">
-            <div class="filter-item type-1">
+            <a
+              class="filter-item type-1"
+              href="./inspiration-detail.html"
+            >
               <div class="image">
                 <img src="./assets/images/del/gallery-1.jpg" alt="" />
               </div>
@@ -108,8 +123,11 @@
                   Sanchi.
                 </div>
               </div>
-            </div>
-            <div class="filter-item type-2">
+            </a>
+            <a
+              class="filter-item type-2"
+              href="./inspiration-detail.html"
+            >
               <div class="image">
                 <img src="./assets/images/del/gallery-2.jpg" alt="" />
               </div>
@@ -123,8 +141,11 @@
                   Sanchi.
                 </div>
               </div>
-            </div>
-            <div class="filter-item type-3">
+            </a>
+            <a
+              class="filter-item type-3"
+              href="./inspiration-detail.html"
+            >
               <div class="image">
                 <img src="./assets/images/del/gallery-3.jpg" alt="" />
               </div>
@@ -138,7 +159,7 @@
                   Sanchi.
                 </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </section>
