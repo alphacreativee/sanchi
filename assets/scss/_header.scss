@@ -59,9 +59,11 @@
     }
 
     a {
-      line-height: 1;
       text-transform: uppercase;
       white-space: nowrap;
+      &:hover {
+        color: var(--color-white);
+      }
     }
   }
 

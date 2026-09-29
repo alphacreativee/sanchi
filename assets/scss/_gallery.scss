@@ -85,40 +85,16 @@
     display: grid;
     gap: 24px;
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-    grid-auto-rows: 12px;
 
     &-box {
       overflow: hidden;
       cursor: pointer;
-
+      width: 100%;
+      aspect-ratio: 435 / 300;
       &:hover img {
-        transform: scale(1.05);
+        transform: scale(1.05) !important;
       }
 
-      &:nth-child(6n + 1) {
-        grid-column: span 1;
-        grid-row: span 11;
-      }
-      &:nth-child(6n + 2) {
-        grid-column: span 1;
-        grid-row: span 8;
-      }
-      &:nth-child(6n + 3) {
-        grid-column: span 1;
-        grid-row: span 11;
-      }
-      &:nth-child(6n + 4) {
-        grid-column: span 1;
-        grid-row: span 11;
-      }
-      &:nth-child(6n + 5) {
-        grid-column: span 1;
-        grid-row: span 8;
-      }
-      &:nth-child(6n + 6) {
-        grid-column: span 1;
-        grid-row: span 8;
-      }
       img {
         width: 100%;
         height: 100%;
