@@ -826,3 +826,112 @@ export function revealAnimationBox() {
       );
   });
 }
+
+export function fadeInOnScroll() {
+  const elements = document.querySelectorAll("[data-fade-in]");
+  if (
+    !elements.length ||
+    typeof gsap === "undefined" ||
+    typeof ScrollTrigger === "undefined"
+  ) {
+    return [];
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  return Array.from(elements).map((element) => {
+    if (element.dataset.fadeInitialized) return null;
+    element.dataset.fadeInitialized = "true";
+
+    if (reduceMotion) {
+      gsap.set(element, { clearProps: "opacity,transform,visibility" });
+      return null;
+    }
+
+    const delay = Number.parseFloat(element.dataset.fadeDelay) || 0;
+
+    return gsap.to(element, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.4,
+      delay,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: element,
+        start: "top 70%",
+        once: true,
+      },
+    });
+  });
+}
+
+export function parallaxImagesOnScroll() {
+  const images = document.querySelectorAll("[data-parallax-image]");
+  if (
+    !images.length ||
+    typeof gsap === "undefined" ||
+    typeof ScrollTrigger === "undefined" ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    return [];
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  return Array.from(images).map((image) => {
+    if (image.dataset.parallaxInitialized) return null;
+    image.dataset.parallaxInitialized = "true";
+
+    return gsap.fromTo(
+      image,
+      { yPercent: 10 },
+      {
+        yPercent: -10,
+        ease: "none",
+        scrollTrigger: {
+          trigger: image.parentElement,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      },
+    );
+  });
+}
+
+export function bannerContentFadeIn() {
+  const contents = document.querySelectorAll(".banner-content");
+  if (!contents.length) return null;
+
+  const play = () => {
+    if (typeof gsap === "undefined") {
+      contents.forEach((content) => {
+        content.style.opacity = "1";
+        content.style.visibility = "visible";
+        content.style.transform = "none";
+      });
+      return null;
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set(contents, { autoAlpha: 1, y: 0 });
+      return null;
+    }
+
+    return gsap.to(contents, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  };
+
+  if (document.readyState === "complete") return play();
+
+  window.addEventListener("load", play, { once: true });
+  return null;
+}

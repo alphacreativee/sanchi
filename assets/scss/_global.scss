@@ -6,6 +6,13 @@ body {
   font-family: var(--font-body);
 }
 
+[data-fade-in] {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, 16px, 0);
+  will-change: opacity, transform;
+}
+
 ::selection {
   background-color: var(--color-text);
   color: var(--color-bg);
@@ -403,6 +410,12 @@ input:-webkit-autofill:active {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  [data-fade-in] {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
   .hover-underline-white::after,
   .hover-underline-black::after,
   .button-global,

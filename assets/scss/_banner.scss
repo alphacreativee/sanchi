@@ -47,6 +47,9 @@
     align-items: center;
     flex-direction: column;
     width: min(1120px, calc(100% - 160px));
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, 16px, 0);
     text-align: center;
   }
 
@@ -150,6 +153,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .banner-content {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
   .banner-arrow {
     transition: none;
   }

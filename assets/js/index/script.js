@@ -10,6 +10,9 @@ import {
   sectionGalleryLightbox,
   formReservation,
   revealAnimationBox,
+  fadeInOnScroll,
+  parallaxImagesOnScroll,
+  bannerContentFadeIn,
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -88,6 +91,9 @@ function init() {
   sectionGalleryLightbox();
   formReservation();
   getDateLightPick();
+  fadeInOnScroll();
+  parallaxImagesOnScroll();
+  bannerContentFadeIn();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
