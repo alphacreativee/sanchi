@@ -1,0 +1,16 @@
+.map {
+  background-color: var(--color-bg);
+  &-inner {
+    padding: 0 130px 64px;
+  }
+  &-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1180 / 580;
+    .map-link {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
+}
