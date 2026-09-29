@@ -19,6 +19,18 @@ export function customDropdown() {
       dropdown.dataset.placeholder = displayText.textContent.trim();
     }
 
+    if (isSelectType && hiddenInput && dropdown.dataset.defaultValue) {
+      const defaultItem = dropdown.querySelector(
+        `.dropdown-custom-item[data-value="${dropdown.dataset.defaultValue}"]`,
+      );
+
+      if (defaultItem) {
+        hiddenInput.value = dropdown.dataset.defaultValue;
+        if (displayText) displayText.textContent = defaultItem.textContent.trim();
+        dropdown.classList.add("selected");
+      }
+    }
+
     if (!btnDropdown || !dropdownMenu) return;
 
     dropdownMenu.setAttribute("data-pointer-event", "");
@@ -304,7 +316,7 @@ export function sectionGalleryLightbox() {
 }
 
 export function formReservation() {
-  const forms = document.querySelectorAll("[data-reservation-form]");
+  const forms = document.querySelectorAll("[data-form-type]");
   if (!forms.length) return [];
 
   return Array.from(forms).map((form) => {
@@ -336,13 +348,22 @@ export function formReservation() {
         const displayText = dropdown.querySelector(".dropdown-custom-text");
         const dropdownMenu = dropdown.querySelector(".dropdown-custom-menu");
         const dropdownButton = dropdown.querySelector(".dropdown-custom-btn");
+        const defaultValue = dropdown.dataset.defaultValue || "";
+        const defaultItem = defaultValue
+          ? dropdown.querySelector(
+              `.dropdown-custom-item[data-value="${defaultValue}"]`,
+            )
+          : null;
 
-        if (hiddenInput) hiddenInput.value = "";
-        if (displayText && dropdown.dataset.placeholder) {
-          displayText.textContent = dropdown.dataset.placeholder;
+        if (hiddenInput) hiddenInput.value = defaultValue;
+        if (displayText) {
+          displayText.textContent = defaultItem
+            ? defaultItem.textContent.trim()
+            : dropdown.dataset.placeholder || "";
         }
 
-        dropdown.classList.remove("selected", "is-invalid");
+        dropdown.classList.toggle("selected", Boolean(defaultItem));
+        dropdown.classList.remove("is-invalid");
         dropdownMenu?.classList.remove("dropdown--active");
         dropdownButton?.classList.remove("--active");
       });

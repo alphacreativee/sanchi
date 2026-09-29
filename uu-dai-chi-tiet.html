@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Japanese Wellness Journey | Sanchi Privé</title>
+    <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Japanese Wellness Journey | Sanchi Privé" />
+    <meta
+      property="og:description"
+      content="Hành trình cân bằng thân – tâm với trải nghiệm wellness Nhật Bản tại Sanchi Privé."
+    />
+    <meta property="og:image" content="./assets/images/del/banner-inspiration-detail.webp" />
+
+    <link rel="stylesheet" href="./assets/libs/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lenis.css" />
+    <link rel="stylesheet" href="./assets/libs/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lightpick.min.css" />
+    <link rel="stylesheet" href="./assets/fonts/Manrope/style.css" />
+    <link rel="stylesheet" href="./assets/fonts/Aboreto/style.css" />
+    <link rel="stylesheet" href="./assets/main/css/style.min.css" />
+
+    <script>
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    </script>
+  </head>
+
+  <body>
+    <script>
+      fetch("./components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+          document.querySelectorAll(".header-menu a").forEach((link) => {
+            if (link.getAttribute("href") === "./uu-dai.html") {
+              link.classList.add("active");
+            }
+          });
+        });
+    </script>
+    <header id="header" class="header position-fixed"></header>
+
+    <main>
+      <section class="inspirationDetail offerDetail">
+        <div class="inspirationDetail-hero">
+          <img
+            src="./assets/images/del/banner-inspiration-detail.webp"
+            alt="Hành trình chăm sóc tại Sanchi Privé"
+          />
+        </div>
+
+        <div class="inspirationDetail-inner">
+          <div class="inspirationDetail-main">
+            <h1 class="inspirationDetail-title heading-2">Japanese Wellness Journey</h1>
+
+            <div class="inspirationDetail-content b1">
+              <p><strong>Hành trình cân bằng thân – tâm</strong></p>
+              <p>
+                Japanese Wellness Journey tại Sanchi Privé được thiết kế như một
+                hành trình chăm sóc trọn vẹn, lấy cảm hứng từ tinh thần wellness
+                Nhật Bản – nơi sự cân bằng, tĩnh tại và lắng nghe cơ thể được đặt
+                lên hàng đầu.
+              </p>
+              <p>
+                Bắt đầu bằng liệu pháp hơi ấm giúp cơ thể dần thả lỏng, tiếp nối
+                với massage trị liệu chuyên sâu nhằm giải tỏa những vùng cơ thường
+                xuyên chịu áp lực. Kết thúc hành trình là khoảng thời gian thư giãn
+                nhẹ nhàng cùng trà thảo mộc, để cơ thể có thời gian ổn định và tận
+                hưởng trạng thái thư thái sau liệu trình.
+              </p>
+
+              <h2>Trải nghiệm bao gồm</h2>
+              <p>
+                <strong>01 — Steambath | 15 phút</strong><br />
+                Khởi động hành trình bằng không gian hơi ấm, giúp cơ thể thư giãn
+                và chuẩn bị tốt hơn cho các bước chăm sóc tiếp theo.
+              </p>
+              <p>
+                <strong>02 — Therapeutic Body Massage | 90 phút</strong><br />
+                Liệu trình massage toàn thân kết hợp các kỹ thuật chăm sóc chuyên
+                sâu, tập trung vào những vùng dễ tích tụ căng thẳng như cổ, vai,
+                lưng và chân. Cường độ được điều chỉnh linh hoạt theo nhu cầu và
+                trạng thái cơ thể của từng khách hàng.
+              </p>
+              <p>
+                <strong>03 — Herbal Tea Ritual | 15 phút</strong><br />
+                Khép lại trải nghiệm trong không gian yên tĩnh với một tách trà
+                thảo mộc. Đây là khoảng thời gian để cơ thể chậm lại và tận hưởng
+                cảm giác thư thái sau liệu trình.
+              </p>
+
+              <h2>Điều khoản &amp; điều kiện</h2>
+              <ul>
+                <li>Ưu đãi áp dụng cho 01 khách / 01 lần sử dụng.</li>
+                <li>Cần đặt lịch trước và cung cấp mã ưu đãi khi xác nhận đặt chỗ.</li>
+                <li>Ưu đãi được áp dụng tùy theo tình trạng phòng và lịch trị liệu thực tế.</li>
+                <li>Vui lòng đến trước giờ hẹn 10–15 phút để hoàn tất thủ tục và chuẩn bị cho liệu trình.</li>
+                <li>Trường hợp đến muộn, thời lượng liệu trình có thể được điều chỉnh để không ảnh hưởng đến lịch hẹn tiếp theo.</li>
+              </ul>
+            </div>
+
+            <button
+              class="inspirationDetail-booking button-global"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#offerReservationModal"
+              aria-haspopup="dialog"
+              aria-controls="offerReservationModal"
+            >
+              Đặt gói
+            </button>
+          </div>
+
+          <aside class="inspirationDetail-aside">
+            <div class="inspirationDetail-asideImage">
+              <img
+                src="./assets/images/del/gallery-6.jpg"
+                alt="Không gian chăm sóc riêng tư tại Sanchi Privé"
+              />
+            </div>
+            <p class="inspirationDetail-caption b1">Hình ảnh</p>
+            <div class="offerDetail-progress" aria-hidden="true"><span></span></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="inspirationRelated offerRelated">
+        <div class="inspirationRelated-heading">
+          <h2 class="inspirationRelated-title heading-4">Khuyến mãi khác</h2>
+        </div>
+
+        <div class="inspirationRelated-list">
+          <article class="inspirationRelated-card">
+            <a class="inspirationRelated-image" href="./uu-dai-chi-tiet.html">
+              <img src="./assets/images/del/inspire-1.webp" alt="Deep Relaxation Ritual" />
+            </a>
+            <div class="inspirationRelated-content">
+              <h3 class="inspirationRelated-name heading-5">Deep Relaxation Ritual</h3>
+              <p class="inspirationRelated-desc b1">
+                Liệu trình kết hợp massage toàn thân giúp giải tỏa căng cứng và
+                mang lại trạng thái thư thái nhẹ nhàng.
+              </p>
+              <a class="inspirationRelated-link b-tag hover-underline-black underline-default" href="./uu-dai-chi-tiet.html">Chi tiết</a>
+            </div>
+          </article>
+
+          <article class="inspirationRelated-card">
+            <a class="inspirationRelated-image" href="./uu-dai-chi-tiet.html">
+              <img src="./assets/images/del/inspire-2.webp" alt="Body Reset" />
+            </a>
+            <div class="inspirationRelated-content">
+              <h3 class="inspirationRelated-name heading-5">Body Reset</h3>
+              <p class="inspirationRelated-desc b1">
+                Các kỹ thuật massage được thực hiện với nhịp độ phù hợp, tập trung
+                vào những vùng cơ thể dễ tích tụ căng thẳng.
+              </p>
+              <a class="inspirationRelated-link b-tag hover-underline-black underline-default" href="./uu-dai-chi-tiet.html">Chi tiết</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal fade formReservation-modal offerReservation-modal" id="offerReservationModal" tabindex="-1" aria-labelledby="offerReservationTitle" aria-hidden="true" data-lenis-prevent>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content formReservation offerReservation">
+          <button class="formReservation-close" type="button" data-bs-dismiss="modal" aria-label="Đóng"><span aria-hidden="true"></span></button>
+          <form class="formReservation-form" data-form-type="offer" novalidate>
+            <h2 class="formReservation-title heading-4" id="offerReservationTitle">Đặt gói ưu đãi</h2>
+            <div class="formReservation-fields">
+              <div class="dropdown-custom-select formReservation-dropdown" data-required data-default-value="japanese-wellness-journey">
+                <input type="hidden" name="offer" value="japanese-wellness-journey" required />
+                <button class="dropdown-custom-btn b1" type="button"><span class="dropdown-custom-text">Japanese Wellness Journey</span><span class="formReservation-chevron" aria-hidden="true"></span></button>
+                <div class="dropdown-custom-menu"><button class="dropdown-custom-item b1" type="button" data-value="japanese-wellness-journey">Japanese Wellness Journey</button><button class="dropdown-custom-item b1" type="button" data-value="deep-relaxation-ritual">Deep Relaxation Ritual</button><button class="dropdown-custom-item b1" type="button" data-value="body-reset">Body Reset</button></div>
+              </div>
+              <label class="formReservation-field"><span class="visually-hidden">Họ và tên</span><input class="formReservation-input b1" type="text" name="fullName" placeholder="Họ và tên" autocomplete="name" required /></label>
+              <label class="formReservation-field"><span class="visually-hidden">Số điện thoại</span><input class="formReservation-input b1" type="tel" name="phone" placeholder="Số điện thoại" autocomplete="tel" required /></label>
+              <div class="formReservation-row">
+                <label class="formReservation-field formReservation-dateField"><span class="visually-hidden">Ngày đến</span><input class="formReservation-input b1" type="text" name="date" placeholder="Ngày đến" data-lightpick readonly required /><span class="formReservation-chevron" aria-hidden="true"></span></label>
+                <div class="dropdown-custom-select formReservation-dropdown" data-required>
+                  <input type="hidden" name="time" required />
+                  <button class="dropdown-custom-btn b1" type="button"><span class="dropdown-custom-text">Giờ đến</span><span class="formReservation-chevron" aria-hidden="true"></span></button>
+                  <div class="dropdown-custom-menu"><button class="dropdown-custom-item b1" type="button" data-value="09:00">09:00</button><button class="dropdown-custom-item b1" type="button" data-value="12:00">12:00</button><button class="dropdown-custom-item b1" type="button" data-value="15:00">15:00</button><button class="dropdown-custom-item b1" type="button" data-value="18:00">18:00</button></div>
+                </div>
+              </div>
+            </div>
+            <button class="formReservation-submit button-global" type="submit"><span class="formReservation-submitText">Gửi yêu cầu</span></button>
+            <p class="formReservation-success b1" aria-live="polite" hidden>Yêu cầu đã được gửi thành công.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade formReservation-modal" id="formReservationModal" tabindex="-1" aria-labelledby="formReservationTitle" aria-hidden="true" data-lenis-prevent>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content formReservation">
+          <button class="formReservation-close" type="button" data-bs-dismiss="modal" aria-label="Đóng"><span aria-hidden="true"></span></button>
+          <form class="formReservation-form" data-form-type="reservation" novalidate>
+            <h2 class="formReservation-title heading-4" id="formReservationTitle">Đặt lịch</h2>
+            <div class="formReservation-fields">
+              <label class="formReservation-field"><span class="visually-hidden">Họ và tên</span><input class="formReservation-input b1" type="text" name="fullName" placeholder="Họ và tên" autocomplete="name" required /></label>
+              <label class="formReservation-field"><span class="visually-hidden">Số điện thoại</span><input class="formReservation-input b1" type="tel" name="phone" placeholder="Số điện thoại" autocomplete="tel" required /></label>
+              <div class="dropdown-custom-select formReservation-dropdown" data-required>
+                <input type="hidden" name="service" required />
+                <button class="dropdown-custom-btn b1" type="button"><span class="dropdown-custom-text">Dịch vụ</span><span class="formReservation-chevron" aria-hidden="true"></span></button>
+                <div class="dropdown-custom-menu"><button class="dropdown-custom-item b1" type="button" data-value="massage">Massage</button><button class="dropdown-custom-item b1" type="button" data-value="tri-lieu">Trị liệu</button><button class="dropdown-custom-item b1" type="button" data-value="phuc-hoi">Phục hồi</button></div>
+              </div>
+              <div class="formReservation-row">
+                <label class="formReservation-field formReservation-dateField"><span class="visually-hidden">Ngày đến</span><input class="formReservation-input b1" type="text" name="date" placeholder="Ngày đến" data-lightpick readonly required /><span class="formReservation-chevron" aria-hidden="true"></span></label>
+                <div class="dropdown-custom-select formReservation-dropdown" data-required>
+                  <input type="hidden" name="time" required />
+                  <button class="dropdown-custom-btn b1" type="button"><span class="dropdown-custom-text">Giờ đến</span><span class="formReservation-chevron" aria-hidden="true"></span></button>
+                  <div class="dropdown-custom-menu"><button class="dropdown-custom-item b1" type="button" data-value="09:00">09:00</button><button class="dropdown-custom-item b1" type="button" data-value="12:00">12:00</button><button class="dropdown-custom-item b1" type="button" data-value="15:00">15:00</button><button class="dropdown-custom-item b1" type="button" data-value="18:00">18:00</button></div>
+                </div>
+              </div>
+            </div>
+            <button class="formReservation-submit button-global" type="submit"><span class="formReservation-submitText">Đặt lịch</span></button>
+            <p class="formReservation-success b1" aria-live="polite" hidden>Đặt lịch thành công. Chúng tôi sẽ liên hệ với bạn sớm.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      fetch("./components/footer.html")
+        .then((response) => response.text())
+        .then((data) => { document.getElementById("footer").innerHTML = data; });
+    </script>
+    <footer id="footer"></footer>
+
+    <div class="modal fade formSuccess-modal" id="formReservationSuccessModal" tabindex="-1" aria-labelledby="formReservationSuccessTitle" aria-hidden="true" data-lenis-prevent>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content formSuccess">
+          <button class="formReservation-close" type="button" data-bs-dismiss="modal" aria-label="Đóng"><span aria-hidden="true"></span></button>
+          <div class="formSuccess-inner">
+            <h2 class="visually-hidden" id="formReservationSuccessTitle">Gửi yêu cầu thành công</h2>
+            <img class="formSuccess-logo" src="./assets/images/logo.svg" alt="Sanchi Privé Wellness House by Fuji" />
+            <p class="formSuccess-message b1">Chúng tôi đã nhận được yêu cầu từ bạn. Đội ngũ tư vấn sẽ liên hệ với bạn sớm nhất để xác nhận lịch hẹn.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/libs/jquery-3.7.1.js"></script>
+    <script src="./assets/libs/lenis.min.js"></script>
+    <script src="./assets/libs/gsap.min.js"></script>
+    <script src="./assets/libs/ScrollTrigger.min.js"></script>
+    <script src="./assets/libs/SplitText.min.js"></script>
+    <script src="./assets/libs/bootstrap.bundle.min.js"></script>
+    <script src="./assets/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/libs/moment.min.js"></script>
+    <script src="./assets/libs/lightpick.min.js"></script>
+    <script type="module" src="./assets/main/js/script.min.js"></script>
+  </body>
+</html>

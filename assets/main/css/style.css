@@ -1274,6 +1274,11 @@ input:-webkit-autofill:active {
   text-align: center;
 }
 
+.offerReservation .formReservation-fields > .formReservation-dropdown:first-child .dropdown-custom-text,
+.offerReservation .formReservation-fields > .formReservation-dropdown:first-child .dropdown-custom-item {
+  text-transform: uppercase;
+}
+
 .modal-backdrop.show {
   opacity: 0.65;
 }
@@ -2541,7 +2546,7 @@ input:-webkit-autofill:active {
   grid-template-columns: minmax(0, 1.75fr) minmax(280px, 0.9fr);
   max-width: 1360px;
   margin: 0 auto;
-  padding: var(--section-spacing) 20px;
+  padding: var(--section-spacing) 0;
   gap: 80px;
 }
 .inspirationDetail-main {
@@ -2826,6 +2831,20 @@ input:-webkit-autofill:active {
   color: var(--color-text);
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.offerDetail-progress {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin-top: 16px;
+  gap: 2px;
+}
+.offerDetail-progress span {
+  height: 2px;
+  background-color: rgba(35, 35, 35, 0.14);
+}
+.offerDetail-progress span:first-child {
+  background-color: rgba(35, 35, 35, 0.55);
 }
 
 @media (max-width: 1199px) {

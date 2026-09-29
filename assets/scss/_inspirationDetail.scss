@@ -19,7 +19,7 @@
     grid-template-columns: minmax(0, 1.75fr) minmax(280px, 0.9fr);
     max-width: 1360px;
     margin: 0 auto;
-    padding: var(--section-spacing) 20px;
+    padding: var(--section-spacing) 0;
     gap: 80px;
   }
 
@@ -363,6 +363,22 @@
     color: var(--color-text);
     font-weight: 600;
     text-transform: uppercase;
+  }
+}
+
+.offerDetail-progress {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin-top: 16px;
+  gap: 2px;
+
+  span {
+    height: 2px;
+    background-color: rgba(35, 35, 35, 0.14);
+
+    &:first-child {
+      background-color: rgba(35, 35, 35, 0.55);
+    }
   }
 }
 

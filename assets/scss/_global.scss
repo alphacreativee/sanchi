@@ -421,6 +421,13 @@ input:-webkit-autofill:active {
   }
 }
 
+.offerReservation .formReservation-fields > .formReservation-dropdown:first-child {
+  .dropdown-custom-text,
+  .dropdown-custom-item {
+    text-transform: uppercase;
+  }
+}
+
 .modal-backdrop.show {
   opacity: 0.65;
 }
