@@ -25,11 +25,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s ease;
+    scale: 1;
+    transition: scale 0.5s ease;
   }
 
   &-item:hover &-image {
-    transform: scale(1.035);
+    scale: 1.05;
   }
 }
 
