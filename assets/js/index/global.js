@@ -192,7 +192,7 @@ export function sectionTreatmentSlider() {
       slider.classList.toggle("is-end", swiper.isEnd);
     };
 
-    return new Swiper(slider, {
+    const swiper = new Swiper(slider, {
       speed: 800,
       grabCursor: true,
       loop: false,
@@ -219,6 +219,22 @@ export function sectionTreatmentSlider() {
         resize: syncEndState,
       },
     });
+
+    slider.addEventListener("click", (event) => {
+      if (!window.matchMedia("(min-width: 1200px)").matches) return;
+
+      const link = event.target.closest(".sectionTreatment-cardLink");
+      const card = link?.closest(".sectionTreatment-card");
+      const isNextPreview =
+        card?.previousElementSibling?.classList.contains("swiper-slide-next");
+
+      if (!link || !isNextPreview || swiper.isEnd) return;
+
+      event.preventDefault();
+      swiper.slideNext();
+    });
+
+    return swiper;
   });
 }
 
