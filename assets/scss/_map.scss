@@ -1,0 +1,14 @@
+.map {
+  background-color: var(--color-bg);
+  &-inner {
+    padding: 0 130px 64px;
+  }
+  &-image {
+    position: relative;
+    .map-link {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
+}

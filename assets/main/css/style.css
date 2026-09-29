@@ -1773,7 +1773,7 @@ input:-webkit-autofill:active {
   background-color: var(--color-bg);
 }
 .sectionReservation.layout-contact {
-  padding: 0 130px;
+  padding: 164px 130px 64px;
   position: relative;
 }
 .sectionReservation.layout-contact .sectionReservation-inner {
@@ -3539,4 +3539,18 @@ input:-webkit-autofill:active {
   .sectionAbout-title {
     margin-bottom: 16px;
   }
+}
+.map {
+  background-color: var(--color-bg);
+}
+.map-inner {
+  padding: 0 130px 64px;
+}
+.map-image {
+  position: relative;
+}
+.map-image .map-link {
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
