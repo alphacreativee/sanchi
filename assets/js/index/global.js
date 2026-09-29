@@ -853,13 +853,27 @@ export function fadeInOnScroll() {
     }
 
     const delay = Number.parseFloat(element.dataset.fadeDelay) || 0;
+    const bounds = element.getBoundingClientRect();
+    const visibleTop = Math.max(bounds.top, 0);
+    const visibleBottom = Math.min(bounds.bottom, window.innerHeight);
+    const visibleHeight = Math.max(visibleBottom - visibleTop, 0);
+    const visibleRatio = bounds.height > 0 ? visibleHeight / bounds.height : 0;
+    const isWithinInitialViewport = visibleRatio >= 0.7;
 
-    return gsap.to(element, {
+    const animation = {
       autoAlpha: 1,
       y: 0,
       duration: 0.4,
       delay,
       ease: "power2.out",
+    };
+
+    if (isWithinInitialViewport) {
+      return gsap.to(element, animation);
+    }
+
+    return gsap.to(element, {
+      ...animation,
       scrollTrigger: {
         trigger: element,
         start: "top 70%",

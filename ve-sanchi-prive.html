@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Về Sanchi Privé | Sanchi Privé</title>
+    <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Về Sanchi Privé" />
+    <meta
+      property="og:description"
+      content="Khám phá câu chuyện thương hiệu, triết lý và phương pháp chăm sóc tại Sanchi Privé."
+    />
+    <meta property="og:image" content="./assets/images/del/banner.webp" />
+
+    <link rel="stylesheet" href="./assets/libs/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lenis.css" />
+    <link rel="stylesheet" href="./assets/libs/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lightpick.min.css" />
+    <link rel="stylesheet" href="./assets/fonts/Manrope/style.css" />
+    <link rel="stylesheet" href="./assets/fonts/Aboreto/style.css" />
+    <link rel="stylesheet" href="./assets/main/css/style.min.css" />
+
+    <script>
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    </script>
+  </head>
+
+  <body>
+    <script>
+      fetch("./components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+          const currentPage = window.location.pathname.split("/").pop();
+
+          document.querySelectorAll(".header-menu a").forEach((link) => {
+            const linkPage = link.getAttribute("href").replace("./", "");
+            if (linkPage === currentPage) link.classList.add("active");
+          });
+        });
+    </script>
+    <header id="header" class="header position-fixed"></header>
+
+    <main>
+      <section class="banner short-banner" aria-label="Về Sanchi Privé">
+        <div class="banner-slide reveal-element">
+          <span class="reveal-overlay" aria-hidden="true"></span>
+          <img
+            class="banner-image"
+            src="./assets/images/del/banner.webp"
+            alt="Không gian đón tiếp tại Sanchi Privé"
+          />
+          <div class="banner-content">
+            <h1 class="banner-title heading-2">Về Sanchi Privé</h1>
+          </div>
+        </div>
+      </section>
+
+      <section class="sectionIntro">
+        <div class="sectionIntro-inner" data-fade-in>
+          <div class="sectionIntro-content b1">
+            <p>
+              Giữa nhịp sống hiện đại luôn chuyển động, Sanchi Privé được hình
+              thành với mong muốn tạo nên một khoảng lặng, nơi con người có thể
+              tạm rời xa những bộn bề thường nhật để trở về với sự cân bằng bên
+              trong.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sectionAbout">
+        <div class="sectionAbout-inner">
+          <div class="sectionAbout-list">
+            <div class="sectionAbout-layout1">
+              <div class="sectionAbout-content" data-fade-in>
+                <h2 class="sectionAbout-title heading-5">Câu chuyện thương hiệu</h2>
+                <div class="sectionAbout-desc b1">
+                  <p>
+                    Lấy cảm hứng từ tinh thần chăm sóc sức khỏe của Nhật Bản,
+                    Sanchi Privé tin rằng wellness không chỉ là thư giãn cơ thể,
+                    mà còn là hành trình kết nối lại giữa cơ thể, tâm trí và nguồn
+                    năng lượng bên trong.
+                  </p>
+                  <p>
+                    Mỗi trải nghiệm tại Sanchi được xây dựng với sự tinh tế, chậm
+                    rãi và riêng tư, để việc chăm sóc bản thân trở thành một phần
+                    tự nhiên của cuộc sống.
+                  </p>
+                  <p>
+                    Với Sanchi Privé, mỗi lần ghé thăm không đơn thuần là một liệu
+                    trình, mà là một hành trình trở về với chính mình. Bước qua
+                    cánh cửa Sanchi, nhịp sống dường như chậm lại trong thơm dịu
+                    nhẹ, âm thanh thư thái và sự chăm sóc tận tâm.
+                  </p>
+                </div>
+              </div>
+              <div class="sectionAbout-image reveal-element">
+                <span class="reveal-overlay" aria-hidden="true"></span>
+                <img
+                  src="./assets/images/del/gallery-1.jpg"
+                  alt="Câu chuyện thương hiệu Sanchi Privé"
+                />
+              </div>
+            </div>
+
+            <div class="sectionAbout-layout2">
+              <div class="sectionAbout-mediaGrid">
+                <div class="sectionAbout-card">
+                  <div class="sectionAbout-image sectionAbout-cardImage reveal-element">
+                    <span class="reveal-overlay" aria-hidden="true"></span>
+                    <img
+                      src="./assets/images/del/gallery-2.jpg"
+                      alt="Triết lý chăm sóc tại Sanchi Privé"
+                    />
+                  </div>
+                  <div class="sectionAbout-cardContent" data-fade-in>
+                    <h2 class="sectionAbout-cardTitle heading-5">Triết lý Sanchi</h2>
+                    <div class="sectionAbout-desc b1">
+                      <p>
+                        Sanchi tạo nên một không gian để mỗi người có thể chậm lại,
+                        cảm nhận cơ thể và tìm về trạng thái cân bằng tự nhiên.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sectionAbout-card">
+                  <div class="sectionAbout-image sectionAbout-cardImage reveal-element">
+                    <span class="reveal-overlay" aria-hidden="true"></span>
+                    <img
+                      src="./assets/images/del/gallery-3.jpg"
+                      alt="Phương pháp và định hướng của Sanchi Privé"
+                    />
+                  </div>
+                  <div class="sectionAbout-cardContent" data-fade-in>
+                    <h2 class="sectionAbout-cardTitle heading-5">
+                      Phương pháp &amp; định hướng
+                    </h2>
+                    <div class="sectionAbout-desc b1">
+                      <p>
+                        Mỗi liệu trình được định hướng nhằm hỗ trợ cơ thể giải tỏa
+                        căng thẳng, phục hồi và tái tạo nguồn năng lượng tự nhiên.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sectionAbout-layout2Content" data-fade-in>
+                <div class="sectionAbout-desc b1">
+                  <p>
+                    Phương pháp của Sanchi bắt đầu từ việc lắng nghe cơ thể — nhận
+                    diện trạng thái thể chất, mức độ căng thẳng và nhu cầu thư giãn
+                    của mỗi người để lựa chọn trải nghiệm phù hợp.
+                  </p>
+                  <p>
+                    Các kỹ thuật massage, trị liệu và chăm sóc cơ thể được thực
+                    hiện với nhịp độ chậm rãi, chú trọng sự chính xác, riêng tư và
+                    cảm nhận của khách hàng.
+                  </p>
+                  <p>
+                    Sanchi Privé xây dựng trải nghiệm wellness dựa trên sự kết hợp
+                    giữa tinh hoa chăm sóc sức khỏe phương Đông và những tiêu chuẩn
+                    wellness đương đại.
+                  </p>
+                </div>
+                <p class="sectionAbout-caption b1">
+                  “Sanchi Privé - nơi sự cân bằng trở thành một cách sống.”
+                </p>
+              </div>
+            </div>
+
+            <div class="sectionAbout-layout3">
+              <div class="sectionAbout-image sectionAbout-layout3Image reveal-element">
+                <span class="reveal-overlay" aria-hidden="true"></span>
+                <img
+                  src="./assets/images/del/banner.webp"
+                  alt="Mối liên hệ giữa Sanchi Privé và Fuji"
+                />
+              </div>
+              <div class="sectionAbout-layout3Content">
+                <div class="sectionAbout-layout3Inner" data-fade-in>
+                  <h2 class="sectionAbout-title heading-4">Mối liên hệ với Fuji</h2>
+                  <div class="sectionAbout-desc b1">
+                    <p>
+                      Tinh thần ấy được Sanchi chuyển hóa vào từng trải nghiệm bằng
+                      sự chăm rãi, tinh tế và chú trọng cảm nhận cá nhân. Từ không
+                      gian, hương thơm, âm thanh đến các kỹ thuật massage và trị liệu,
+                      mọi chi tiết đều hướng đến việc tạo ra một trạng thái thư giãn
+                      sâu, giúp cơ thể được phục hồi và tâm trí tìm lại sự tĩnh tại.
+                    </p>
+                    <p>
+                      Sanchi không sao chép một mô hình wellness Nhật Bản, mà chắt
+                      lọc tinh thần cốt lõi để tạo nên cách chăm sóc phù hợp với nhịp
+                      sống hiện đại.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sectionAbout-layout4">
+              <div class="sectionAbout-image reveal-element">
+                <span class="reveal-overlay" aria-hidden="true"></span>
+                <img
+                  src="./assets/images/del/gallery-1.jpg"
+                  alt="Sanchi Privé tại Shilla Hanoi"
+                />
+              </div>
+              <div class="sectionAbout-content" data-fade-in>
+                <h2 class="sectionAbout-title heading-5">
+                  Sanchi Privé tại Shilla Hanoi
+                </h2>
+                <div class="sectionAbout-desc b1">
+                  <p>
+                    Tọa lạc trong không gian yên tĩnh và tinh tế tại The Shilla
+                    Hanoi, Sanchi Privé mang đến một điểm dừng wellness giữa lòng
+                    thành phố.
+                  </p>
+                  <p>
+                    Từ những liệu trình massage thư giãn, chăm sóc cơ thể đến các
+                    phương pháp trị liệu chuyên sâu, mỗi trải nghiệm đều được kết
+                    hợp giữa tinh hoa chăm sóc sức khỏe phương Đông và tiêu chuẩn
+                    wellness đương đại, hướng đến việc giải tỏa căng thẳng, phục
+                    hồi thể chất và tái tạo năng lượng.
+                  </p>
+                </div>
+                <p class="sectionAbout-caption b1">
+                  “Sanchi Privé - một khoảng lặng để cân bằng, phục hồi và tìm lại
+                  chính mình.”
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div
+      class="modal fade formReservation-modal"
+      id="formReservationModal"
+      tabindex="-1"
+      aria-labelledby="formReservationTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content formReservation">
+          <button
+            class="formReservation-close"
+            type="button"
+            data-bs-dismiss="modal"
+            aria-label="Đóng"
+          ><span aria-hidden="true"></span></button>
+
+          <form class="formReservation-form" data-reservation-form novalidate>
+            <h2 class="formReservation-title heading-4" id="formReservationTitle">Đặt lịch</h2>
+            <div class="formReservation-fields">
+              <label class="formReservation-field">
+                <span class="visually-hidden">Họ và tên</span>
+                <input class="formReservation-input b1" type="text" name="fullName" placeholder="Họ và tên" autocomplete="name" required />
+              </label>
+              <label class="formReservation-field">
+                <span class="visually-hidden">Số điện thoại</span>
+                <input class="formReservation-input b1" type="tel" name="phone" placeholder="Số điện thoại" autocomplete="tel" required />
+              </label>
+              <div class="dropdown-custom-select formReservation-dropdown" data-required>
+                <input type="hidden" name="service" required />
+                <button class="dropdown-custom-btn b1" type="button">
+                  <span class="dropdown-custom-text">Dịch vụ</span>
+                  <span class="formReservation-chevron" aria-hidden="true"></span>
+                </button>
+                <div class="dropdown-custom-menu">
+                  <button class="dropdown-custom-item b1" type="button" data-value="massage">Massage</button>
+                  <button class="dropdown-custom-item b1" type="button" data-value="tri-lieu">Trị liệu</button>
+                  <button class="dropdown-custom-item b1" type="button" data-value="phuc-hoi">Phục hồi</button>
+                </div>
+              </div>
+              <div class="formReservation-row">
+                <label class="formReservation-field formReservation-dateField">
+                  <span class="visually-hidden">Ngày đến</span>
+                  <input class="formReservation-input b1" type="text" name="date" placeholder="Ngày đến" data-lightpick readonly required />
+                  <span class="formReservation-chevron" aria-hidden="true"></span>
+                </label>
+                <div class="dropdown-custom-select formReservation-dropdown" data-required>
+                  <input type="hidden" name="time" required />
+                  <button class="dropdown-custom-btn b1" type="button">
+                    <span class="dropdown-custom-text">Giờ đến</span>
+                    <span class="formReservation-chevron" aria-hidden="true"></span>
+                  </button>
+                  <div class="dropdown-custom-menu">
+                    <button class="dropdown-custom-item b1" type="button" data-value="09:00">09:00</button>
+                    <button class="dropdown-custom-item b1" type="button" data-value="12:00">12:00</button>
+                    <button class="dropdown-custom-item b1" type="button" data-value="15:00">15:00</button>
+                    <button class="dropdown-custom-item b1" type="button" data-value="18:00">18:00</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="formReservation-submit button-global" type="submit">
+              <span class="formReservation-submitText">Đặt lịch</span>
+            </button>
+            <p class="formReservation-success b1" aria-live="polite" hidden>
+              Đặt lịch thành công. Chúng tôi sẽ liên hệ với bạn sớm.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      fetch("./components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+    <footer id="footer"></footer>
+
+    <script src="./assets/libs/jquery-3.7.1.js"></script>
+    <script src="./assets/libs/lenis.min.js"></script>
+    <script src="./assets/libs/gsap.min.js"></script>
+    <script src="./assets/libs/ScrollTrigger.min.js"></script>
+    <script src="./assets/libs/SplitText.min.js"></script>
+    <script src="./assets/libs/bootstrap.bundle.min.js"></script>
+    <script src="./assets/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/libs/moment.min.js"></script>
+    <script src="./assets/libs/lightpick.min.js"></script>
+    <script type="module" src="./assets/main/js/script.min.js"></script>
+  </body>
+</html>
