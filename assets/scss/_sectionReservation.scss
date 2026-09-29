@@ -7,6 +7,15 @@
     .sectionReservation-inner {
       min-height: auto;
     }
+    .formReservation {
+      width: 100%;
+    }
+    .sectionReservation-inner {
+      gap: 64px;
+    }
+    .formReservation-form {
+      max-width: 100%;
+    }
     .box-row {
       &.info {
         display: flex;

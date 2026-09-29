@@ -1779,6 +1779,15 @@ input:-webkit-autofill:active {
 .sectionReservation.layout-contact .sectionReservation-inner {
   min-height: auto;
 }
+.sectionReservation.layout-contact .formReservation {
+  width: 100%;
+}
+.sectionReservation.layout-contact .sectionReservation-inner {
+  gap: 64px;
+}
+.sectionReservation.layout-contact .formReservation-form {
+  max-width: 100%;
+}
 .sectionReservation.layout-contact .box-row.info {
   display: flex;
   align-items: center;
@@ -3548,6 +3557,8 @@ input:-webkit-autofill:active {
 }
 .map-image {
   position: relative;
+  width: 100%;
+  aspect-ratio: 1180/580;
 }
 .map-image .map-link {
   position: absolute;

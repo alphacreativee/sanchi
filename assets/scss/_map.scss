@@ -5,6 +5,8 @@
   }
   &-image {
     position: relative;
+    width: 100%;
+    aspect-ratio: 1180 / 580;
     .map-link {
       position: absolute;
       left: 0;
