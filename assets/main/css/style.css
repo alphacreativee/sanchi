@@ -1032,6 +1032,44 @@ input:-webkit-autofill:active {
   margin-left: auto;
 }
 
+.formSuccess-modal .modal-dialog {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 48px);
+  max-width: 500px;
+  min-height: calc(100% - 32px);
+  margin: 16px auto;
+}
+
+.formSuccess {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 500px;
+  max-height: calc(100dvh - 32px);
+  padding: 64px;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--color-bg-2);
+}
+.formSuccess-inner {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: min(320px, 100%);
+  text-align: center;
+}
+.formSuccess-logo {
+  width: 180px;
+  height: auto;
+}
+.formSuccess-message {
+  margin-top: 40px;
+  color: var(--color-bg);
+}
+
 .formReservation {
   position: relative;
   height: auto;
@@ -1246,7 +1284,8 @@ input:-webkit-autofill:active {
   }
 }
 @media (max-width: 575px) {
-  .formReservation-modal .modal-dialog {
+  .formReservation-modal .modal-dialog,
+  .formSuccess-modal .modal-dialog {
     width: calc(100% - 32px);
   }
   .formReservation {
@@ -1260,6 +1299,10 @@ input:-webkit-autofill:active {
   }
   .formReservation-submit {
     margin-top: 32px;
+  }
+  .formSuccess {
+    height: min(570px, 100dvh - 32px);
+    padding: 48px 24px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2335,15 +2378,19 @@ input:-webkit-autofill:active {
   overflow: hidden;
   aspect-ratio: 1.45/1;
 }
+.sectionGallery-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
 .sectionGallery-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  scale: 1;
-  transition: scale 0.5s ease;
 }
-.sectionGallery-item:hover .sectionGallery-image {
-  scale: 1.05;
+.sectionGallery-item:hover .sectionGallery-media {
+  transform: scale(1.05);
 }
 
 .glightbox-container .gslide-image img {
@@ -2392,7 +2439,7 @@ input:-webkit-autofill:active {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sectionGallery-image {
+  .sectionGallery-media {
     transition: none;
   }
 }

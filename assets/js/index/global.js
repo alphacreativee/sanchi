@@ -348,6 +348,38 @@ export function formReservation() {
       });
     };
 
+    const showSuccessModal = () => {
+      const successModalElement = document.getElementById(
+        "formReservationSuccessModal",
+      );
+      resetForm();
+
+      if (!successModalElement || typeof bootstrap === "undefined") {
+        if (successMessage) {
+          successMessage.hidden = false;
+          successTimer = window.setTimeout(() => {
+            successMessage.hidden = true;
+          }, 5000);
+        }
+        return;
+      }
+
+      const openSuccessModal = () => {
+        bootstrap.Modal.getOrCreateInstance(successModalElement).show();
+      };
+      const currentModal = form.closest(".modal.show");
+
+      if (currentModal && currentModal !== successModalElement) {
+        currentModal.addEventListener("hidden.bs.modal", openSuccessModal, {
+          once: true,
+        });
+        bootstrap.Modal.getOrCreateInstance(currentModal).hide();
+        return;
+      }
+
+      openSuccessModal();
+    };
+
     requiredInputs.forEach((input) => {
       input.addEventListener("input", () => {
         input.classList.remove("is-invalid");
@@ -402,15 +434,7 @@ export function formReservation() {
       submitTimer = window.setTimeout(() => {
         submitButton.classList.remove("loading");
         submitButton.disabled = false;
-        if (successMessage) {
-          successMessage.hidden = false;
-          successTimer = window.setTimeout(() => {
-            successMessage.hidden = true;
-            resetForm();
-          }, 5000);
-        } else {
-          resetForm();
-        }
+        showSuccessModal();
       }, 3000);
     });
 

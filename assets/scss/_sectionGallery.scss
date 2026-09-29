@@ -21,16 +21,21 @@
     aspect-ratio: 1.45 / 1;
   }
 
+  &-media {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+  }
+
   &-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    scale: 1;
-    transition: scale 0.5s ease;
   }
 
-  &-item:hover &-image {
-    scale: 1.05;
+  &-item:hover &-media {
+    transform: scale(1.05);
   }
 }
 
@@ -89,7 +94,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sectionGallery-image {
+  .sectionGallery-media {
     transition: none;
   }
 }
