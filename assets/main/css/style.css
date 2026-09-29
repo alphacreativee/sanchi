@@ -1918,6 +1918,11 @@ input:-webkit-autofill:active {
   caret-color: var(--color-text);
 }
 
+@media (min-width: 1200px) {
+  .sectionReservation-image {
+    max-height: 730px;
+  }
+}
 @media (max-width: 1199px) {
   .sectionReservation {
     padding-bottom: 100px;
