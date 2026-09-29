@@ -108,6 +108,12 @@
   font-family: var(--font-heading);
 }
 
+.heading-3 {
+  font-size: 32px;
+  line-height: 39px;
+  font-family: var(--font-heading);
+}
+
 .heading-4 {
   font-size: 28px;
   line-height: 34px;
@@ -147,7 +153,8 @@
     line-height: 60px;
   }
 
-  .heading-2 {
+  .heading-2,
+  .heading-3 {
     font-size: 28px;
     line-height: 34px;
   }
