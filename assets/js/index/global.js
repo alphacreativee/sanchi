@@ -190,6 +190,20 @@ export function sectionTreatmentSlider() {
   return Array.from(sliders).map((slider) => {
     const syncEndState = (swiper) => {
       slider.classList.toggle("is-end", swiper.isEnd);
+
+      const section = slider.closest(".sectionTreatment");
+      const sectionLeft = Math.max(
+        section?.getBoundingClientRect().left || 0,
+        0,
+      );
+
+      swiper.slides.forEach((slide) => {
+        const bounds = slide.getBoundingClientRect();
+        const isClippedLeft =
+          bounds.left < sectionLeft - 1 && bounds.right > sectionLeft + 1;
+
+        slide.classList.toggle("is-left-preview", isClippedLeft);
+      });
     };
 
     const swiper = new Swiper(slider, {
@@ -217,14 +231,24 @@ export function sectionTreatmentSlider() {
         reachEnd: syncEndState,
         fromEdge: syncEndState,
         resize: syncEndState,
+        setTranslate: syncEndState,
+        transitionEnd: syncEndState,
       },
     });
 
     slider.addEventListener("click", (event) => {
-      if (!window.matchMedia("(min-width: 1200px)").matches) return;
-
       const link = event.target.closest(".sectionTreatment-cardLink");
       const card = link?.closest(".sectionTreatment-card");
+      const isPreviousPreview = card?.classList.contains("is-left-preview");
+
+      if (link && isPreviousPreview && !swiper.isBeginning) {
+        event.preventDefault();
+        swiper.slidePrev();
+        return;
+      }
+
+      if (!window.matchMedia("(min-width: 1200px)").matches) return;
+
       const isNextPreview =
         card?.previousElementSibling?.classList.contains("swiper-slide-next");
 
