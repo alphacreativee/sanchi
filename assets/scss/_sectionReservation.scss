@@ -1,7 +1,65 @@
 .sectionReservation {
   padding: 0 0 var(--section-spacing);
   background-color: var(--color-bg);
-
+  &.layout-contact {
+    padding: 0 130px;
+    position: relative;
+    .sectionReservation-inner {
+      min-height: auto;
+    }
+    .box-row {
+      &.info {
+        display: flex;
+        align-items: center;
+        gap: 48px;
+      }
+      .box-item {
+        a {
+          color: var(--color-white);
+        }
+      }
+      .label,
+      .text {
+        color: var(--color-white);
+      }
+      .list-time {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        p {
+          color: var(--color-white);
+        }
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: -220px;
+      width: 440px;
+      height: 440px;
+      background: url("../../images/icons/logo-artwork.svg") center / contain
+        no-repeat;
+      opacity: 1;
+      pointer-events: none;
+    }
+    .box-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .social-list {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .sectionReservation-content {
+      padding: 0;
+      &::before {
+        content: unset;
+      }
+    }
+  }
   &-inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
@@ -42,7 +100,15 @@
       object-fit: cover;
     }
   }
-
+  &-box {
+    background-color: var(--color-bg-2);
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    height: 100%;
+  }
   .formReservation--inline {
     z-index: 1;
     width: min(500px, 100%);
