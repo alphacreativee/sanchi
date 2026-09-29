@@ -2,6 +2,9 @@
   background-color: var(--color-bg);
   &-inner {
     padding: 0 130px 64px;
+    @media (max-width: 991px) {
+      padding: 0 16px 64px;
+    }
   }
   &-image {
     position: relative;

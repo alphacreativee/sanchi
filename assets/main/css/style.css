@@ -1819,8 +1819,19 @@ input:-webkit-autofill:active {
   padding: 164px 130px 64px;
   position: relative;
 }
+@media (max-width: 991px) {
+  .sectionReservation.layout-contact {
+    padding: 64px 16px;
+  }
+}
 .sectionReservation.layout-contact .sectionReservation-inner {
   min-height: auto;
+}
+@media (max-width: 991px) {
+  .sectionReservation.layout-contact .sectionReservation-inner {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }
 .sectionReservation.layout-contact .formReservation {
   width: 100%;
@@ -1836,6 +1847,12 @@ input:-webkit-autofill:active {
   align-items: center;
   gap: 48px;
 }
+@media (max-width: 991px) {
+  .sectionReservation.layout-contact .box-row.info {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+}
 .sectionReservation.layout-contact .box-row .box-item a {
   color: var(--color-white);
 }
@@ -1843,10 +1860,21 @@ input:-webkit-autofill:active {
 .sectionReservation.layout-contact .box-row .text {
   color: var(--color-white);
 }
+@media (max-width: 991px) {
+  .sectionReservation.layout-contact .box-row .label {
+    margin-bottom: 12px;
+  }
+}
 .sectionReservation.layout-contact .box-row .list-time {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 24px;
+}
+@media (max-width: 991px) {
+  .sectionReservation.layout-contact .box-row .list-time {
+    gap: 16px 24px;
+  }
 }
 .sectionReservation.layout-contact .box-row .list-time p {
   color: var(--color-white);
@@ -1870,6 +1898,7 @@ input:-webkit-autofill:active {
 .sectionReservation.layout-contact .social-list {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 24px;
 }
 .sectionReservation.layout-contact .sectionReservation-content {
@@ -1921,6 +1950,11 @@ input:-webkit-autofill:active {
   justify-content: space-between;
   gap: 24px;
   height: 100%;
+}
+@media (max-width: 991px) {
+  .sectionReservation-box {
+    padding: 24px;
+  }
 }
 .sectionReservation .formReservation--inline {
   z-index: 1;
@@ -3624,6 +3658,11 @@ input:-webkit-autofill:active {
 }
 .map-inner {
   padding: 0 130px 64px;
+}
+@media (max-width: 991px) {
+  .map-inner {
+    padding: 0 16px 64px;
+  }
 }
 .map-image {
   position: relative;
