@@ -1218,9 +1218,13 @@ export function menuFlipbook() {
       const lastPageIndex = isLandscape
         ? Math.max(0, pageCount - (pageCount % 2 === 0 ? 2 : 1))
         : Math.max(0, pageCount - 1);
+      const displayedPage =
+        isLandscape && pageCount > 2 && pageIndex >= lastPageIndex
+          ? pageCount
+          : pageIndex + 1;
 
       if (currentLabel) {
-        currentLabel.textContent = String(pageIndex + 1).padStart(2, "0");
+        currentLabel.textContent = String(displayedPage).padStart(2, "0");
       }
       if (totalLabel) {
         totalLabel.textContent = pageCount
