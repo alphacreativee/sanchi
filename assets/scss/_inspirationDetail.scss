@@ -17,9 +17,9 @@
   &-inner {
     display: grid;
     grid-template-columns: minmax(0, 1.75fr) minmax(280px, 0.9fr);
-    max-width: 1360px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: var(--section-spacing) 0;
+    padding: var(--section-spacing) 20px;
     gap: 80px;
   }
 
@@ -262,6 +262,8 @@
     position: sticky;
     top: 106px;
     align-self: start;
+    min-width: 0;
+    max-width: 100%;
   }
 
   &-asideImage {
@@ -366,20 +368,61 @@
   }
 }
 
-.offerDetail-progress {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  margin-top: 16px;
-  gap: 2px;
+.offerDetail-slider {
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
 
-  span {
-    height: 2px;
-    background-color: rgba(35, 35, 35, 0.14);
-
-    &:first-child {
-      background-color: rgba(35, 35, 35, 0.55);
-    }
+  .swiper-wrapper,
+  .swiper-slide {
+    min-width: 0;
   }
+
+  .swiper-slide {
+    width: 100%;
+  }
+}
+
+.offerDetail-caption {
+  min-height: 24px;
+}
+
+.offerDetail-pagination.swiper-pagination {
+  position: static;
+  display: flex;
+  width: 100%;
+  margin-top: 16px;
+  gap: 3px;
+
+  .swiper-pagination-bullet {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    height: 2px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background-color: rgba(35, 35, 35, 0.14);
+    opacity: 1;
+    transition: flex-grow 0.35s ease;
+  }
+
+  .swiper-pagination-bullet-active {
+    flex-grow: 2;
+  }
+
+  .offerDetail-progressFill {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(35, 35, 35, 0.65);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
 }
 
 @media (max-width: 1199px) {
@@ -429,6 +472,8 @@
 
     &-aside {
       position: static;
+      width: 100%;
+      overflow: hidden;
     }
 
     &-asideImage {
@@ -455,6 +500,12 @@
     }
   }
 
+  .offerDetail-slider,
+  .offerDetail-pagination {
+    width: 100%;
+    max-width: calc(100vw - 32px);
+  }
+
   .inspirationRelated {
     padding-right: 16px;
     padding-left: 16px;
@@ -479,5 +530,12 @@
   .inspirationDetail-content a,
   .inspirationRelated-image img {
     transition: none;
+  }
+
+  .offerDetail-pagination {
+    .swiper-pagination-bullet,
+    .offerDetail-progressFill {
+      transition: none;
+    }
   }
 }

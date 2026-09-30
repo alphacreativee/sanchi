@@ -7,6 +7,7 @@ import {
   bannerSlider,
   sectionTreatmentSlider,
   sectionTestimonialSlider,
+  offerDetailSlider,
   sectionGalleryLightbox,
   formReservation,
   revealAnimationBox,
@@ -88,6 +89,7 @@ function init() {
   bannerSlider();
   sectionTreatmentSlider();
   sectionTestimonialSlider();
+  offerDetailSlider();
   sectionGalleryLightbox();
   formReservation();
   getDateLightPick();

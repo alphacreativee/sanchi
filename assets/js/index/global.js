@@ -298,6 +298,65 @@ export function sectionTestimonialSlider() {
   });
 }
 
+export function offerDetailSlider() {
+  const sliders = document.querySelectorAll(".offerDetail-slider");
+  if (!sliders.length || typeof Swiper === "undefined") return [];
+
+  return Array.from(sliders).map((slider) => {
+    const aside = slider.closest(".inspirationDetail-aside");
+    const caption = aside?.querySelector("[data-offer-caption]");
+    const pagination = aside?.querySelector(".offerDetail-pagination");
+
+    const updateCaption = (swiper) => {
+      if (!caption) return;
+      caption.textContent =
+        swiper.slides[swiper.activeIndex]?.dataset.caption || "";
+    };
+
+    const resetProgress = () => {
+      pagination
+        ?.querySelectorAll(".offerDetail-progressFill")
+        .forEach((fill) => {
+          fill.style.transform = "scaleX(0)";
+        });
+    };
+
+    return new Swiper(slider, {
+      slidesPerView: 1,
+      loop: true,
+      speed: 700,
+      effect: "slide",
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: false,
+      },
+      pagination: {
+        el: pagination,
+        clickable: true,
+        renderBullet(index, className) {
+          return `<button class="${className}" type="button" aria-label="Chuyển đến ảnh ${index + 1}"><span class="offerDetail-progressFill"></span></button>`;
+        },
+      },
+      on: {
+        init: updateCaption,
+        slideChange(swiper) {
+          resetProgress();
+          updateCaption(swiper);
+        },
+        autoplayTimeLeft(swiper, timeLeft, percentage) {
+          const activeProgress = pagination?.querySelector(
+            ".swiper-pagination-bullet-active .offerDetail-progressFill",
+          );
+          if (activeProgress) {
+            activeProgress.style.transform = `scaleX(${1 - percentage})`;
+          }
+        },
+      },
+    });
+  });
+}
+
 export function sectionGalleryLightbox() {
   const galleryLinks = [...document.querySelectorAll(".sectionGallery-link")];
   const lightbox = document.querySelector(".sectionGallery-lightbox");

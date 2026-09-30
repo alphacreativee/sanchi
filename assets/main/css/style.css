@@ -1875,41 +1875,64 @@ input:-webkit-autofill:active {
   max-width: 100%;
 }
 .sectionReservation.layout-contact .box-row.info {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
   gap: 48px;
 }
 @media (max-width: 991px) {
   .sectionReservation.layout-contact .box-row.info {
     gap: 24px;
-    flex-wrap: wrap;
   }
 }
+.sectionReservation.layout-contact .box-row .box-item {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
 .sectionReservation.layout-contact .box-row .box-item a {
-  color: var(--color-white);
+  width: max-content;
+  max-width: 100%;
+  color: var(--color-bg);
+  line-height: 100%;
+}
+.sectionReservation.layout-contact .box-row .box-item a::after {
+  right: auto;
+  width: 0;
+  transform: none;
+  transition: width 0.3s ease;
+}
+.sectionReservation.layout-contact .box-row .box-item a:hover::after, .sectionReservation.layout-contact .box-row .box-item a:focus-visible::after {
+  width: 100%;
+  transform: none;
 }
 .sectionReservation.layout-contact .box-row .label,
 .sectionReservation.layout-contact .box-row .text {
-  color: var(--color-white);
+  color: var(--color-bg);
+}
+.sectionReservation.layout-contact .box-row .label {
+  margin-bottom: 8px;
 }
 @media (max-width: 991px) {
   .sectionReservation.layout-contact .box-row .label {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 }
 .sectionReservation.layout-contact .box-row .list-time {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px;
 }
 @media (max-width: 991px) {
   .sectionReservation.layout-contact .box-row .list-time {
-    gap: 16px 24px;
+    gap: 24px;
   }
 }
 .sectionReservation.layout-contact .box-row .list-time p {
-  color: var(--color-white);
+  color: var(--color-bg);
+}
+.sectionReservation.layout-contact .box-row .list-time p + p {
+  margin-top: 4px;
 }
 .sectionReservation.layout-contact::before {
   content: "";
@@ -1931,7 +1954,11 @@ input:-webkit-autofill:active {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 8px 24px;
+}
+.sectionReservation.layout-contact .box-social .label {
+  margin-bottom: 24px;
+  color: var(--color-bg);
 }
 .sectionReservation.layout-contact .sectionReservation-content {
   padding: 0;
@@ -1976,7 +2003,7 @@ input:-webkit-autofill:active {
 }
 .sectionReservation-box {
   background-color: var(--color-bg-2);
-  padding: 48px;
+  padding: 64px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -2099,6 +2126,18 @@ input:-webkit-autofill:active {
   }
   .sectionReservation .formReservation--inline .formReservation-submit {
     width: 100%;
+  }
+}
+@media (max-width: 575px) {
+  .sectionReservation.layout-contact .box-row.info,
+  .sectionReservation.layout-contact .box-row .list-time {
+    grid-template-columns: 1fr;
+  }
+  .sectionReservation.layout-contact .social-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    align-items: start;
+    gap: 20px 24px;
   }
 }
 .sectionTreatment {
@@ -2538,6 +2577,12 @@ input:-webkit-autofill:active {
   margin: 0 auto;
   padding-bottom: 64px;
 }
+.sectionTestimonial-slide {
+  cursor: grab;
+}
+.sectionTestimonial-slide:active {
+  cursor: grabbing;
+}
 .sectionTestimonial-quote {
   color: var(--color-text);
   text-transform: uppercase;
@@ -2590,9 +2635,9 @@ input:-webkit-autofill:active {
 .inspirationDetail-inner {
   display: grid;
   grid-template-columns: minmax(0, 1.75fr) minmax(280px, 0.9fr);
-  max-width: 1360px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: var(--section-spacing) 0;
+  padding: var(--section-spacing) 20px;
   gap: 80px;
 }
 .inspirationDetail-main {
@@ -2793,6 +2838,8 @@ input:-webkit-autofill:active {
   position: sticky;
   top: 106px;
   align-self: start;
+  min-width: 0;
+  max-width: 100%;
 }
 .inspirationDetail-asideImage {
   width: 100%;
@@ -2879,18 +2926,55 @@ input:-webkit-autofill:active {
   text-transform: uppercase;
 }
 
-.offerDetail-progress {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+.offerDetail-slider {
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.offerDetail-slider .swiper-wrapper,
+.offerDetail-slider .swiper-slide {
+  min-width: 0;
+}
+.offerDetail-slider .swiper-slide {
+  width: 100%;
+}
+
+.offerDetail-caption {
+  min-height: 24px;
+}
+
+.offerDetail-pagination.swiper-pagination {
+  position: static;
+  display: flex;
+  width: 100%;
   margin-top: 16px;
-  gap: 2px;
+  gap: 3px;
 }
-.offerDetail-progress span {
+.offerDetail-pagination.swiper-pagination .swiper-pagination-bullet {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
   height: 2px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
   background-color: rgba(35, 35, 35, 0.14);
+  opacity: 1;
+  transition: flex-grow 0.35s ease;
 }
-.offerDetail-progress span:first-child {
-  background-color: rgba(35, 35, 35, 0.55);
+.offerDetail-pagination.swiper-pagination .swiper-pagination-bullet-active {
+  flex-grow: 2;
+}
+.offerDetail-pagination.swiper-pagination .offerDetail-progressFill {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(35, 35, 35, 0.65);
+  transform: scaleX(0);
+  transform-origin: left center;
 }
 
 @media (max-width: 1199px) {
@@ -2927,6 +3011,8 @@ input:-webkit-autofill:active {
   }
   .inspirationDetail-aside {
     position: static;
+    width: 100%;
+    overflow: hidden;
   }
   .inspirationDetail-asideImage {
     aspect-ratio: 1.2/1;
@@ -2944,6 +3030,11 @@ input:-webkit-autofill:active {
   .inspirationDetail-content .gallery,
   .inspirationDetail-content .gallery-columns-4 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .offerDetail-slider,
+  .offerDetail-pagination {
+    width: 100%;
+    max-width: calc(100vw - 32px);
   }
   .inspirationRelated {
     padding-right: 16px;
@@ -2964,6 +3055,10 @@ input:-webkit-autofill:active {
 @media (prefers-reduced-motion: reduce) {
   .inspirationDetail-content a,
   .inspirationRelated-image img {
+    transition: none;
+  }
+  .offerDetail-pagination .swiper-pagination-bullet,
+  .offerDetail-pagination .offerDetail-progressFill {
     transition: none;
   }
 }
@@ -3079,6 +3174,8 @@ input:-webkit-autofill:active {
 }
 .footer-credit {
   grid-column: 4;
+  width: max-content;
+  max-width: 100%;
 }
 
 @media (max-width: 1199px) {
@@ -4026,4 +4123,10 @@ html.gallery-lightbox-open body {
   position: absolute;
   left: 0;
   bottom: 0;
+  display: inline-flex;
+  background-color: var(--color-bg-2);
+  transition: background-color 0.3s ease;
+}
+.map-image .map-link:hover, .map-image .map-link:focus-visible {
+  background-color: var(--color-text);
 }

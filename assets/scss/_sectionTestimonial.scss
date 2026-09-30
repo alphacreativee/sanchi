@@ -9,6 +9,14 @@
     padding-bottom: 64px;
   }
 
+  &-slide {
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
   &-quote {
     color: var(--color-text);
     text-transform: uppercase;

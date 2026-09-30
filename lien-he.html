@@ -63,7 +63,7 @@
         id="sectionReservation"
       >
         <div class="sectionReservation-inner">
-          <div class="sectionReservation-content">
+          <div class="sectionReservation-content" data-fade-in>
             <div class="formReservation formReservation--inline">
               <form
                 class="formReservation-form"
@@ -213,7 +213,7 @@
             </div>
           </div>
 
-          <div class="sectionReservation-box">
+          <div class="sectionReservation-box" data-fade-in>
             <div class="box-list">
               <div class="box-row">
                 <div class="label heading-5 text-uppercase">Địa chỉ</div>
@@ -224,24 +224,36 @@
               </div>
               <div class="box-row">
                 <div class="label heading-5 text-uppercase">Giờ mở cửa</div>
-                <div class="text list-time">
-                  <p>Thứ 2 - Thứ 6: 09:00 - 20:00</p>
-                  <p>Thứ 7: 09:00 - 18:00</p>
-                  <p>Chủ Nhật: 09:00 - 18:00</p>
+                <div class="text list-time b1">
+                  <div class="list-timeGroup">
+                    <p>Thứ 2 - Thứ 6:</p>
+                    <p>09:00 - 20:00</p>
+                  </div>
+                  <div class="list-timeGroup">
+                    <p>Thứ 7: 09:00 - 18:00</p>
+                    <p>Chủ Nhật: 09:00 - 18:00</p>
+                  </div>
                 </div>
               </div>
               <div class="box-row info">
                 <div class="box-item">
                   <div class="label heading-5 text-uppercase">Email</div>
-                  <a href="mailto:info@sanchiprive.com">info@sanchiprive.com</a>
+                  <a
+                    class="b1 hover-underline-white"
+                    href="mailto:info@sanchiprive.com"
+                    >info@sanchiprive.com</a
+                  >
                 </div>
                 <div class="box-item">
                   <div class="label heading-5 text-uppercase">Hotline</div>
-                  <a href="tel:+842473010100">+84 24 7301 0100</a>
+                  <a class="b1 hover-underline-white" href="tel:+842473010100"
+                    >+84 24 7301 0100</a
+                  >
                 </div>
               </div>
             </div>
             <div class="box-social">
+              <div class="label heading-5 text-uppercase">Theo dõi</div>
               <div class="social-list">
                 <a class="footer-socialLink b1" href="#facebook">
                   <img
@@ -305,9 +317,13 @@
       </section>
       <section class="map">
         <div class="map-inner">
-          <div class="map-image">
+          <div class="map-image" data-fade-in>
             <img src="./assets/images/del/map.jpg" alt="" />
-            <a href="" class="map-link" target="_blank">
+            <a
+              href="https://maps.app.goo.gl/vV9Z1NCwTvU3CbTq8"
+              class="map-link"
+              target="_blank"
+            >
               <img src="./assets/images/del/map-link.svg" alt="" />
             </a>
           </div>
@@ -331,7 +347,11 @@
               <span aria-hidden="true"></span>
             </button>
 
-            <form class="formReservation-form" data-form-type="reservation" novalidate>
+            <form
+              class="formReservation-form"
+              data-form-type="reservation"
+              novalidate
+            >
               <h2
                 class="formReservation-title heading-4"
                 id="formReservationTitle"

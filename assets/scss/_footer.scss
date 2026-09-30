@@ -140,6 +140,8 @@
 
   &-credit {
     grid-column: 4;
+    width: max-content;
+    max-width: 100%;
   }
 }
 
