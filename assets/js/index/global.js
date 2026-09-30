@@ -792,10 +792,11 @@ export function createFilterTab() {
           duration: 0.5,
           ease: "power2.inOut",
         })
+        .set(media, { opacity: 1 }, 0.5)
         .to(
           media,
-          { opacity: 1, scale: 1, duration: 0.6, ease: "none" },
-          "<",
+          { scale: 1, duration: 0.6, ease: "none" },
+          0.5,
         );
     };
 
@@ -941,12 +942,13 @@ export function revealAnimationBox() {
           duration: 0.6,
           ease: "power2.inOut",
         },
-        "+=0.1",
+        ">",
       )
+      .set(media, { opacity: 1 }, 0.8)
       .to(
         media,
-        { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" },
-        "<",
+        { scale: 1, duration: 0.7, ease: "power2.out" },
+        0.8,
       );
   });
 }
