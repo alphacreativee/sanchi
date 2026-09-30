@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu liệu trình | Sanchi Privé</title>
+    <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Menu liệu trình | Sanchi Privé" />
+    <meta
+      property="og:description"
+      content="Khám phá menu liệu trình chăm sóc sức khỏe tại Sanchi Privé."
+    />
+    <link rel="stylesheet" href="./assets/libs/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lenis.css" />
+    <link rel="stylesheet" href="./assets/libs/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lightpick.min.css" />
+    <link rel="stylesheet" href="./assets/libs/glightbox.min.css" />
+    <link rel="stylesheet" href="./assets/fonts/Manrope/style.css" />
+    <link rel="stylesheet" href="./assets/fonts/Aboreto/style.css" />
+    <link rel="stylesheet" href="./assets/main/css/style.min.css" />
+    <script>
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    </script>
+  </head>
+
+  <body>
+    <script>
+      fetch("./components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          const header = document.getElementById("header");
+          header.innerHTML = data;
+          header
+            .querySelectorAll('[data-bs-target="#formReservationModal"]')
+            .forEach((button) => {
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-target");
+              button.addEventListener("click", () => {
+                window.location.href = "./lieu-trinh.html#sectionReservation";
+              });
+            });
+        });
+    </script>
+    <header id="header" class="header"></header>
+
+    <main class="menuPage" data-menu-page>
+      <div class="menuPage-inner" data-menu-fullscreen-root>
+        <div class="menuModal-filterWrap" data-lenis-prevent>
+          <div
+            class="menuModal-filters"
+            role="tablist"
+            aria-label="Chọn gói liệu trình"
+          >
+            <button
+              class="menuModal-filter b-tag is-active"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              data-menu-filter="massage"
+            >
+              Massage
+            </button>
+            <button
+              class="menuModal-filter b-tag"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-menu-filter="therapy"
+            >
+              Trị liệu
+            </button>
+            <button
+              class="menuModal-filter b-tag"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-menu-filter="recovery"
+            >
+              Phục hồi
+            </button>
+          </div>
+        </div>
+
+        <div class="menuModal-body">
+          <div class="menuModal-toolbar">
+            <a
+              class="menuModal-tool"
+              href="./assets/images/del/menu.pdf"
+              download="menu-sanchi-prive.pdf"
+              data-menu-download
+              aria-label="Tải menu PDF"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 20h16" />
+              </svg>
+            </a>
+            <button
+              class="menuModal-tool is-active"
+              type="button"
+              data-menu-sound
+              aria-pressed="true"
+              aria-label="Tắt âm thanh lật trang"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M4 9v6h4l5 4V5L8 9H4Zm12.5-1.5a6.4 6.4 0 0 1 0 9M15 10a3.3 3.3 0 0 1 0 4"
+                />
+              </svg>
+            </button>
+            <button
+              class="menuModal-tool"
+              type="button"
+              data-menu-fullscreen
+              aria-pressed="false"
+              aria-label="Xem toàn màn hình"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="menuFlipbook-stage">
+            <div class="menuFlipbook-menus">
+              <div
+                class="menuFlipbook-menu is-active"
+                data-menu-group="massage"
+                data-menu-pdf="./assets/images/del/menu.pdf"
+                data-menu-file="menu-massage-sanchi-prive.pdf"
+                role="tabpanel"
+              >
+                <div
+                  class="menuFlipbook-loading"
+                  data-menu-loading
+                  role="status"
+                >
+                  <span class="menuFlipbook-spinner" aria-hidden="true"></span>
+                  <span class="visually-hidden">Đang tải menu...</span>
+                </div>
+                <div class="menuFlipbook-book"></div>
+              </div>
+
+              <div
+                class="menuFlipbook-menu"
+                data-menu-group="therapy"
+                data-menu-pdf="./assets/images/del/menu.pdf"
+                data-menu-file="menu-tri-lieu-sanchi-prive.pdf"
+                role="tabpanel"
+                hidden
+              >
+                <div
+                  class="menuFlipbook-loading"
+                  data-menu-loading
+                  role="status"
+                >
+                  <span class="menuFlipbook-spinner" aria-hidden="true"></span>
+                  <span class="visually-hidden">Đang tải menu...</span>
+                </div>
+                <div class="menuFlipbook-book"></div>
+              </div>
+
+              <div
+                class="menuFlipbook-menu"
+                data-menu-group="recovery"
+                data-menu-pdf="./assets/images/del/menu.pdf"
+                data-menu-file="menu-phuc-hoi-sanchi-prive.pdf"
+                role="tabpanel"
+                hidden
+              >
+                <div
+                  class="menuFlipbook-loading"
+                  data-menu-loading
+                  role="status"
+                >
+                  <span class="menuFlipbook-spinner" aria-hidden="true"></span>
+                  <span class="visually-hidden">Đang tải menu...</span>
+                </div>
+                <div class="menuFlipbook-book"></div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="menuFlipbook-navigation"
+            aria-label="Điều hướng trang menu"
+          >
+            <button
+              class="menuFlipbook-arrow menuFlipbook-arrow--prev"
+              type="button"
+              data-menu-prev
+              aria-label="Trang trước"
+            >
+              <span aria-hidden="true"></span>
+            </button>
+            <p class="menuFlipbook-counter b-tag" aria-live="polite">
+              <span data-menu-current>01</span>
+              <span aria-hidden="true">/</span>
+              <span data-menu-total>--</span>
+            </p>
+            <button
+              class="menuFlipbook-arrow menuFlipbook-arrow--next"
+              type="button"
+              data-menu-next
+              aria-label="Trang tiếp theo"
+            >
+              <span aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      fetch("./components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+    <footer id="footer"></footer>
+
+    <script src="./assets/libs/jquery-3.7.1.js"></script>
+    <script src="./assets/libs/lenis.min.js"></script>
+    <script src="./assets/libs/gsap.min.js"></script>
+    <script src="./assets/libs/ScrollTrigger.min.js"></script>
+    <script src="./assets/libs/SplitText.min.js"></script>
+    <script src="./assets/libs/bootstrap.bundle.min.js"></script>
+    <script src="./assets/libs/pdf.min.js"></script>
+    <script src="./assets/libs/page-flip.browser.js"></script>
+    <script src="./assets/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/libs/moment.min.js"></script>
+    <script src="./assets/libs/lightpick.min.js"></script>
+    <script src="./assets/libs/glightbox.min.js"></script>
+    <script type="module" src="./assets/main/js/script.min.js"></script>
+  </body>
+</html>

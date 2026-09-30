@@ -1134,3 +1134,305 @@ export function bannerContentFadeIn() {
   window.addEventListener("load", play, { once: true });
   return null;
 }
+
+export function menuFlipbook() {
+  if (document.documentElement.dataset.menuFlipbookEvents === "true") return;
+  document.documentElement.dataset.menuFlipbookEvents = "true";
+
+  let audioContext = null;
+
+  const playPageSound = (enabled) => {
+    if (!enabled) return;
+
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+
+    audioContext ||= new AudioContextClass();
+    if (audioContext.state === "suspended") audioContext.resume();
+
+    const duration = 0.13;
+    const frameCount = Math.floor(audioContext.sampleRate * duration);
+    const buffer = audioContext.createBuffer(
+      1,
+      frameCount,
+      audioContext.sampleRate,
+    );
+    const channel = buffer.getChannelData(0);
+
+    for (let index = 0; index < frameCount; index += 1) {
+      const progress = index / frameCount;
+      channel[index] = (Math.random() * 2 - 1) * (1 - progress);
+    }
+
+    const source = audioContext.createBufferSource();
+    const filter = audioContext.createBiquadFilter();
+    const gain = audioContext.createGain();
+
+    source.buffer = buffer;
+    filter.type = "bandpass";
+    filter.frequency.value = 1200;
+    filter.Q.value = 0.7;
+    gain.gain.setValueAtTime(0.055, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+      0.001,
+      audioContext.currentTime + duration,
+    );
+
+    source.connect(filter);
+    filter.connect(gain);
+    gain.connect(audioContext.destination);
+    source.start();
+  };
+
+  const initViewer = (viewer) => {
+    if (!viewer || viewer.dataset.menuInitialized === "true") return;
+    viewer.dataset.menuInitialized = "true";
+
+    const filters = [...viewer.querySelectorAll("[data-menu-filter]")];
+    const groups = [...viewer.querySelectorAll("[data-menu-group]")];
+    const prevButton = viewer.querySelector("[data-menu-prev]");
+    const nextButton = viewer.querySelector("[data-menu-next]");
+    const soundButton = viewer.querySelector("[data-menu-sound]");
+    const downloadButton = viewer.querySelector("[data-menu-download]");
+    const fullscreenButton = viewer.querySelector("[data-menu-fullscreen]");
+    const fullscreenRoot = viewer.querySelector("[data-menu-fullscreen-root]");
+    const currentLabel = viewer.querySelector("[data-menu-current]");
+    const totalLabel = viewer.querySelector("[data-menu-total]");
+
+    let activeGroup = groups.find((group) =>
+      group.classList.contains("is-active"),
+    );
+    let soundEnabled = true;
+
+    const updateDownload = () => {
+      if (!downloadButton || !activeGroup) return;
+      downloadButton.href = activeGroup.dataset.menuPdf || "#";
+      downloadButton.download =
+        activeGroup.dataset.menuFile || "menu-sanchi-prive.pdf";
+    };
+
+    const updateCounter = (pageIndex = 0) => {
+      const pageCount = activeGroup?._menuPageCount || 0;
+      const pageFlip = activeGroup?._menuPageFlip;
+      const isLandscape = pageFlip?.getOrientation?.() === "landscape";
+      const lastPageIndex = isLandscape
+        ? Math.max(0, pageCount - (pageCount % 2 === 0 ? 2 : 1))
+        : Math.max(0, pageCount - 1);
+
+      if (currentLabel) {
+        currentLabel.textContent = String(pageIndex + 1).padStart(2, "0");
+      }
+      if (totalLabel) {
+        totalLabel.textContent = pageCount
+          ? String(pageCount).padStart(2, "0")
+          : "--";
+      }
+
+      if (prevButton) prevButton.disabled = !pageCount || pageIndex <= 0;
+      if (nextButton) {
+        nextButton.disabled = !pageCount || pageIndex >= lastPageIndex;
+      }
+    };
+
+    const initGroup = async (group) => {
+      if (!group) return null;
+      if (group._menuPageFlip) return group._menuPageFlip;
+      if (group._menuLoadPromise) return group._menuLoadPromise;
+
+      const loading = group.querySelector("[data-menu-loading]");
+      const book = group.querySelector(".menuFlipbook-book");
+      const source = group.dataset.menuPdf;
+
+      group.classList.add("is-loading");
+      if (loading) loading.hidden = false;
+      updateCounter(0);
+
+      group._menuLoadPromise = (async () => {
+        if (!window.pdfjsLib || !window.St?.PageFlip) {
+          throw new Error("Thiếu thư viện PDF.js hoặc StPageFlip");
+        }
+        if (!source || !book) throw new Error("Chưa thiết lập file PDF menu");
+
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "./assets/libs/pdf.worker.min.js";
+
+        const pdf = await window.pdfjsLib.getDocument(source).promise;
+        const firstPage = await pdf.getPage(1);
+        const firstViewport = firstPage.getViewport({ scale: 1 });
+        const pageElements = await Promise.all(
+          Array.from({ length: pdf.numPages }, async (_, index) => {
+            const pdfPage = await pdf.getPage(index + 1);
+            const viewport = pdfPage.getViewport({ scale: 1.5 });
+            const pageElement = document.createElement("div");
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d", { alpha: false });
+
+            pageElement.className = "menuFlipbook-page";
+            pageElement.setAttribute("data-density", "soft");
+            pageElement.setAttribute(
+              "aria-label",
+              `Trang ${index + 1} / ${pdf.numPages}`,
+            );
+            canvas.width = Math.ceil(viewport.width);
+            canvas.height = Math.ceil(viewport.height);
+            canvas.setAttribute("aria-hidden", "true");
+            pageElement.appendChild(canvas);
+
+            await pdfPage.render({ canvasContext: context, viewport }).promise;
+            return pageElement;
+          }),
+        );
+
+        book.replaceChildren(...pageElements);
+        const pageFlip = new window.St.PageFlip(book, {
+          width: Math.round(firstViewport.width),
+          height: Math.round(firstViewport.height),
+          size: "stretch",
+          minWidth: 260,
+          maxWidth: 850,
+          minHeight: 346,
+          maxHeight: 1134,
+          maxShadowOpacity: 0.38,
+          // Keep the first and last spreads at the same geometry as the
+          // remaining pages. Hard cover mode changes to a single-page spread
+          // at both ends and makes the book visibly jump while turning.
+          showCover: false,
+          drawShadow: true,
+          flippingTime: 900,
+          useMouseEvents: true,
+          mobileScrollSupport: false,
+          clickEventForward: true,
+          autoSize: true,
+        });
+
+        let isInteractive = false;
+        pageFlip.on("init", () => {
+          isInteractive = true;
+        });
+        pageFlip.on("flip", (event) => {
+          if (group === activeGroup) updateCounter(event.data);
+          if (isInteractive) playPageSound(soundEnabled);
+        });
+        pageFlip.on("changeOrientation", () => {
+          if (group === activeGroup) {
+            updateCounter(pageFlip.getCurrentPageIndex());
+          }
+        });
+        pageFlip.loadFromHTML(pageElements);
+
+        group._menuPageFlip = pageFlip;
+        group._menuPageCount = pdf.numPages;
+        group.classList.remove("is-loading");
+        group.classList.add("is-ready");
+        if (loading) loading.hidden = true;
+
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => {
+            pageFlip.update();
+            if (group === activeGroup) {
+              updateCounter(pageFlip.getCurrentPageIndex());
+            }
+          });
+        });
+        return pageFlip;
+      })().catch((error) => {
+        group.classList.remove("is-loading");
+        group.classList.add("is-error");
+        if (loading) {
+          loading.classList.add("is-error");
+          loading.setAttribute("aria-label", "Không thể tải menu PDF");
+        }
+        console.warn("Không thể khởi tạo flipbook.", error);
+        updateCounter(0);
+        return null;
+      });
+
+      return group._menuLoadPromise;
+    };
+
+    const turnPage = (direction) => {
+      const pageFlip = activeGroup?._menuPageFlip;
+      if (!pageFlip) return;
+
+      if (direction === "prev") pageFlip.flipPrev();
+      if (direction === "next") pageFlip.flipNext();
+    };
+
+    filters.forEach((filter) => {
+      filter.addEventListener("click", () => {
+        const target = filter.dataset.menuFilter;
+        const nextGroup = groups.find(
+          (group) => group.dataset.menuGroup === target,
+        );
+        if (!nextGroup || nextGroup === activeGroup) return;
+
+        filters.forEach((item) => {
+          const isActive = item === filter;
+          item.classList.toggle("is-active", isActive);
+          item.setAttribute("aria-selected", String(isActive));
+        });
+
+        groups.forEach((group) => {
+          const isActive = group === nextGroup;
+          group.classList.toggle("is-active", isActive);
+          group.hidden = !isActive;
+        });
+
+        activeGroup = nextGroup;
+        updateDownload();
+        updateCounter(nextGroup._menuPageFlip?.getCurrentPageIndex() || 0);
+        initGroup(nextGroup).then(() => {
+          window.dispatchEvent(new Event("resize"));
+        });
+      });
+    });
+
+    prevButton?.addEventListener("click", () => turnPage("prev"));
+    nextButton?.addEventListener("click", () => turnPage("next"));
+
+    soundButton?.addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+      soundButton.classList.toggle("is-active", soundEnabled);
+      soundButton.setAttribute("aria-pressed", String(soundEnabled));
+      soundButton.setAttribute(
+        "aria-label",
+        soundEnabled ? "Tắt âm thanh lật trang" : "Bật âm thanh lật trang",
+      );
+    });
+
+    fullscreenButton?.addEventListener("click", async () => {
+      try {
+        if (document.fullscreenElement) {
+          await document.exitFullscreen();
+        } else {
+          await fullscreenRoot?.requestFullscreen();
+        }
+      } catch (error) {
+        console.warn("Không thể chuyển chế độ toàn màn hình.", error);
+      }
+    });
+
+    document.addEventListener("fullscreenchange", () => {
+      const isFullscreen = document.fullscreenElement === fullscreenRoot;
+      fullscreenButton?.setAttribute("aria-pressed", String(isFullscreen));
+      fullscreenButton?.setAttribute(
+        "aria-label",
+        isFullscreen ? "Thoát toàn màn hình" : "Xem toàn màn hình",
+      );
+      window.requestAnimationFrame(() => {
+        activeGroup?._menuPageFlip?.update();
+      });
+    });
+
+    viewer.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") turnPage("prev");
+      if (event.key === "ArrowRight") turnPage("next");
+    });
+
+    updateDownload();
+    updateCounter(0);
+    initGroup(activeGroup);
+  };
+
+  initViewer(document.querySelector("[data-menu-page]"));
+}

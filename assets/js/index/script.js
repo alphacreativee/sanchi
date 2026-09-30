@@ -14,6 +14,7 @@ import {
   fadeInOnScroll,
   parallaxImagesOnScroll,
   bannerContentFadeIn,
+  menuFlipbook,
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -96,6 +97,7 @@ function init() {
   fadeInOnScroll();
   parallaxImagesOnScroll();
   bannerContentFadeIn();
+  menuFlipbook();
 }
 
 document.addEventListener("DOMContentLoaded", () => {

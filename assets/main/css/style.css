@@ -148,7 +148,10 @@
     font-size: 53px;
     line-height: 60px;
   }
-  .heading-2,
+  .heading-2 {
+    font-size: 32px;
+    line-height: 39px;
+  }
   .heading-3 {
     font-size: 28px;
     line-height: 34px;
@@ -1896,16 +1899,6 @@ input:-webkit-autofill:active {
   color: var(--color-bg);
   line-height: 100%;
 }
-.sectionReservation.layout-contact .box-row .box-item a::after {
-  right: auto;
-  width: 0;
-  transform: none;
-  transition: width 0.3s ease;
-}
-.sectionReservation.layout-contact .box-row .box-item a:hover::after, .sectionReservation.layout-contact .box-row .box-item a:focus-visible::after {
-  width: 100%;
-  transform: none;
-}
 .sectionReservation.layout-contact .box-row .label,
 .sectionReservation.layout-contact .box-row .text {
   color: var(--color-bg);
@@ -1957,7 +1950,7 @@ input:-webkit-autofill:active {
   gap: 8px 24px;
 }
 .sectionReservation.layout-contact .box-social .label {
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   color: var(--color-bg);
 }
 .sectionReservation.layout-contact .sectionReservation-content {
@@ -2007,7 +2000,7 @@ input:-webkit-autofill:active {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 24px;
+  gap: 32px;
   height: 100%;
 }
 @media (max-width: 991px) {
@@ -4129,4 +4122,400 @@ html.gallery-lightbox-open body {
 }
 .map-image .map-link:hover, .map-image .map-link:focus-visible {
   background-color: var(--color-text);
+}
+
+.menuModal {
+  --menu-modal-edge: 32px;
+  background: rgba(35, 35, 35, 0.78);
+  color: var(--color-text);
+}
+.menuModal .modal-dialog {
+  width: calc(100% - 40px);
+  max-width: 1440px;
+  height: calc(100dvh - 40px);
+  margin: 20px auto;
+}
+.menuModal .modal-content {
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow: hidden;
+}
+.menuModal-header {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 82px;
+  padding: 12px var(--menu-modal-edge);
+  border-bottom: 1px solid rgba(35, 35, 35, 0.18);
+}
+.menuModal-logo {
+  display: block;
+  width: 104px;
+}
+.menuModal-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.menuModal-close {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+}
+.menuModal-close::before, .menuModal-close::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  transition: opacity 0.3s ease;
+}
+.menuModal-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.menuModal-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.menuModal-close:hover::before, .menuModal-close:hover::after {
+  opacity: 0.6;
+}
+.menuModal-filterWrap {
+  position: relative;
+  z-index: 4;
+  flex: 0 0 auto;
+  overflow-x: auto;
+  border-bottom: 1px solid rgba(35, 35, 35, 0.12);
+  scrollbar-width: none;
+}
+.menuModal-filterWrap::-webkit-scrollbar {
+  display: none;
+}
+.menuModal-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  min-width: 100%;
+  padding: 0 var(--menu-modal-edge);
+  gap: 48px;
+}
+.menuModal-filter {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 15px 0 13px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.menuModal-filter::after {
+  position: absolute;
+  right: 0;
+  bottom: 9px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s ease;
+}
+.menuModal-filter:hover::after, .menuModal-filter.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.menuModal-body {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px var(--menu-modal-edge) 16px;
+  overflow: hidden;
+}
+.menuModal-toolbar {
+  position: absolute;
+  z-index: 8;
+  top: 16px;
+  right: var(--menu-modal-edge);
+  display: flex;
+  gap: 8px;
+}
+.menuModal-tool {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid rgba(35, 35, 35, 0.24);
+  background: transparent;
+  color: var(--color-text);
+  place-items: center;
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+}
+.menuModal-tool svg {
+  width: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.4;
+}
+.menuModal-tool:hover {
+  border-color: var(--color-text);
+  background: var(--color-text);
+  color: var(--color-white);
+}
+.menuModal-tool:hover svg,
+.menuModal-tool:hover svg path {
+  stroke: var(--color-white);
+}
+.menuModal-tool[data-menu-sound]:not(.is-active) {
+  opacity: 0.4;
+}
+
+body.menu-modal-open {
+  overflow: hidden;
+}
+
+.menuFlipbook-stage {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  width: min(820px, 100%);
+  height: calc(100dvh - 220px);
+  min-height: 0;
+  align-items: center;
+  justify-content: center;
+  perspective: 1800px;
+}
+.menuFlipbook-menus, .menuFlipbook-menu {
+  height: 100%;
+  min-height: 0;
+}
+.menuFlipbook-menus {
+  width: min(1040px, 100%);
+  height: 100%;
+  max-height: 100%;
+}
+.menuFlipbook-menu {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.menuFlipbook-menu[hidden] {
+  display: none !important;
+}
+.menuFlipbook-book {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  cursor: grab;
+}
+.menuFlipbook-book:active {
+  cursor: grabbing;
+}
+.menuFlipbook-book .stf__parent {
+  margin: 0 auto;
+}
+.menuFlipbook-page {
+  overflow: hidden;
+  background: var(--color-white);
+  box-shadow: 0 18px 45px rgba(35, 35, 35, 0.16);
+}
+.menuFlipbook-page canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.menuFlipbook-loading {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.menuFlipbook-spinner {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(35, 35, 35, 0.2);
+  border-top-color: var(--color-text);
+  border-radius: 50%;
+  animation: menuFlipbookSpin 0.75s linear infinite;
+}
+.menuFlipbook-navigation {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  gap: 16px;
+}
+.menuFlipbook-arrow {
+  position: relative;
+  width: 32px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  transition: opacity 0.3s ease;
+}
+.menuFlipbook-arrow span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+}
+.menuFlipbook-arrow--prev span {
+  transform: translate(-35%, -50%) rotate(-135deg);
+}
+.menuFlipbook-arrow--next span {
+  transform: translate(-65%, -50%) rotate(45deg);
+}
+.menuFlipbook-arrow:hover {
+  opacity: 0.55;
+}
+.menuFlipbook-arrow:disabled {
+  cursor: default;
+  opacity: 0.2;
+}
+.menuFlipbook-counter {
+  flex: 0 0 auto;
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.menuPage {
+  --menu-modal-edge: 32px;
+  padding-top: 82px;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+.menuPage .menuModal-body {
+  flex: 1 1 auto;
+  padding-top: 32px;
+  padding-bottom: 16px;
+  overflow: hidden;
+}
+.menuPage .menuFlipbook-stage {
+  flex: 1 1 auto;
+  width: min(1200px, 100%);
+  height: auto;
+  min-height: 0;
+}
+.menuPage .menuFlipbook-navigation {
+  margin-top: 32px;
+}
+.menuPage-inner {
+  display: flex;
+  height: calc(100dvh - 82px);
+  min-height: 0;
+  flex-direction: column;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+@media (min-width: 1600px) {
+  .menuPage .menuModal-body {
+    padding-top: 64px;
+  }
+  .menuPage .menuFlipbook-navigation {
+    margin-top: 64px;
+  }
+}
+.menuPage-inner:fullscreen {
+  width: 100vw;
+  height: 100dvh;
+  background: var(--color-bg);
+}
+
+@keyframes menuFlipbookSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 767px) {
+  .menuModal {
+    --menu-modal-edge: 16px;
+  }
+  .menuModal .modal-dialog {
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    margin: 0;
+  }
+  .menuModal-header {
+    min-height: 68px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .menuModal-logo {
+    width: 84px;
+  }
+  .menuModal-filters {
+    justify-content: flex-start;
+    gap: 32px;
+  }
+  .menuModal-body {
+    padding-top: 54px;
+    padding-bottom: 12px;
+  }
+  .menuModal-toolbar {
+    top: 8px;
+  }
+  .menuModal-tool {
+    width: 34px;
+    height: 34px;
+  }
+  .menuFlipbook-stage {
+    width: 100%;
+  }
+  .menuFlipbook-menus {
+    width: calc(100% - 48px);
+  }
+  .menuFlipbook-arrow {
+    width: 28px;
+    height: 28px;
+  }
+  .menuFlipbook-arrow span {
+    width: 16px;
+    height: 16px;
+  }
+  .menuPage {
+    --menu-modal-edge: 16px;
+    padding-top: 82px;
+  }
+  .menuPage .menuModal-body {
+    padding-top: 64px;
+    padding-bottom: 16px;
+  }
+  .menuPage .menuFlipbook-stage {
+    height: auto;
+    min-height: 0;
+  }
+  .menuPage-inner {
+    height: calc(100dvh - 82px);
+    min-height: 0;
+  }
 }

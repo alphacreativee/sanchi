@@ -1,0 +1,475 @@
+.menuModal {
+  --menu-modal-edge: 32px;
+  background: rgba(35, 35, 35, 0.78);
+  color: var(--color-text);
+
+  .modal-dialog {
+    width: calc(100% - 40px);
+    max-width: 1440px;
+    height: calc(100dvh - 40px);
+    margin: 20px auto;
+  }
+
+  .modal-content {
+    height: 100%;
+    min-height: 0;
+    border: 0;
+    border-radius: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    overflow: hidden;
+  }
+
+  &-header {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 82px;
+    padding: 12px var(--menu-modal-edge);
+    border-bottom: 1px solid rgba(35, 35, 35, 0.18);
+  }
+
+  &-logo {
+    display: block;
+    width: 104px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &-close {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+      transition: opacity 0.3s ease;
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    &:hover::before,
+    &:hover::after {
+      opacity: 0.6;
+    }
+  }
+
+  &-filterWrap {
+    position: relative;
+    z-index: 4;
+    flex: 0 0 auto;
+    overflow-x: auto;
+    border-bottom: 1px solid rgba(35, 35, 35, 0.12);
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &-filters {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    min-width: 100%;
+    padding: 0 var(--menu-modal-edge);
+    gap: 48px;
+  }
+
+  &-filter {
+    position: relative;
+    flex: 0 0 auto;
+    padding: 15px 0 13px;
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+    line-height: 1.4;
+    text-transform: uppercase;
+
+    &::after {
+      position: absolute;
+      right: 0;
+      bottom: 9px;
+      left: 0;
+      height: 1px;
+      background: currentColor;
+      content: "";
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.35s ease;
+    }
+
+    &:hover::after,
+    &.is-active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+
+  &-body {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px var(--menu-modal-edge) 16px;
+    overflow: hidden;
+  }
+
+  &-toolbar {
+    position: absolute;
+    z-index: 8;
+    top: 16px;
+    right: var(--menu-modal-edge);
+    display: flex;
+    gap: 8px;
+  }
+
+  &-tool {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid rgba(35, 35, 35, 0.24);
+    background: transparent;
+    color: var(--color-text);
+    place-items: center;
+    transition: color 0.3s ease, background-color 0.3s ease,
+      border-color 0.3s ease, opacity 0.3s ease;
+
+    svg {
+      width: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.4;
+    }
+
+    &:hover {
+      border-color: var(--color-text);
+      background: var(--color-text);
+      color: var(--color-white);
+
+      svg,
+      svg path {
+        stroke: var(--color-white);
+      }
+    }
+
+    &[data-menu-sound]:not(.is-active) {
+      opacity: 0.4;
+    }
+  }
+}
+
+body.menu-modal-open {
+  overflow: hidden;
+}
+
+.menuFlipbook {
+  &-stage {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    width: min(820px, 100%);
+    height: calc(100dvh - 220px);
+    min-height: 0;
+    align-items: center;
+    justify-content: center;
+    perspective: 1800px;
+  }
+
+  &-menus,
+  &-menu {
+    height: 100%;
+    min-height: 0;
+  }
+
+  &-menus {
+    width: min(1040px, 100%);
+    height: 100%;
+    max-height: 100%;
+  }
+
+  &-menu {
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+
+  &-menu[hidden] {
+    display: none !important;
+  }
+
+  &-book {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    .stf__parent {
+      margin: 0 auto;
+    }
+  }
+
+  &-page {
+    overflow: hidden;
+    background: var(--color-white);
+    box-shadow: 0 18px 45px rgba(35, 35, 35, 0.16);
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &-loading {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &-spinner {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(35, 35, 35, 0.2);
+    border-top-color: var(--color-text);
+    border-radius: 50%;
+    animation: menuFlipbookSpin 0.75s linear infinite;
+  }
+
+  &-navigation {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+    gap: 16px;
+  }
+
+  &-arrow {
+    position: relative;
+    width: 32px;
+    height: 30px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+    transition: opacity 0.3s ease;
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      border-top: 1px solid currentColor;
+      border-right: 1px solid currentColor;
+    }
+
+    &--prev {
+      span {
+        transform: translate(-35%, -50%) rotate(-135deg);
+      }
+    }
+
+    &--next {
+      span {
+        transform: translate(-65%, -50%) rotate(45deg);
+      }
+    }
+
+    &:hover {
+      opacity: 0.55;
+    }
+
+    &:disabled {
+      cursor: default;
+      opacity: 0.2;
+    }
+  }
+
+  &-counter {
+    flex: 0 0 auto;
+    margin: 0;
+    color: var(--color-text);
+    line-height: 1;
+  }
+}
+
+.menuPage {
+  --menu-modal-edge: 32px;
+  padding-top: 82px;
+  background: var(--color-bg);
+  color: var(--color-text);
+
+  .menuModal-body {
+    flex: 1 1 auto;
+    padding-top: 32px;
+    padding-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .menuFlipbook-stage {
+    flex: 1 1 auto;
+    width: min(1200px, 100%);
+    height: auto;
+    min-height: 0;
+  }
+
+  .menuFlipbook-navigation {
+    margin-top: 32px;
+  }
+
+  &-inner {
+    display: flex;
+    height: calc(100dvh - 82px);
+    min-height: 0;
+    flex-direction: column;
+    background: var(--color-bg);
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 1600px) {
+  .menuPage {
+    .menuModal-body {
+      padding-top: 64px;
+    }
+
+    .menuFlipbook-navigation {
+      margin-top: 64px;
+    }
+  }
+}
+
+.menuPage-inner:fullscreen {
+  width: 100vw;
+  height: 100dvh;
+  background: var(--color-bg);
+}
+
+@keyframes menuFlipbookSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 767px) {
+  .menuModal {
+    --menu-modal-edge: 16px;
+
+    .modal-dialog {
+      width: 100%;
+      max-width: none;
+      height: 100dvh;
+      margin: 0;
+    }
+
+    &-header {
+      min-height: 68px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    &-logo {
+      width: 84px;
+    }
+
+    &-filters {
+      justify-content: flex-start;
+      gap: 32px;
+    }
+
+    &-body {
+      padding-top: 54px;
+      padding-bottom: 12px;
+    }
+
+    &-toolbar {
+      top: 8px;
+    }
+
+    &-tool {
+      width: 34px;
+      height: 34px;
+    }
+  }
+
+  .menuFlipbook {
+    &-stage {
+      width: 100%;
+    }
+
+    &-menus {
+      width: calc(100% - 48px);
+    }
+
+    &-arrow {
+      width: 28px;
+      height: 28px;
+
+      span {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  .menuPage {
+    --menu-modal-edge: 16px;
+    padding-top: 82px;
+
+    .menuModal-body {
+      padding-top: 64px;
+      padding-bottom: 16px;
+    }
+
+    .menuFlipbook-stage {
+      height: auto;
+      min-height: 0;
+    }
+
+    &-inner {
+      height: calc(100dvh - 82px);
+      min-height: 0;
+    }
+  }
+}
+
