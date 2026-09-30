@@ -1,0 +1,239 @@
+.offerPage {
+  &.layout-post {
+    padding-right: 35px;
+    padding-left: 35px;
+  }
+
+  .layout-post-heading {
+    margin-bottom: 44px;
+  }
+
+  &-results {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  &-featured {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 0.95fr);
+    margin-bottom: 56px;
+    gap: 56px;
+  }
+
+  .filter-item.offerPage-featured {
+    display: grid;
+  }
+
+  &-featuredImage {
+    display: block;
+    height: 415px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .offerPage-featuredZoom {
+      display: block;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    &:hover .offerPage-featuredZoom,
+    &:focus-visible .offerPage-featuredZoom {
+      transform: scale(1.05);
+    }
+  }
+
+  &-featuredContent {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 4px 0;
+  }
+
+  &-featuredTitle {
+    margin-bottom: 24px;
+    color: var(--color-text);
+    text-transform: uppercase;
+  }
+
+  &-featuredDesc,
+  &-featuredInfo {
+    color: var(--color-text);
+  }
+
+  &-featuredInfo {
+    margin-top: 20px;
+
+    p + p {
+      margin-top: 4px;
+    }
+  }
+
+  &-featuredLink {
+    margin-top: auto;
+    color: var(--color-text);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 64px 32px;
+  }
+
+  .filter-item.offerPage-card {
+    display: block;
+    min-width: 0;
+    color: var(--color-text);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-text);
+    }
+  }
+
+  &-cardImage {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1.25 / 1;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  &-cardZoom {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .offerPage-card:hover .offerPage-cardZoom,
+  .offerPage-card:focus-visible .offerPage-cardZoom {
+    transform: scale(1.05);
+  }
+
+  &-cardTitle {
+    margin-bottom: 12px;
+    color: var(--color-text);
+    text-transform: uppercase;
+  }
+
+  &-cardDesc {
+    color: var(--color-text);
+  }
+}
+
+@media (min-width: 1200px) {
+  .offerPage .layout-post-heading {
+    margin-right: -35px;
+    margin-left: -35px;
+    padding-right: 35px;
+    padding-left: 35px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .offerPage {
+    &-featured {
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.9fr);
+      gap: 40px;
+    }
+
+    &-featuredImage {
+      height: 360px;
+    }
+
+    &-grid {
+      gap: 48px 24px;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .offerPage {
+    &-featured {
+      grid-template-columns: minmax(0, 1.25fr) minmax(220px, 0.9fr);
+      gap: 24px;
+    }
+
+    &-featuredImage {
+      height: 320px;
+    }
+
+    &-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 40px 20px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .offerPage.layout-post {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .offerPage {
+    &-results {
+      padding-top: 8px;
+    }
+
+    &-featured {
+      grid-template-columns: 1fr;
+      margin-bottom: 40px;
+      gap: 24px;
+    }
+
+    &-featuredImage {
+      height: auto;
+      aspect-ratio: 1.2 / 1;
+    }
+
+    &-featuredContent {
+      min-height: 0;
+      padding: 0;
+    }
+
+    &-featuredTitle {
+      margin-bottom: 16px;
+    }
+
+    &-featuredInfo {
+      margin-top: 16px;
+    }
+
+    &-featuredLink {
+      margin-top: 32px;
+    }
+
+    &-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    &-cardImage {
+      aspect-ratio: 1.25 / 1;
+      margin-bottom: 16px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offerPage-featuredImage img,
+  .offerPage-featuredZoom,
+  .offerPage-cardZoom {
+    transition: none;
+  }
+}

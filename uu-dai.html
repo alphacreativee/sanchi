@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ưu đãi | Sanchi Privé</title>
+    <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ưu đãi | Sanchi Privé" />
+    <meta property="og:description" content="Khám phá các ưu đãi chăm sóc và liệu trình wellness tại Sanchi Privé." />
+    <meta property="og:image" content="./assets/images/del/banner-lieu-trinh.webp" />
+
+    <link rel="stylesheet" href="./assets/libs/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lenis.css" />
+    <link rel="stylesheet" href="./assets/libs/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./assets/fonts/Manrope/style.css" />
+    <link rel="stylesheet" href="./assets/fonts/Aboreto/style.css" />
+    <link rel="stylesheet" href="./assets/main/css/style.min.css" />
+    <script>
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    </script>
+  </head>
+
+  <body>
+    <script>
+      fetch("./components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+          document.querySelectorAll(".header-menu a").forEach((link) => {
+            if (link.getAttribute("href") === "./uu-dai.html") link.classList.add("active");
+          });
+        });
+    </script>
+    <header id="header" class="header position-fixed"></header>
+
+    <main>
+      <section class="banner short-banner reveal-element" aria-label="Ưu đãi">
+        <span class="reveal-overlay" aria-hidden="true"></span>
+        <div class="banner-slide">
+          <img class="banner-image" src="./assets/images/del/banner-lieu-trinh.webp" alt="Trải nghiệm chăm sóc tại Sanchi Privé" />
+          <div class="banner-content"><h1 class="banner-title heading-2">Ưu đãi</h1></div>
+        </div>
+      </section>
+
+      <section class="layout-post offerPage">
+        <div class="layout-post-inner">
+          <div class="layout-post-heading">
+            <div class="filter-section select-tab animation-tab d-flex align-items-center justify-content-center" data-target="#listOffers">
+              <button class="filter-mobile-toggle b1" type="button" aria-expanded="false" aria-controls="offerFilterOptions">
+                <span class="filter-mobile-label">Tất cả</span>
+                <span class="filter-mobile-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="filter-list-button d-flex align-items-center" id="offerFilterOptions">
+                <div class="filter-button b2-font hover-underline-black active" data-type="all">Tất cả</div>
+                <div class="filter-button b2-font hover-underline-black" data-type="type-latest">Ưu đãi mới nhất</div>
+                <div class="filter-button b2-font hover-underline-black" data-type="type-week">Ưu đãi tuần</div>
+                <div class="filter-button b2-font hover-underline-black" data-type="type-month">Ưu đãi tháng</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="offerPage-results filter-section-result" id="listOffers">
+            <!-- Chỉ render featured của tab khi bài featured đã được nhập. -->
+            <a class="filter-item all offerPage-featured" href="./uu-dai-chi-tiet.html">
+              <div class="offerPage-featuredImage"><span class="offerPage-featuredZoom reveal-element-item"><span class="reveal-overlay" aria-hidden="true"></span><img src="./assets/images/del/banner-inspiration-detail.webp" alt="Japanese Wellness Journey tại Sanchi Privé" /></span></div>
+              <div class="offerPage-featuredContent">
+                <h2 class="offerPage-featuredTitle heading-5">Japanese Wellness Journey</h2>
+                <p class="offerPage-featuredDesc b1">Trải nghiệm chăm sóc chuyên sâu lấy cảm hứng từ tinh thần wellness Nhật Bản, kết hợp massage trị liệu, thư giãn và liệu pháp hơi ấm giúp cơ thể được thả lỏng, phục hồi năng lượng và tìm lại sự cân bằng.</p>
+                <div class="offerPage-featuredInfo b1"><p>Thông tin gói</p><p>Massage trị liệu 90 phút + Steambath + Trà thảo mộc</p><p>Thời lượng: 120 phút</p><p>Giá ưu đãi: 1.290.000 VNĐ</p></div>
+                <span class="offerPage-featuredLink b-tag hover-underline-black underline-default">Chi tiết</span>
+              </div>
+            </a>
+
+            <a class="filter-item type-latest offerPage-featured" href="./uu-dai-chi-tiet.html">
+              <div class="offerPage-featuredImage"><span class="offerPage-featuredZoom reveal-element-item"><span class="reveal-overlay" aria-hidden="true"></span><img src="./assets/images/del/home/a (4).webp" alt="Ưu đãi Deep Relaxation Ritual" /></span></div>
+              <div class="offerPage-featuredContent">
+                <h2 class="offerPage-featuredTitle heading-5">Deep Relaxation Ritual</h2>
+                <p class="offerPage-featuredDesc b1">Liệu trình kết hợp massage toàn thân giúp giải tỏa căng cứng và mang lại trạng thái thư thái nhẹ nhàng.</p>
+                <div class="offerPage-featuredInfo b1"><p>Thông tin gói</p><p>Massage toàn thân chuyên sâu</p><p>Thời lượng: 90 phút</p></div>
+                <span class="offerPage-featuredLink b-tag hover-underline-black underline-default">Chi tiết</span>
+              </div>
+            </a>
+
+            <a class="filter-item type-week offerPage-featured" href="./uu-dai-chi-tiet.html">
+              <div class="offerPage-featuredImage"><span class="offerPage-featuredZoom reveal-element-item"><span class="reveal-overlay" aria-hidden="true"></span><img src="./assets/images/del/home/a (9).webp" alt="Ưu đãi Body Reset" /></span></div>
+              <div class="offerPage-featuredContent">
+                <h2 class="offerPage-featuredTitle heading-5">Body Reset</h2>
+                <p class="offerPage-featuredDesc b1">Các kỹ thuật massage được thực hiện với nhịp độ phù hợp, tập trung vào những vùng cơ thể dễ tích tụ căng thẳng.</p>
+                <div class="offerPage-featuredInfo b1"><p>Thông tin gói</p><p>Massage thư giãn và phục hồi</p><p>Thời lượng: 75 phút</p></div>
+                <span class="offerPage-featuredLink b-tag hover-underline-black underline-default">Chi tiết</span>
+              </div>
+            </a>
+
+            <a class="filter-item type-month offerPage-featured" href="./uu-dai-chi-tiet.html">
+              <div class="offerPage-featuredImage"><span class="offerPage-featuredZoom reveal-element-item"><span class="reveal-overlay" aria-hidden="true"></span><img src="./assets/images/del/home/a (5).webp" alt="Ưu đãi Couple Wellness Escape" /></span></div>
+              <div class="offerPage-featuredContent">
+                <h2 class="offerPage-featuredTitle heading-5">Couple Wellness Escape</h2>
+                <p class="offerPage-featuredDesc b1">Liệu trình được thiết kế để cả hai cùng thả lỏng cơ thể và tận hưởng những phút giây chăm sóc riêng tư.</p>
+                <div class="offerPage-featuredInfo b1"><p>Thông tin gói</p><p>Trải nghiệm chăm sóc dành cho hai khách</p><p>Thời lượng: 120 phút</p></div>
+                <span class="offerPage-featuredLink b-tag hover-underline-black underline-default">Chi tiết</span>
+              </div>
+            </a>
+
+            <div class="offerPage-grid">
+              <a class="filter-item all type-latest offerPage-card" href="./uu-dai-chi-tiet.html">
+                <span class="offerPage-cardImage"><span class="offerPage-cardZoom reveal-element-item"><span class="reveal-overlay" aria-hidden="true"></span><img src="./assets/images/del/home/a (1).webp" alt="Deep Relaxation Ritual" /></span></span>
+                <h3 class="offerPage-cardTitle heading-5">Deep Relaxation Ritual</h3>
+                <p class="offerPage-cardDesc b1">Liệu trình kết hợp massage toàn thân giúp giải tỏa căng cứng và mang lại trạng thái thư thái nhẹ nhàng.</p>
+              </a>
+              <a class="filter-item all type-week offerPage-card" href="./uu-dai-chi-tiet.html">
+                <span class="offerPage-cardImage"><span class="offerPage-cardZoom reveal-element-item"><span class="reveal-overlay" aria-hidden="true"></span><img src="./assets/images/del/home/a (9).webp" alt="Body Reset" /></span></span>
+                <h3 class="offerPage-cardTitle heading-5">Body Reset</h3>
+                <p class="offerPage-cardDesc b1">Các kỹ thuật massage được thực hiện với nhịp độ phù hợp, tập trung vào những vùng cơ thể dễ tích tụ căng thẳng.</p>
+              </a>
+              <a class="filter-item all type-month offerPage-card" href="./uu-dai-chi-tiet.html">
+                <span class="offerPage-cardImage"><span class="offerPage-cardZoom reveal-element-item"><span class="reveal-overlay" aria-hidden="true"></span><img src="./assets/images/del/home/a (5).webp" alt="Couple Wellness Escape" /></span></span>
+                <h3 class="offerPage-cardTitle heading-5">Couple Wellness Escape</h3>
+                <p class="offerPage-cardDesc b1">Liệu trình được thiết kế để cả hai cùng thả lỏng cơ thể và tận hưởng những phút giây chăm sóc riêng tư.</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      fetch("./components/footer.html")
+        .then((response) => response.text())
+        .then((data) => { document.getElementById("footer").innerHTML = data; });
+    </script>
+    <footer id="footer"></footer>
+
+    <script src="./assets/libs/jquery-3.7.1.js"></script>
+    <script src="./assets/libs/lenis.min.js"></script>
+    <script src="./assets/libs/gsap.min.js"></script>
+    <script src="./assets/libs/ScrollTrigger.min.js"></script>
+    <script src="./assets/libs/SplitText.min.js"></script>
+    <script src="./assets/libs/bootstrap.bundle.min.js"></script>
+    <script src="./assets/libs/swiper-bundle.min.js"></script>
+    <script type="module" src="./assets/main/js/script.min.js"></script>
+  </body>
+</html>

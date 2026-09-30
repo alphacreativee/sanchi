@@ -299,20 +299,73 @@ export function sectionTestimonialSlider() {
 }
 
 export function sectionGalleryLightbox() {
-  const galleryLinks = document.querySelectorAll(".sectionGallery-link");
-  if (!galleryLinks.length || typeof GLightbox === "undefined") return null;
+  const galleryLinks = [...document.querySelectorAll(".sectionGallery-link")];
+  const lightbox = document.querySelector(".sectionGallery-lightbox");
+  const swiperEl = lightbox?.querySelector(".swiper-lightbox");
 
-  return GLightbox({
-    selector: ".sectionGallery-link",
-    touchNavigation: true,
-    keyboardNavigation: true,
-    closeOnOutsideClick: true,
-    loop: true,
-    zoomable: true,
-    openEffect: "zoom",
-    closeEffect: "zoom",
-    slideEffect: "fade",
+  if (!galleryLinks.length || !lightbox || !swiperEl) return null;
+
+  const titleEl = lightbox.querySelector(".swiper-slide-title");
+  const closeButton = lightbox.querySelector(".icon-close-lightbox");
+  let lastTrigger = null;
+
+  const updateTitle = (swiper) => {
+    if (!titleEl) return;
+    titleEl.textContent = swiper.slides[swiper.activeIndex]?.dataset.title || "";
+  };
+
+  const swiper = new Swiper(swiperEl, {
+    navigation: {
+      nextEl: lightbox.querySelector(".swiper-button-next"),
+      prevEl: lightbox.querySelector(".swiper-button-prev"),
+    },
+    pagination: {
+      el: lightbox.querySelector(".swiper-fraction"),
+      type: "fraction",
+    },
+    on: {
+      init: updateTitle,
+      slideChange: updateTitle,
+    },
   });
+
+  const openLightbox = (index, trigger) => {
+    lastTrigger = trigger;
+    lightbox.classList.remove("hidden");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.documentElement.classList.add("gallery-lightbox-open");
+    swiper.update();
+    swiper.slideTo(index, 0);
+    updateTitle(swiper);
+    closeButton?.focus();
+  };
+
+  const closeLightbox = () => {
+    lightbox.classList.add("hidden");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.documentElement.classList.remove("gallery-lightbox-open");
+    lastTrigger?.focus();
+  };
+
+  galleryLinks.forEach((link, index) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      openLightbox(index, link);
+    });
+  });
+
+  closeButton?.addEventListener("click", closeLightbox);
+  lightbox
+    .querySelector(".lightbox-overlay")
+    ?.addEventListener("click", closeLightbox);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !lightbox.classList.contains("hidden")) {
+      closeLightbox();
+    }
+  });
+
+  return swiper;
 }
 
 export function formReservation() {
@@ -711,8 +764,8 @@ export function createFilterTab() {
         if (!overlay || !media) return;
 
         gsap.set(overlay, {
-          scaleX: 0,
-          transformOrigin: "left",
+          scaleY: 0,
+          transformOrigin: "top",
           overwrite: "auto",
         });
         gsap.set(media, { opacity: 0, scale: 1.05, overwrite: "auto" });
@@ -728,21 +781,21 @@ export function createFilterTab() {
       gsap
         .timeline()
         .to(overlay, {
-          scaleX: 1,
-          transformOrigin: "left",
+          scaleY: 1,
+          transformOrigin: "top",
           duration: 0.5,
           ease: "power2.out",
         })
         .to(overlay, {
-          scaleX: 0,
-          transformOrigin: "right",
+          scaleY: 0,
+          transformOrigin: "bottom",
           duration: 0.5,
           ease: "power2.inOut",
         })
         .to(
           media,
-          { opacity: 1, scale: 1, duration: 0.8, ease: "none" },
-          "-=0.3",
+          { opacity: 1, scale: 1, duration: 0.6, ease: "none" },
+          "<",
         );
     };
 
@@ -863,6 +916,8 @@ export function revealAnimationBox() {
 
     if (!overlay || !media) return;
 
+    gsap.set(overlay, { scaleY: 0, transformOrigin: "top" });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: element,
@@ -873,16 +928,16 @@ export function revealAnimationBox() {
     });
 
     tl.to(overlay, {
-      scaleX: 1,
-      transformOrigin: "left",
+      scaleY: 1,
+      transformOrigin: "top",
       duration: 0.8,
       ease: "power2.out",
     })
       .to(
         overlay,
         {
-          scaleX: 0,
-          transformOrigin: "right",
+          scaleY: 0,
+          transformOrigin: "bottom",
           duration: 0.6,
           ease: "power2.inOut",
         },
@@ -890,8 +945,8 @@ export function revealAnimationBox() {
       )
       .to(
         media,
-        { opacity: 1, scale: 1, duration: 1, ease: "power2.out" },
-        "-=0.4",
+        { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" },
+        "<",
       );
   });
 }

@@ -186,6 +186,32 @@
         font-size: 16px;
         line-height: 24px;
       }
+
+      .clr-animation {
+        &::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          bottom: -4px;
+          left: 0;
+          height: 1px;
+          background-color: var(--color-bg);
+          transform: scaleX(0);
+          transform-origin: right center;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover::after,
+        &:focus-visible::after,
+        &.active::after {
+          transform: scaleX(1);
+          transform-origin: left center;
+        }
+
+        .svg-clr {
+          display: none;
+        }
+      }
     }
 
     &-booking {

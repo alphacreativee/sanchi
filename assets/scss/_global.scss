@@ -499,8 +499,9 @@ input:-webkit-autofill:active {
     height: 100%;
     z-index: 3;
     background-color: var(--color-bg-2);
-    transform: scaleX(0);
-    transform-origin: left;
+    transform: scaleY(0);
+    transform-origin: top;
+    will-change: transform;
   }
 
   img,
