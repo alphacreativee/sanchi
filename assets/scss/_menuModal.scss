@@ -94,7 +94,7 @@
   &-filters {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: safe center;
     width: max-content;
     min-width: 100%;
     padding: 0 var(--menu-modal-edge);
@@ -191,6 +191,23 @@
 
 body.menu-modal-open {
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .menuModal {
+    &-filterWrap {
+      overflow-x: hidden;
+    }
+
+    &-filters {
+      width: 100%;
+      min-width: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+      column-gap: 48px;
+      row-gap: 0;
+    }
+  }
 }
 
 .menuFlipbook {

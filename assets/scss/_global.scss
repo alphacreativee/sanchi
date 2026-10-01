@@ -421,7 +421,9 @@ input:-webkit-autofill:active {
   }
 }
 
-.offerReservation .formReservation-fields > .formReservation-dropdown:first-child {
+.offerReservation
+  .formReservation-fields
+  > .formReservation-dropdown:first-child {
   .dropdown-custom-text,
   .dropdown-custom-item {
     text-transform: uppercase;
@@ -553,3 +555,4 @@ input:-webkit-autofill:active {
     }
   }
 }
+

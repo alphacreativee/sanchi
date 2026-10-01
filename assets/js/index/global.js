@@ -1,6 +1,6 @@
 export function customDropdown() {
   const dropdowns = document.querySelectorAll(
-    ".dropdown-custom, .dropdown-custom-select",
+    ".dropdown-custom, .dropdown-custom-select"
   );
   if (!dropdowns.length) return;
   dropdowns.forEach((dropdown) => {
@@ -21,12 +21,13 @@ export function customDropdown() {
 
     if (isSelectType && hiddenInput && dropdown.dataset.defaultValue) {
       const defaultItem = dropdown.querySelector(
-        `.dropdown-custom-item[data-value="${dropdown.dataset.defaultValue}"]`,
+        `.dropdown-custom-item[data-value="${dropdown.dataset.defaultValue}"]`
       );
 
       if (defaultItem) {
         hiddenInput.value = dropdown.dataset.defaultValue;
-        if (displayText) displayText.textContent = defaultItem.textContent.trim();
+        if (displayText)
+          displayText.textContent = defaultItem.textContent.trim();
         dropdown.classList.add("selected");
       }
     }
@@ -126,7 +127,7 @@ export function headerScroll() {
       }
 
       lastScroll = currentScroll;
-    },
+    }
   });
 
   return trigger;
@@ -177,7 +178,7 @@ export function bannerSlider() {
       iframe.allow = "autoplay; fullscreen; picture-in-picture";
       iframe.setAttribute("allowfullscreen", "");
       iframe.addEventListener("load", () => video.classList.add("is-loaded"), {
-        once: true,
+        once: true
       });
 
       video.appendChild(iframe);
@@ -199,17 +200,17 @@ export function bannerSlider() {
       speed: 900,
       loop: hasMultipleSlides,
       allowTouchMove: hasMultipleSlides,
-      watchOverflow: true,
+      watchOverflow: true
     };
 
     if (hasMultipleSlides) {
       options.navigation = {
         nextEl: nextArrow,
-        prevEl: prevArrow,
+        prevEl: prevArrow
       };
       options.autoplay = {
         delay: 6000,
-        disableOnInteraction: false,
+        disableOnInteraction: false
       };
     }
 
@@ -228,7 +229,7 @@ export function sectionTreatmentSlider() {
       const section = slider.closest(".sectionTreatment");
       const sectionLeft = Math.max(
         section?.getBoundingClientRect().left || 0,
-        0,
+        0
       );
 
       swiper.slides.forEach((slide) => {
@@ -252,12 +253,12 @@ export function sectionTreatmentSlider() {
       breakpoints: {
         768: {
           slidesPerView: 2.4,
-          spaceBetween: 20,
+          spaceBetween: 20
         },
         1200: {
           slidesPerView: 2.65,
-          spaceBetween: 20,
-        },
+          spaceBetween: 20
+        }
       },
       on: {
         init: syncEndState,
@@ -266,8 +267,8 @@ export function sectionTreatmentSlider() {
         fromEdge: syncEndState,
         resize: syncEndState,
         setTranslate: syncEndState,
-        transitionEnd: syncEndState,
-      },
+        transitionEnd: syncEndState
+      }
     });
 
     slider.addEventListener("click", (event) => {
@@ -310,12 +311,12 @@ export function sectionTestimonialSlider() {
       autoplay: {
         delay: 5000,
         disableOnInteraction: false,
-        pauseOnMouseEnter: true,
+        pauseOnMouseEnter: true
       },
       pagination: {
         el: pagination,
-        clickable: true,
-      },
+        clickable: true
+      }
     });
   });
 }
@@ -351,14 +352,14 @@ export function offerDetailSlider() {
       autoplay: {
         delay: 5000,
         disableOnInteraction: false,
-        pauseOnMouseEnter: false,
+        pauseOnMouseEnter: false
       },
       pagination: {
         el: pagination,
         clickable: true,
         renderBullet(index, className) {
           return `<button class="${className}" type="button" aria-label="Chuyển đến ảnh ${index + 1}"><span class="offerDetail-progressFill"></span></button>`;
-        },
+        }
       },
       on: {
         init: updateCaption,
@@ -368,13 +369,13 @@ export function offerDetailSlider() {
         },
         autoplayTimeLeft(swiper, timeLeft, percentage) {
           const activeProgress = pagination?.querySelector(
-            ".swiper-pagination-bullet-active .offerDetail-progressFill",
+            ".swiper-pagination-bullet-active .offerDetail-progressFill"
           );
           if (activeProgress) {
             activeProgress.style.transform = `scaleX(${1 - percentage})`;
           }
-        },
-      },
+        }
+      }
     });
   });
 }
@@ -392,22 +393,23 @@ export function sectionGalleryLightbox() {
 
   const updateTitle = (swiper) => {
     if (!titleEl) return;
-    titleEl.textContent = swiper.slides[swiper.activeIndex]?.dataset.title || "";
+    titleEl.textContent =
+      swiper.slides[swiper.activeIndex]?.dataset.title || "";
   };
 
   const swiper = new Swiper(swiperEl, {
     navigation: {
       nextEl: lightbox.querySelector(".swiper-button-next"),
-      prevEl: lightbox.querySelector(".swiper-button-prev"),
+      prevEl: lightbox.querySelector(".swiper-button-prev")
     },
     pagination: {
       el: lightbox.querySelector(".swiper-fraction"),
-      type: "fraction",
+      type: "fraction"
     },
     on: {
       init: updateTitle,
-      slideChange: updateTitle,
-    },
+      slideChange: updateTitle
+    }
   });
 
   const openLightbox = (index, trigger) => {
@@ -457,10 +459,10 @@ export function formReservation() {
     const submitButton = form.querySelector(".formReservation-submit");
     const successMessage = form.querySelector(".formReservation-success");
     const requiredInputs = form.querySelectorAll(
-      ".formReservation-input[required]",
+      ".formReservation-input[required]"
     );
     const requiredDropdowns = form.querySelectorAll(
-      ".formReservation-dropdown[data-required]",
+      ".formReservation-dropdown[data-required]"
     );
     let submitTimer = null;
     let successTimer = null;
@@ -485,7 +487,7 @@ export function formReservation() {
         const defaultValue = dropdown.dataset.defaultValue || "";
         const defaultItem = defaultValue
           ? dropdown.querySelector(
-              `.dropdown-custom-item[data-value="${defaultValue}"]`,
+              `.dropdown-custom-item[data-value="${defaultValue}"]`
             )
           : null;
 
@@ -505,7 +507,7 @@ export function formReservation() {
 
     const showSuccessModal = () => {
       const successModalElement = document.getElementById(
-        "formReservationSuccessModal",
+        "formReservationSuccessModal"
       );
       resetForm();
 
@@ -526,7 +528,7 @@ export function formReservation() {
 
       if (currentModal && currentModal !== successModalElement) {
         currentModal.addEventListener("hidden.bs.modal", openSuccessModal, {
-          once: true,
+          once: true
         });
         bootstrap.Modal.getOrCreateInstance(currentModal).hide();
         return;
@@ -572,7 +574,7 @@ export function formReservation() {
         if (isEmpty) {
           isValid = false;
           firstInvalidControl ||= dropdown.querySelector(
-            ".dropdown-custom-btn",
+            ".dropdown-custom-btn"
           );
         }
       });
@@ -828,10 +830,10 @@ export function createFilterTab() {
 
     const getVisibleRevealBoxes = () => {
       const visibleItems = [...result.querySelectorAll(".filter-item")].filter(
-        (item) => item.style.display !== "none",
+        (item) => item.style.display !== "none"
       );
       return visibleItems.flatMap((item) => [
-        ...item.querySelectorAll(".reveal-element-item"),
+        ...item.querySelectorAll(".reveal-element-item")
       ]);
     };
 
@@ -847,7 +849,7 @@ export function createFilterTab() {
         gsap.set(overlay, {
           scaleY: 0,
           transformOrigin: "top",
-          overwrite: "auto",
+          overwrite: "auto"
         });
         gsap.set(media, { opacity: 0, scale: 1.05, overwrite: "auto" });
       });
@@ -865,20 +867,16 @@ export function createFilterTab() {
           scaleY: 1,
           transformOrigin: "top",
           duration: 0.5,
-          ease: "power2.out",
+          ease: "power2.out"
         })
         .to(overlay, {
           scaleY: 0,
           transformOrigin: "bottom",
           duration: 0.5,
-          ease: "power2.inOut",
+          ease: "power2.inOut"
         })
         .set(media, { opacity: 1 }, 0.5)
-        .to(
-          media,
-          { scale: 1, duration: 0.6, ease: "none" },
-          0.5,
-        );
+        .to(media, { scale: 1, duration: 0.6, ease: "none" }, 0.5);
     };
 
     // Chỉ chạy ngay cho box đang trong viewport; box ngoài viewport đợi cuộn tới mới chạy
@@ -910,7 +908,7 @@ export function createFilterTab() {
             trigger: box,
             start: "top 85%",
             once: true,
-            onEnter: () => revealBox(box),
+            onEnter: () => revealBox(box)
           });
         }
       });
@@ -977,7 +975,7 @@ export function getDateLightPick() {
         datepicker.classList.remove("is-invalid");
         datepicker.dispatchEvent(new Event("input", { bubbles: true }));
         datepicker.dispatchEvent(new Event("change", { bubbles: true }));
-      },
+      }
     });
 
     datepicker.lightpickInstance = picker;
@@ -1004,16 +1002,16 @@ export function revealAnimationBox() {
       scrollTrigger: {
         trigger: element,
         start: "top 85%",
-        once: true,
+        once: true
         // markers: true,
-      },
+      }
     });
 
     tl.to(overlay, {
       scaleY: 1,
       transformOrigin: "top",
       duration: 0.8,
-      ease: "power2.out",
+      ease: "power2.out"
     })
       .to(
         overlay,
@@ -1021,16 +1019,12 @@ export function revealAnimationBox() {
           scaleY: 0,
           transformOrigin: "bottom",
           duration: 0.6,
-          ease: "power2.inOut",
+          ease: "power2.inOut"
         },
-        ">",
+        ">"
       )
       .set(media, { opacity: 1 }, 0.8)
-      .to(
-        media,
-        { scale: 1, duration: 0.7, ease: "power2.out" },
-        0.8,
-      );
+      .to(media, { scale: 1, duration: 0.7, ease: "power2.out" }, 0.8);
   });
 }
 
@@ -1047,7 +1041,7 @@ export function fadeInOnScroll() {
   gsap.registerPlugin(ScrollTrigger);
 
   const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
+    "(prefers-reduced-motion: reduce)"
   ).matches;
 
   return Array.from(elements).map((element) => {
@@ -1072,7 +1066,7 @@ export function fadeInOnScroll() {
       y: 0,
       duration: 0.4,
       delay,
-      ease: "power2.out",
+      ease: "power2.out"
     };
 
     if (isWithinInitialViewport) {
@@ -1084,8 +1078,8 @@ export function fadeInOnScroll() {
       scrollTrigger: {
         trigger: element,
         start: "top 70%",
-        once: true,
-      },
+        once: true
+      }
     });
   });
 }
@@ -1117,9 +1111,9 @@ export function parallaxImagesOnScroll() {
           trigger: image.parentElement,
           start: "top bottom",
           end: "bottom top",
-          scrub: true,
-        },
-      },
+          scrub: true
+        }
+      }
     );
   });
 }
@@ -1127,8 +1121,13 @@ export function parallaxImagesOnScroll() {
 export function bannerContentFadeIn() {
   const contents = document.querySelectorAll(".banner-content");
   if (!contents.length) return null;
+  const loadingElement = document.querySelector(".loading");
+  let hasPlayed = false;
 
-  const play = () => {
+  const play = (delay = 0) => {
+    if (hasPlayed) return null;
+    hasPlayed = true;
+
     if (typeof gsap === "undefined") {
       contents.forEach((content) => {
         content.style.opacity = "1";
@@ -1146,14 +1145,30 @@ export function bannerContentFadeIn() {
     return gsap.to(contents, {
       autoAlpha: 1,
       y: 0,
-      duration: 0.4,
-      ease: "power2.out",
+      duration: 0.5,
+      delay,
+      ease: "power2.out"
     });
   };
 
-  if (document.readyState === "complete") return play();
+  const start = () => {
+    const loadingComplete =
+      document.documentElement.dataset.loadingComplete === "true" ||
+      loadingElement?.hidden;
 
-  window.addEventListener("load", play, { once: true });
+    if (loadingElement && !loadingComplete) {
+      window.addEventListener("pageLoadingComplete", () => play(0.1), {
+        once: true
+      });
+      return null;
+    }
+
+    return play();
+  };
+
+  if (document.readyState === "complete") return start();
+
+  window.addEventListener("load", start, { once: true });
   return null;
 }
 
@@ -1177,7 +1192,7 @@ export function menuFlipbook() {
     const buffer = audioContext.createBuffer(
       1,
       frameCount,
-      audioContext.sampleRate,
+      audioContext.sampleRate
     );
     const channel = buffer.getChannelData(0);
 
@@ -1197,7 +1212,7 @@ export function menuFlipbook() {
     gain.gain.setValueAtTime(0.055, audioContext.currentTime);
     gain.gain.exponentialRampToValueAtTime(
       0.001,
-      audioContext.currentTime + duration,
+      audioContext.currentTime + duration
     );
 
     source.connect(filter);
@@ -1222,7 +1237,7 @@ export function menuFlipbook() {
     const totalLabel = viewer.querySelector("[data-menu-total]");
 
     let activeGroup = groups.find((group) =>
-      group.classList.contains("is-active"),
+      group.classList.contains("is-active")
     );
     let soundEnabled = true;
 
@@ -1240,10 +1255,9 @@ export function menuFlipbook() {
       const lastPageIndex = isLandscape
         ? Math.max(0, pageCount - (pageCount % 2 === 0 ? 2 : 1))
         : Math.max(0, pageCount - 1);
-      const displayedPage =
-        isLandscape && pageCount > 2 && pageIndex >= lastPageIndex
-          ? pageCount
-          : pageIndex + 1;
+      const displayedPage = isLandscape
+        ? Math.min(pageIndex + 2, pageCount)
+        : pageIndex + 1;
 
       if (currentLabel) {
         currentLabel.textContent = String(displayedPage).padStart(2, "0");
@@ -1297,7 +1311,7 @@ export function menuFlipbook() {
             pageElement.setAttribute("data-density", "soft");
             pageElement.setAttribute(
               "aria-label",
-              `Trang ${index + 1} / ${pdf.numPages}`,
+              `Trang ${index + 1} / ${pdf.numPages}`
             );
             canvas.width = Math.ceil(viewport.width);
             canvas.height = Math.ceil(viewport.height);
@@ -1306,7 +1320,7 @@ export function menuFlipbook() {
 
             await pdfPage.render({ canvasContext: context, viewport }).promise;
             return pageElement;
-          }),
+          })
         );
 
         book.replaceChildren(...pageElements);
@@ -1328,7 +1342,7 @@ export function menuFlipbook() {
           useMouseEvents: true,
           mobileScrollSupport: false,
           clickEventForward: true,
-          autoSize: true,
+          autoSize: true
         });
 
         let isInteractive = false;
@@ -1388,7 +1402,7 @@ export function menuFlipbook() {
       filter.addEventListener("click", () => {
         const target = filter.dataset.menuFilter;
         const nextGroup = groups.find(
-          (group) => group.dataset.menuGroup === target,
+          (group) => group.dataset.menuGroup === target
         );
         if (!nextGroup || nextGroup === activeGroup) return;
 
@@ -1422,7 +1436,7 @@ export function menuFlipbook() {
       soundButton.setAttribute("aria-pressed", String(soundEnabled));
       soundButton.setAttribute(
         "aria-label",
-        soundEnabled ? "Tắt âm thanh lật trang" : "Bật âm thanh lật trang",
+        soundEnabled ? "Tắt âm thanh lật trang" : "Bật âm thanh lật trang"
       );
     });
 
@@ -1443,7 +1457,7 @@ export function menuFlipbook() {
       fullscreenButton?.setAttribute("aria-pressed", String(isFullscreen));
       fullscreenButton?.setAttribute(
         "aria-label",
-        isFullscreen ? "Thoát toàn màn hình" : "Xem toàn màn hình",
+        isFullscreen ? "Thoát toàn màn hình" : "Xem toàn màn hình"
       );
       window.requestAnimationFrame(() => {
         activeGroup?._menuPageFlip?.update();
@@ -1461,4 +1475,58 @@ export function menuFlipbook() {
   };
 
   initViewer(document.querySelector("[data-menu-page]"));
+}
+
+export function loading() {
+  const loadingElement = document.querySelector(".loading");
+  if (!loadingElement) return;
+  const loadingLogo = loadingElement.querySelector(".logo");
+
+  const hideLoading = () => {
+    loadingElement.hidden = true;
+    loadingElement.classList.add("d-none");
+    document.documentElement.dataset.loadingComplete = "true";
+    window.dispatchEvent(new Event("pageLoadingComplete"));
+  };
+
+  const completeLoading = () => {
+    if (
+      typeof gsap === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      hideLoading();
+      return;
+    }
+
+    const timeline = gsap.timeline({ onComplete: hideLoading });
+
+    if (loadingLogo) {
+      timeline.fromTo(
+        loadingLogo,
+        { clipPath: "inset(100% 0% 0% 0%)" },
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 0.6,
+          ease: "power2.inOut"
+        }
+      );
+    }
+
+    timeline.fromTo(
+      loadingElement,
+      { clipPath: "inset(0% 0% 0% 0%)" },
+      {
+        clipPath: "inset(0% 0% 100% 0%)",
+        duration: 0.8,
+        ease: "power2.inOut"
+      }
+    );
+  };
+
+  if (document.readyState === "complete") {
+    completeLoading();
+    return;
+  }
+
+  window.addEventListener("load", completeLoading, { once: true });
 }

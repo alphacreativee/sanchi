@@ -15,7 +15,10 @@ import {
   parallaxImagesOnScroll,
   bannerContentFadeIn,
   menuFlipbook,
+  loading,
 } from "../../main/js/global.min.js";
+
+loading();
 
 const $ = jQuery;
 
