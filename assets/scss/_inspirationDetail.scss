@@ -14,6 +14,12 @@
     }
   }
 
+  &-heroPicture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
   &-inner {
     display: grid;
     grid-template-columns: minmax(0, 1.75fr) minmax(280px, 0.9fr);
@@ -310,6 +316,10 @@
     color: var(--color-text);
     text-align: center;
     text-transform: uppercase;
+
+    @media (max-width: 767px) {
+      font-size: 24px;
+    }
   }
 
   &-list {
@@ -422,7 +432,6 @@
     transform: scaleX(0);
     transform-origin: left center;
   }
-
 }
 
 @media (max-width: 1199px) {

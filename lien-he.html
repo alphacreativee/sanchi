@@ -48,11 +48,17 @@
       <section class="banner short-banner reveal-element" aria-label="">
         <div class="reveal-overlay"></div>
         <div class="banner-slide">
-          <img
-            class="banner-image"
-            src="./assets/images/del/banner-contact.jpg"
-            alt="Không gian  tại Sanchi Privé"
-          />
+          <picture class="banner-picture">
+            <source
+              media="(max-width: 767px)"
+              srcset="./assets/images/del/banner-contact.jpg"
+            />
+            <img
+              class="banner-image"
+              src="./assets/images/del/banner-contact.jpg"
+              alt="Không gian tại Sanchi Privé"
+            />
+          </picture>
           <div class="banner-content">
             <h1 class="banner-title heading-2">liên hệ</h1>
           </div>
@@ -318,7 +324,13 @@
       <section class="map">
         <div class="map-inner">
           <div class="map-image" data-fade-in>
-            <img src="./assets/images/del/map.jpg" alt="" />
+            <picture>
+              <source
+                media="(max-width: 767px)"
+                srcset="./assets/images/del/map-mobile.jpg"
+              />
+              <img src="./assets/images/del/map.jpg" alt="" />
+            </picture>
             <a
               href="https://maps.app.goo.gl/vV9Z1NCwTvU3CbTq8"
               class="map-link"
