@@ -1227,6 +1227,9 @@ export function menuFlipbook() {
 
     const filters = [...viewer.querySelectorAll("[data-menu-filter]")];
     const groups = [...viewer.querySelectorAll("[data-menu-group]")];
+    const filterWrap = viewer.querySelector(".menuModal-filterWrap");
+    const filterToggle = viewer.querySelector("[data-menu-filter-toggle]");
+    const filterLabel = viewer.querySelector("[data-menu-filter-label]");
     const prevButton = viewer.querySelector("[data-menu-prev]");
     const nextButton = viewer.querySelector("[data-menu-next]");
     const soundButton = viewer.querySelector("[data-menu-sound]");
@@ -1240,6 +1243,21 @@ export function menuFlipbook() {
       group.classList.contains("is-active")
     );
     let soundEnabled = true;
+
+    const closeMobileFilter = () => {
+      filterWrap?.classList.remove("is-open");
+      filterToggle?.setAttribute("aria-expanded", "false");
+    };
+
+    filterToggle?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const isOpen = filterWrap?.classList.toggle("is-open") || false;
+      filterToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!filterWrap?.contains(event.target)) closeMobileFilter();
+    });
 
     const updateDownload = () => {
       if (!downloadButton || !activeGroup) return;
@@ -1400,6 +1418,9 @@ export function menuFlipbook() {
 
     filters.forEach((filter) => {
       filter.addEventListener("click", () => {
+        if (filterLabel) filterLabel.textContent = filter.textContent.trim();
+        closeMobileFilter();
+
         const target = filter.dataset.menuFilter;
         const nextGroup = groups.find(
           (group) => group.dataset.menuGroup === target
@@ -1467,6 +1488,7 @@ export function menuFlipbook() {
     viewer.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") turnPage("prev");
       if (event.key === "ArrowRight") turnPage("next");
+      if (event.key === "Escape") closeMobileFilter();
     });
 
     updateDownload();

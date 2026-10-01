@@ -47,8 +47,19 @@
     <main class="menuPage" data-menu-page>
       <div class="menuPage-inner" data-menu-fullscreen-root>
         <div class="menuModal-filterWrap" data-lenis-prevent>
+          <button
+            class="menuModal-filterToggle b-tag"
+            type="button"
+            aria-expanded="false"
+            aria-controls="menuFilterOptions"
+            data-menu-filter-toggle
+          >
+            <span data-menu-filter-label>Sanchi Prive Signature Rituals</span>
+            <span class="menuModal-filterChevron" aria-hidden="true"></span>
+          </button>
           <div
             class="menuModal-filters"
+            id="menuFilterOptions"
             role="tablist"
             aria-label="Chọn gói liệu trình"
           >

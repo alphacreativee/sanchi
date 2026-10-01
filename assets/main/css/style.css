@@ -4278,6 +4278,9 @@ html.gallery-lightbox-open body {
   padding: 0 var(--menu-modal-edge);
   gap: 48px;
 }
+.menuModal-filterToggle {
+  display: none;
+}
 .menuModal-filter {
   position: relative;
   flex: 0 0 auto;
@@ -4552,16 +4555,76 @@ body.menu-modal-open {
   .menuModal-logo {
     width: 84px;
   }
+  .menuModal-filterWrap {
+    padding: 16px var(--menu-modal-edge) 8px;
+    border-bottom: 0;
+    background-color: var(--color-bg);
+    overflow: visible;
+  }
+  .menuModal-filterToggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    padding: 0 44px 0 16px;
+    border: 1px solid rgba(35, 35, 35, 0.2);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .menuModal-filterChevron {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    width: 8px;
+    height: 8px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: translateY(-70%) rotate(45deg);
+    transition: transform 0.25s ease;
+  }
   .menuModal-filters {
-    justify-content: flex-start;
-    gap: 32px;
+    position: absolute;
+    top: calc(100% + 4px);
+    right: var(--menu-modal-edge);
+    left: var(--menu-modal-edge);
+    z-index: 20;
+    display: none;
+    width: auto;
+    min-width: 0;
+    align-items: center;
+    flex-direction: column;
+    padding: 8px 0;
+    gap: 0;
+    background-color: var(--color-bg);
+    box-shadow: 0 10px 24px rgba(35, 35, 35, 0.12);
+  }
+  .menuModal-filter {
+    width: fit-content;
+    max-width: calc(100% - 32px);
+    padding: 12px 0;
+    text-align: center;
+  }
+  .menuModal-filter::after {
+    bottom: 9px;
+  }
+  .menuModal-filterWrap.is-open .menuModal-filters {
+    display: flex;
+  }
+  .menuModal-filterWrap.is-open .menuModal-filterChevron {
+    transform: translateY(-30%) rotate(225deg);
   }
   .menuModal-body {
-    padding-top: 54px;
-    padding-bottom: 12px;
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
   .menuModal-toolbar {
-    top: 8px;
+    top: auto;
+    right: var(--menu-modal-edge);
+    bottom: 16px;
   }
   .menuModal-tool {
     width: 34px;
@@ -4581,12 +4644,17 @@ body.menu-modal-open {
     width: 16px;
     height: 16px;
   }
+  .menuFlipbook-navigation {
+    align-self: flex-start;
+    justify-content: flex-start;
+    margin-top: 16px;
+  }
   .menuPage {
     --menu-modal-edge: 16px;
     padding-top: 82px;
   }
   .menuPage .menuModal-body {
-    padding-top: 64px;
+    padding-top: 16px;
     padding-bottom: 16px;
   }
   .menuPage .menuFlipbook-stage {
