@@ -1653,14 +1653,41 @@ input:-webkit-autofill:active {
   height: 100%;
   object-fit: cover;
 }
+.banner-video {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.banner-video iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;
+  min-width: 100%;
+  height: 56.25vw;
+  min-height: 100%;
+  border: 0;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s ease;
+}
+.banner-video.is-loaded iframe {
+  opacity: 1;
+}
 .banner-content {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   width: min(1120px, 100% - 160px);
+  height: 100%;
+  margin: 0 auto;
   opacity: 0;
+  pointer-events: none;
   visibility: hidden;
   transform: translate3d(0, 16px, 0);
   text-align: center;
@@ -1672,6 +1699,7 @@ input:-webkit-autofill:active {
 .banner-booking {
   min-width: 160px;
   margin-top: 40px;
+  pointer-events: auto;
 }
 .banner-arrow {
   position: absolute;
@@ -1682,7 +1710,7 @@ input:-webkit-autofill:active {
   justify-content: center;
   width: 48px;
   height: 72px;
-  color: var(--color-bg);
+  color: var(--color-white);
   transform: translateY(-50%);
   transition: opacity 0.3s ease;
 }
@@ -1692,6 +1720,9 @@ input:-webkit-autofill:active {
 .banner-arrow svg {
   width: 18px;
   height: 34px;
+}
+.banner-arrow svg path {
+  stroke: var(--color-white);
 }
 .banner-arrow:hover, .banner-arrow:focus-visible {
   opacity: 0.65;

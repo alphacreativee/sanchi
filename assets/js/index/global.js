@@ -164,6 +164,27 @@ export function bannerSlider() {
   if (!sliders.length || typeof Swiper === "undefined") return [];
 
   return Array.from(sliders).map((slider) => {
+    slider.querySelectorAll(".banner-slide[data-vimeo-id]").forEach((slide) => {
+      const vimeoId = slide.dataset.vimeoId?.trim();
+      if (!vimeoId || slide.querySelector(".banner-video")) return;
+
+      const video = document.createElement("div");
+      const iframe = document.createElement("iframe");
+
+      video.className = "banner-video";
+      iframe.src = `https://player.vimeo.com/video/${encodeURIComponent(vimeoId)}?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1`;
+      iframe.title = slide.dataset.vimeoTitle || "Video banner Sanchi Privé";
+      iframe.allow = "autoplay; fullscreen; picture-in-picture";
+      iframe.setAttribute("allowfullscreen", "");
+      iframe.addEventListener("load", () => video.classList.add("is-loaded"), {
+        once: true,
+      });
+
+      video.appendChild(iframe);
+      slide.appendChild(video);
+      slide.classList.add("has-vimeo");
+    });
+
     const slides = slider.querySelectorAll(".swiper-slide");
     const prevArrow = slider.querySelector(".swiper-button-prev");
     const nextArrow = slider.querySelector(".swiper-button-next");
@@ -174,10 +195,7 @@ export function bannerSlider() {
     });
 
     const options = {
-      effect: "fade",
-      fadeEffect: {
-        crossFade: true,
-      },
+      effect: "slide",
       speed: 900,
       loop: hasMultipleSlides,
       allowTouchMove: hasMultipleSlides,
@@ -188,6 +206,10 @@ export function bannerSlider() {
       options.navigation = {
         nextEl: nextArrow,
         prevEl: prevArrow,
+      };
+      options.autoplay = {
+        delay: 6000,
+        disableOnInteraction: false,
       };
     }
 
