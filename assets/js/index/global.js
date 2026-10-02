@@ -1236,13 +1236,76 @@ export function menuFlipbook() {
     const downloadButton = viewer.querySelector("[data-menu-download]");
     const fullscreenButton = viewer.querySelector("[data-menu-fullscreen]");
     const fullscreenRoot = viewer.querySelector("[data-menu-fullscreen-root]");
+    const zoomStage = viewer.querySelector(".menuFlipbook-stage");
     const currentLabel = viewer.querySelector("[data-menu-current]");
     const totalLabel = viewer.querySelector("[data-menu-total]");
+    const usePseudoFullscreen = /iPhone|iPod/i.test(navigator.userAgent);
 
     let activeGroup = groups.find((group) =>
       group.classList.contains("is-active")
     );
     let soundEnabled = true;
+    let zoomScale = 1;
+    let zoomX = 0;
+    let zoomY = 0;
+    let pinchStartDistance = 0;
+    let pinchStartScale = 1;
+    let pinchStartX = 0;
+    let pinchStartY = 0;
+    let pinchStartCenter = null;
+    let panStart = null;
+
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    const getTouchDistance = (touches) =>
+      Math.hypot(
+        touches[0].clientX - touches[1].clientX,
+        touches[0].clientY - touches[1].clientY
+      );
+
+    const getTouchCenter = (touches) => ({
+      x: (touches[0].clientX + touches[1].clientX) / 2,
+      y: (touches[0].clientY + touches[1].clientY) / 2
+    });
+
+    const applyZoom = () => {
+      if (!zoomStage || !activeGroup) return;
+
+      const maxX = (zoomStage.clientWidth * (zoomScale - 1)) / 2;
+      const maxY = (zoomStage.clientHeight * (zoomScale - 1)) / 2;
+      zoomX = clamp(zoomX, -maxX, maxX);
+      zoomY = clamp(zoomY, -maxY, maxY);
+
+      activeGroup.style.transform = `translate3d(${zoomX}px, ${zoomY}px, 0) scale(${zoomScale})`;
+      zoomStage.classList.toggle("is-zoomed", zoomScale > 1.001);
+    };
+
+    const resetZoom = (group = activeGroup) => {
+      zoomScale = 1;
+      zoomX = 0;
+      zoomY = 0;
+      pinchStartDistance = 0;
+      pinchStartCenter = null;
+      panStart = null;
+      if (group) group.style.transform = "";
+      zoomStage?.classList.remove("is-zoomed", "is-panning");
+    };
+
+    const setPseudoFullscreen = (isActive) => {
+      if (!fullscreenRoot) return;
+      fullscreenRoot.classList.toggle("is-menu-fullscreen", isActive);
+      document.body.classList.toggle("menu-page-fullscreen", isActive);
+      fullscreenButton?.setAttribute("aria-pressed", String(isActive));
+      fullscreenButton?.setAttribute(
+        "aria-label",
+        isActive ? "Thu nhỏ menu" : "Phóng to menu"
+      );
+      if (!isActive) resetZoom();
+
+      window.requestAnimationFrame(() => {
+        activeGroup?._menuPageFlip?.update();
+      });
+    };
 
     const closeMobileFilter = () => {
       filterWrap?.classList.remove("is-open");
@@ -1258,6 +1321,93 @@ export function menuFlipbook() {
     document.addEventListener("click", (event) => {
       if (!filterWrap?.contains(event.target)) closeMobileFilter();
     });
+
+    if (zoomStage) {
+      zoomStage.addEventListener(
+        "touchstart",
+        (event) => {
+          if (event.touches.length >= 2) {
+            event.preventDefault();
+            event.stopPropagation();
+            pinchStartDistance = getTouchDistance(event.touches);
+            pinchStartScale = zoomScale;
+            pinchStartX = zoomX;
+            pinchStartY = zoomY;
+            pinchStartCenter = getTouchCenter(event.touches);
+            panStart = null;
+            return;
+          }
+
+          if (zoomScale > 1.001 && event.touches.length === 1) {
+            event.preventDefault();
+            event.stopPropagation();
+            const touch = event.touches[0];
+            panStart = {
+              x: touch.clientX,
+              y: touch.clientY,
+              offsetX: zoomX,
+              offsetY: zoomY
+            };
+            zoomStage.classList.add("is-panning");
+          }
+        },
+        { passive: false, capture: true }
+      );
+
+      zoomStage.addEventListener(
+        "touchmove",
+        (event) => {
+          if (
+            event.touches.length >= 2 &&
+            pinchStartDistance > 0 &&
+            pinchStartCenter
+          ) {
+            event.preventDefault();
+            event.stopPropagation();
+            const distance = getTouchDistance(event.touches);
+            const center = getTouchCenter(event.touches);
+            zoomScale = clamp(
+              pinchStartScale * (distance / pinchStartDistance),
+              1,
+              3
+            );
+            zoomX = pinchStartX + center.x - pinchStartCenter.x;
+            zoomY = pinchStartY + center.y - pinchStartCenter.y;
+            applyZoom();
+            return;
+          }
+
+          if (zoomScale > 1.001 && event.touches.length === 1 && panStart) {
+            event.preventDefault();
+            event.stopPropagation();
+            const touch = event.touches[0];
+            zoomX = panStart.offsetX + touch.clientX - panStart.x;
+            zoomY = panStart.offsetY + touch.clientY - panStart.y;
+            applyZoom();
+          }
+        },
+        { passive: false, capture: true }
+      );
+
+      zoomStage.addEventListener(
+        "touchend",
+        (event) => {
+          if (zoomScale > 1.001 || pinchStartDistance > 0) {
+            event.stopPropagation();
+          }
+          if (event.touches.length < 2) {
+            pinchStartDistance = 0;
+            pinchStartCenter = null;
+          }
+          if (!event.touches.length) {
+            panStart = null;
+            zoomStage.classList.remove("is-panning");
+          }
+          if (zoomScale <= 1.02) resetZoom();
+        },
+        { capture: true }
+      );
+    }
 
     const updateDownload = () => {
       if (!downloadButton || !activeGroup) return;
@@ -1427,6 +1577,8 @@ export function menuFlipbook() {
         );
         if (!nextGroup || nextGroup === activeGroup) return;
 
+        resetZoom(activeGroup);
+
         filters.forEach((item) => {
           const isActive = item === filter;
           item.classList.toggle("is-active", isActive);
@@ -1462,19 +1614,33 @@ export function menuFlipbook() {
     });
 
     fullscreenButton?.addEventListener("click", async () => {
+      if (fullscreenRoot?.classList.contains("is-menu-fullscreen")) {
+        setPseudoFullscreen(false);
+        return;
+      }
+
       try {
         if (document.fullscreenElement) {
           await document.exitFullscreen();
-        } else {
+        } else if (usePseudoFullscreen) {
+          setPseudoFullscreen(true);
+        } else if (
+          document.fullscreenEnabled &&
+          fullscreenRoot?.requestFullscreen
+        ) {
           await fullscreenRoot?.requestFullscreen();
+        } else {
+          setPseudoFullscreen(true);
         }
       } catch (error) {
-        console.warn("Không thể chuyển chế độ toàn màn hình.", error);
+        setPseudoFullscreen(true);
       }
     });
 
     document.addEventListener("fullscreenchange", () => {
-      const isFullscreen = document.fullscreenElement === fullscreenRoot;
+      const isFullscreen =
+        document.fullscreenElement === fullscreenRoot ||
+        fullscreenRoot?.classList.contains("is-menu-fullscreen");
       fullscreenButton?.setAttribute("aria-pressed", String(isFullscreen));
       fullscreenButton?.setAttribute(
         "aria-label",
@@ -1488,7 +1654,12 @@ export function menuFlipbook() {
     viewer.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") turnPage("prev");
       if (event.key === "ArrowRight") turnPage("next");
-      if (event.key === "Escape") closeMobileFilter();
+      if (event.key === "Escape") {
+        closeMobileFilter();
+        if (fullscreenRoot?.classList.contains("is-menu-fullscreen")) {
+          setPseudoFullscreen(false);
+        }
+      }
     });
 
     updateDownload();

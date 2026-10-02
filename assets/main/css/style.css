@@ -4361,6 +4361,10 @@ body.menu-modal-open {
   overflow: hidden;
 }
 
+body.menu-page-fullscreen {
+  overflow: hidden;
+}
+
 @media (min-width: 768px) {
   .menuModal-filterWrap {
     overflow-x: hidden;
@@ -4384,6 +4388,13 @@ body.menu-modal-open {
   align-items: center;
   justify-content: center;
   perspective: 1800px;
+  touch-action: none;
+}
+.menuFlipbook-stage.is-zoomed {
+  overflow: hidden;
+}
+.menuFlipbook-stage.is-panning {
+  cursor: grabbing;
 }
 .menuFlipbook-menus, .menuFlipbook-menu {
   height: 100%;
@@ -4397,6 +4408,8 @@ body.menu-modal-open {
 .menuFlipbook-menu {
   position: relative;
   display: grid;
+  transform-origin: center center;
+  will-change: transform;
   place-items: center;
 }
 .menuFlipbook-menu[hidden] {
@@ -4527,6 +4540,15 @@ body.menu-modal-open {
   }
 }
 .menuPage-inner:fullscreen {
+  width: 100vw;
+  height: 100dvh;
+  background: var(--color-bg);
+}
+
+.menuPage-inner.is-menu-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
   width: 100vw;
   height: 100dvh;
   background: var(--color-bg);

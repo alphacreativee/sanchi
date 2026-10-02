@@ -197,6 +197,10 @@ body.menu-modal-open {
   overflow: hidden;
 }
 
+body.menu-page-fullscreen {
+  overflow: hidden;
+}
+
 @media (min-width: 768px) {
   .menuModal {
     &-filterWrap {
@@ -225,6 +229,15 @@ body.menu-modal-open {
     align-items: center;
     justify-content: center;
     perspective: 1800px;
+    touch-action: none;
+
+    &.is-zoomed {
+      overflow: hidden;
+    }
+
+    &.is-panning {
+      cursor: grabbing;
+    }
   }
 
   &-menus,
@@ -242,6 +255,8 @@ body.menu-modal-open {
   &-menu {
     position: relative;
     display: grid;
+    transform-origin: center center;
+    will-change: transform;
     place-items: center;
   }
 
@@ -401,6 +416,15 @@ body.menu-modal-open {
 }
 
 .menuPage-inner:fullscreen {
+  width: 100vw;
+  height: 100dvh;
+  background: var(--color-bg);
+}
+
+.menuPage-inner.is-menu-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
   width: 100vw;
   height: 100dvh;
   background: var(--color-bg);
