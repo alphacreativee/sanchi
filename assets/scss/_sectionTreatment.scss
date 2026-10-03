@@ -41,7 +41,8 @@
     }
   }
 
-  &-card.swiper-slide-next {
+  &-card.is-right-preview {
+    cursor: pointer;
     opacity: 0.3;
   }
 
@@ -98,18 +99,6 @@
   &-card:hover &-link::after {
     transform: scaleX(0);
     transform-origin: right center;
-  }
-}
-
-@media (min-width: 768px) {
-  .sectionTreatment {
-    &-card.swiper-slide-next {
-      opacity: 1;
-    }
-
-    &-card.swiper-slide-next + &-card {
-      opacity: 0.3;
-    }
   }
 }
 

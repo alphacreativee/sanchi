@@ -48,21 +48,30 @@
     <header id="header" class="header position-fixed"></header>
 
     <main>
-      <section class="inspirationDetail offerDetail">
-        <div class="inspirationDetail-hero reveal-element">
-          <span class="reveal-overlay" aria-hidden="true"></span>
-          <picture class="inspirationDetail-heroPicture">
+      <section
+        class="banner short-banner reveal-element"
+        aria-label="Ưu đãi"
+      >
+        <span class="reveal-overlay" aria-hidden="true"></span>
+        <div class="banner-slide">
+          <picture class="banner-picture">
             <source
               media="(max-width: 767px)"
               srcset="./assets/images/del/banner-inspiration-detail.webp"
             />
             <img
+              class="banner-image"
               src="./assets/images/del/banner-inspiration-detail.webp"
               alt="Hành trình chăm sóc tại Sanchi Privé"
             />
           </picture>
+          <div class="banner-content">
+            <p class="banner-title heading-2">Ưu đãi</p>
+          </div>
         </div>
+      </section>
 
+      <section class="inspirationDetail offerDetail">
         <div class="inspirationDetail-inner">
           <div class="inspirationDetail-main" data-fade-in>
             <h1 class="inspirationDetail-title heading-3">

@@ -4,6 +4,7 @@ import {
   createFilterTab,
   getDateLightPick,
   headerMenu,
+  reservationLinkModal,
   bannerSlider,
   sectionTreatmentSlider,
   sectionTestimonialSlider,
@@ -90,6 +91,7 @@ function init() {
   customDropdown();
   createFilterTab();
   headerMenu();
+  reservationLinkModal();
   bannerSlider();
   sectionTreatmentSlider();
   sectionTestimonialSlider();

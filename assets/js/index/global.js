@@ -160,6 +160,26 @@ export function headerMenu() {
   });
 }
 
+export function reservationLinkModal() {
+  document.addEventListener("click", (event) => {
+    const reservationLink = event.target.closest(
+      'a[href="#reservationForm"]'
+    );
+
+    if (!reservationLink) return;
+
+    event.preventDefault();
+
+    const reservationModal = document.getElementById(
+      "formReservationModal"
+    );
+
+    if (!reservationModal || typeof bootstrap === "undefined") return;
+
+    bootstrap.Modal.getOrCreateInstance(reservationModal).show();
+  });
+}
+
 export function bannerSlider() {
   const sliders = document.querySelectorAll(".banner-slider");
   if (!sliders.length || typeof Swiper === "undefined") return [];
@@ -231,13 +251,20 @@ export function sectionTreatmentSlider() {
         section?.getBoundingClientRect().left || 0,
         0
       );
+      const sectionRight = Math.min(
+        section?.getBoundingClientRect().right || window.innerWidth,
+        window.innerWidth
+      );
 
       swiper.slides.forEach((slide) => {
         const bounds = slide.getBoundingClientRect();
         const isClippedLeft =
           bounds.left < sectionLeft - 1 && bounds.right > sectionLeft + 1;
+        const isClippedRight =
+          bounds.left < sectionRight - 1 && bounds.right > sectionRight + 1;
 
         slide.classList.toggle("is-left-preview", isClippedLeft);
+        slide.classList.toggle("is-right-preview", isClippedRight);
       });
     };
 
@@ -271,21 +298,94 @@ export function sectionTreatmentSlider() {
       }
     });
 
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let dragStartIndex = 0;
+    let suppressPreviewClick = false;
+
+    const getPointerPosition = (event) => {
+      const point = event.touches?.[0] || event.changedTouches?.[0] || event;
+
+      return {
+        x: point?.clientX || 0,
+        y: point?.clientY || 0
+      };
+    };
+
+    slider.addEventListener(
+      "pointerdown",
+      (event) => {
+        const point = getPointerPosition(event);
+        dragStartX = point.x;
+        dragStartY = point.y;
+        dragStartIndex = swiper.activeIndex;
+        suppressPreviewClick = false;
+      },
+      true
+    );
+
+    slider.addEventListener(
+      "pointermove",
+      (event) => {
+        if (!event.buttons && event.pointerType === "mouse") return;
+
+        const point = getPointerPosition(event);
+        if (
+          Math.abs(point.x - dragStartX) > 6 ||
+          Math.abs(point.y - dragStartY) > 6
+        ) {
+          suppressPreviewClick = true;
+        }
+      },
+      true
+    );
+
+    slider.addEventListener(
+      "pointerup",
+      (event) => {
+        const point = getPointerPosition(event);
+        const distanceX = point.x - dragStartX;
+        const distanceY = point.y - dragStartY;
+
+        if (
+          Math.abs(distanceX) < 40 ||
+          Math.abs(distanceX) <= Math.abs(distanceY) ||
+          swiper.activeIndex !== dragStartIndex
+        ) {
+          return;
+        }
+
+        suppressPreviewClick = true;
+
+        if (distanceX > 0 && !swiper.isBeginning) {
+          swiper.slidePrev();
+          return;
+        }
+
+        if (distanceX < 0 && !swiper.isEnd) {
+          swiper.slideNext();
+        }
+      },
+      true
+    );
+
     slider.addEventListener("click", (event) => {
+      if (suppressPreviewClick || !swiper.allowClick) {
+        event.preventDefault();
+        suppressPreviewClick = false;
+        return;
+      }
+
       const link = event.target.closest(".sectionTreatment-cardLink");
       const card = link?.closest(".sectionTreatment-card");
       const isPreviousPreview = card?.classList.contains("is-left-preview");
+      const isNextPreview = card?.classList.contains("is-right-preview");
 
       if (link && isPreviousPreview && !swiper.isBeginning) {
         event.preventDefault();
         swiper.slidePrev();
         return;
       }
-
-      if (!window.matchMedia("(min-width: 1200px)").matches) return;
-
-      const isNextPreview =
-        card?.previousElementSibling?.classList.contains("swiper-slide-next");
 
       if (!link || !isNextPreview || swiper.isEnd) return;
 

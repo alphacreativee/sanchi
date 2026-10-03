@@ -2212,7 +2212,8 @@ input:-webkit-autofill:active {
 .sectionTreatment-card.is-left-preview::after {
   opacity: 1;
 }
-.sectionTreatment-card.swiper-slide-next {
+.sectionTreatment-card.is-right-preview {
+  cursor: pointer;
   opacity: 0.3;
 }
 .sectionTreatment-cardLink {
@@ -2260,14 +2261,6 @@ input:-webkit-autofill:active {
   transform-origin: right center;
 }
 
-@media (min-width: 768px) {
-  .sectionTreatment-card.swiper-slide-next {
-    opacity: 1;
-  }
-  .sectionTreatment-card.swiper-slide-next + .sectionTreatment-card {
-    opacity: 0.3;
-  }
-}
 .sectionTreatment-slider.is-end .sectionTreatment-card {
   opacity: 1;
 }
@@ -3668,7 +3661,7 @@ html.gallery-lightbox-open body {
   color: inherit;
 }
 .layout-post .filter-item:hover .image img, .layout-post .filter-item:focus-visible .image img {
-  transform: scale(1.05);
+  transform: scale(1.05) !important;
 }
 .layout-post .filter-item .image {
   width: 100%;
