@@ -156,6 +156,7 @@
   }
 
   &-tool {
+    position: relative;
     display: grid;
     width: 38px;
     height: 38px;
@@ -176,19 +177,38 @@
       stroke-width: 1.4;
     }
 
-    &:hover {
-      border-color: var(--color-text);
-      background: var(--color-text);
-      color: var(--color-white);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--color-text);
+        background: var(--color-text);
+        color: var(--color-white);
 
-      svg,
-      svg path {
-        stroke: var(--color-white);
+        svg,
+        svg path {
+          stroke: var(--color-white);
+        }
       }
+    }
+
+    &[data-menu-sound]::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 22px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+      opacity: 0;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      transition: opacity 0.3s ease;
     }
 
     &[data-menu-sound]:not(.is-active) {
       opacity: 0.4;
+
+      &::after {
+        opacity: 1;
+      }
     }
   }
 }
@@ -199,6 +219,12 @@ body.menu-modal-open {
 
 body.menu-page-fullscreen {
   overflow: hidden;
+}
+
+body.menu-page-mobile-fullscreen {
+  #header {
+    display: none;
+  }
 }
 
 @media (min-width: 768px) {
@@ -430,6 +456,40 @@ body.menu-page-fullscreen {
   background: var(--color-bg);
 }
 
+.menuPage-inner.is-menu-mobile-fullscreen {
+  height: 100dvh;
+
+  .menuModal-body {
+    padding: 0 16px;
+  }
+
+  .menuFlipbook-stage,
+  .menuFlipbook-menus,
+  .menuFlipbook-menu,
+  .menuFlipbook-book {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .menuFlipbook-stage {
+    flex: 1 1 0;
+  }
+
+  .menuFlipbook-navigation {
+    position: absolute;
+    z-index: 8;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    left: max(16px, env(safe-area-inset-left));
+    margin: 0;
+  }
+
+  .menuModal-toolbar {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+
 @keyframes menuFlipbookSpin {
   to {
     transform: rotate(360deg);
@@ -543,6 +603,12 @@ body.menu-page-fullscreen {
     &-tool {
       width: 34px;
       height: 34px;
+      background-color: transparent;
+
+      &:active {
+        background-color: transparent;
+        opacity: 0.55;
+      }
     }
   }
 
@@ -592,4 +658,3 @@ body.menu-page-fullscreen {
     }
   }
 }
-

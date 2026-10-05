@@ -1339,7 +1339,9 @@ export function menuFlipbook() {
     const zoomStage = viewer.querySelector(".menuFlipbook-stage");
     const currentLabel = viewer.querySelector("[data-menu-current]");
     const totalLabel = viewer.querySelector("[data-menu-total]");
-    const usePseudoFullscreen = /iPhone|iPod/i.test(navigator.userAgent);
+    const mobileFullscreenMedia = window.matchMedia(
+      "(max-width: 767px), (hover: none) and (pointer: coarse)"
+    );
 
     let activeGroup = groups.find((group) =>
       group.classList.contains("is-active")
@@ -1354,6 +1356,7 @@ export function menuFlipbook() {
     let pinchStartY = 0;
     let pinchStartCenter = null;
     let panStart = null;
+    let redrawFrame = 0;
 
     const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -1391,20 +1394,36 @@ export function menuFlipbook() {
       zoomStage?.classList.remove("is-zoomed", "is-panning");
     };
 
-    const setPseudoFullscreen = (isActive) => {
+    const redrawActiveFlipbook = () => {
+      window.cancelAnimationFrame(redrawFrame);
+      redrawFrame = window.requestAnimationFrame(() => {
+        redrawFrame = window.requestAnimationFrame(() => {
+          const pageFlip = activeGroup?._menuPageFlip;
+          pageFlip?.update();
+          if (pageFlip) updateCounter(pageFlip.getCurrentPageIndex());
+        });
+      });
+    };
+
+    const setPseudoFullscreen = (isActive, isMobile = false) => {
       if (!fullscreenRoot) return;
       fullscreenRoot.classList.toggle("is-menu-fullscreen", isActive);
+      fullscreenRoot.classList.toggle(
+        "is-menu-mobile-fullscreen",
+        isActive && isMobile
+      );
       document.body.classList.toggle("menu-page-fullscreen", isActive);
+      document.body.classList.toggle(
+        "menu-page-mobile-fullscreen",
+        isActive && isMobile
+      );
       fullscreenButton?.setAttribute("aria-pressed", String(isActive));
       fullscreenButton?.setAttribute(
         "aria-label",
         isActive ? "Thu nhỏ menu" : "Phóng to menu"
       );
       if (!isActive) resetZoom();
-
-      window.requestAnimationFrame(() => {
-        activeGroup?._menuPageFlip?.update();
-      });
+      redrawActiveFlipbook();
     };
 
     const closeMobileFilter = () => {
@@ -1720,10 +1739,10 @@ export function menuFlipbook() {
       }
 
       try {
-        if (document.fullscreenElement) {
+        if (mobileFullscreenMedia.matches) {
+          setPseudoFullscreen(true, true);
+        } else if (document.fullscreenElement) {
           await document.exitFullscreen();
-        } else if (usePseudoFullscreen) {
-          setPseudoFullscreen(true);
         } else if (
           document.fullscreenEnabled &&
           fullscreenRoot?.requestFullscreen
@@ -1746,9 +1765,13 @@ export function menuFlipbook() {
         "aria-label",
         isFullscreen ? "Thoát toàn màn hình" : "Xem toàn màn hình"
       );
-      window.requestAnimationFrame(() => {
-        activeGroup?._menuPageFlip?.update();
-      });
+      redrawActiveFlipbook();
+    });
+
+    window.visualViewport?.addEventListener("resize", () => {
+      if (fullscreenRoot?.classList.contains("is-menu-fullscreen")) {
+        redrawActiveFlipbook();
+      }
     });
 
     viewer.addEventListener("keydown", (event) => {
