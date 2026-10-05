@@ -108,7 +108,7 @@ input:-webkit-autofill:active {
   &:hover,
   &:focus-visible {
     border: 0;
-    background-color: var(--color-text);
+    background-color: var(--color-bg-2);
     color: var(--color-bg);
   }
 }

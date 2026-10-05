@@ -151,8 +151,12 @@
 
   &-layout3Inner {
     display: grid;
-    grid-template-columns: minmax(240px, 0.9fr) minmax(0, 2.1fr);
-    gap: 40px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+
+    .sectionAbout-desc {
+      grid-column: span 2;
+    }
   }
 
   &-layout4 &-content {
@@ -247,6 +251,10 @@
     &-layout3Inner {
       .sectionAbout-title {
         margin-bottom: 0;
+      }
+
+      .sectionAbout-desc {
+        grid-column: auto;
       }
     }
 

@@ -1,5 +1,5 @@
-export function customDropdown() {
-  const dropdowns = document.querySelectorAll(
+export function customDropdown(root = document) {
+  const dropdowns = root.querySelectorAll(
     ".dropdown-custom, .dropdown-custom-select"
   );
   if (!dropdowns.length) return;
@@ -40,8 +40,9 @@ export function customDropdown() {
     btnDropdown.addEventListener("click", function (e) {
       e.stopPropagation();
       closeAllDropdowns(dropdown);
-      dropdownMenu.classList.toggle("dropdown--active");
-      btnDropdown.classList.toggle("--active");
+      const isOpen = dropdownMenu.classList.toggle("dropdown--active");
+      btnDropdown.classList.toggle("--active", isOpen);
+      btnDropdown.setAttribute("aria-expanded", String(isOpen));
     });
 
     document.addEventListener("click", function () {
@@ -88,6 +89,7 @@ export function customDropdown() {
       if (dropdownMenu.closest(".header-lang")) {
         dropdownMenu.classList.remove("dropdown--active");
         btnDropdown.classList.remove("--active");
+        btnDropdown.setAttribute("aria-expanded", "false");
       }
     });
   });
@@ -100,6 +102,7 @@ export function customDropdown() {
       if (!exception || dropdown !== exception) {
         menu.classList.remove("dropdown--active");
         btn.classList.remove("--active");
+        btn.setAttribute("aria-expanded", "false");
       }
     });
   }
@@ -134,6 +137,36 @@ export function headerScroll() {
 }
 
 export function headerMenu() {
+  const header = document.getElementById("header");
+  const loadLanguageDropdown = () => {
+    const mount = header?.querySelector("[data-header-lang-mount]");
+    if (!mount || mount.dataset.loaded === "true") return Boolean(mount);
+
+    mount.dataset.loaded = "true";
+    fetch("./components/lang.html")
+      .then((response) => {
+        if (!response.ok) throw new Error("Không thể tải bộ chọn ngôn ngữ");
+        return response.text();
+      })
+      .then((html) => {
+        mount.innerHTML = html;
+        customDropdown(mount);
+      })
+      .catch((error) => {
+        delete mount.dataset.loaded;
+        console.warn(error);
+      });
+
+    return true;
+  };
+
+  if (!loadLanguageDropdown() && header) {
+    const headerObserver = new MutationObserver(() => {
+      if (loadLanguageDropdown()) headerObserver.disconnect();
+    });
+    headerObserver.observe(header, { childList: true, subtree: true });
+  }
+
   document.addEventListener("click", (event) => {
     const toggle = event.target.closest("[data-header-toggle]");
     if (!toggle) return;

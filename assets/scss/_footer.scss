@@ -170,7 +170,12 @@
     &-main {
       grid-template-columns: 1fr;
       padding: 64px 16px;
-      gap: 48px;
+      gap: 32px;
+    }
+
+    &-title {
+      font-size: 18px;
+      line-height: 22px;
     }
 
     &-bottomInner {
