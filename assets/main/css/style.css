@@ -3259,11 +3259,21 @@ input:-webkit-autofill:active {
   color: var(--color-bg);
   text-transform: uppercase;
 }
+@media (max-width: 767px) {
+  .footer-title {
+    margin-bottom: 16px;
+  }
+}
 .footer-list {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   gap: 12px;
+}
+@media (max-width: 767px) {
+  .footer-list {
+    gap: 8px;
+  }
 }
 .footer-socials {
   display: grid;
@@ -3363,8 +3373,8 @@ input:-webkit-autofill:active {
 @media (max-width: 575px) {
   .footer-main {
     grid-template-columns: 1fr;
-    padding: 64px 16px;
-    gap: 32px;
+    padding: 64px 16px 48px;
+    gap: 24px;
   }
   .footer-title {
     font-size: 18px;
