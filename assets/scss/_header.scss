@@ -114,12 +114,12 @@
     .dropdown-custom-btn {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
+      gap: 6px;
       width: 100%;
       min-height: 32px;
-      padding: 0 2px 2px;
+      padding: 0 2px;
       border: 0;
-      border-bottom: 1px solid rgba(255, 253, 242, 0.6);
       color: var(--color-bg);
       text-align: left;
     }
@@ -176,14 +176,14 @@
         &::after {
           position: absolute;
           right: 0;
-          bottom: -2px;
+          bottom: -4px;
           left: 0;
           height: 1px;
-          background-color: currentColor;
+          background-color: var(--color-text);
           content: "";
           transform: scaleX(0);
           transform-origin: right center;
-          transition: transform 0.25s ease;
+          transition: transform 0.3s ease;
         }
       }
 
@@ -383,10 +383,6 @@
 
     &-lang-dropdown {
       font-size: 16px;
-
-      .dropdown-custom-btn {
-        border-bottom: 0;
-      }
     }
   }
 }

@@ -1137,6 +1137,10 @@ export function revealAnimationBox() {
         start: "top 85%",
         once: true
         // markers: true,
+      },
+      onComplete: () => {
+        element.dataset.revealComplete = "true";
+        element.dispatchEvent(new Event("revealAnimationComplete"));
       }
     });
 
@@ -1252,30 +1256,27 @@ export function parallaxImagesOnScroll() {
 }
 
 export function bannerContentFadeIn() {
-  const contents = document.querySelectorAll(".banner-content");
+  const contents = [...document.querySelectorAll(".banner-content")];
   if (!contents.length) return null;
   const loadingElement = document.querySelector(".loading");
-  let hasPlayed = false;
 
-  const play = (delay = 0) => {
-    if (hasPlayed) return null;
-    hasPlayed = true;
+  const animateContent = (content, delay = 0) => {
+    if (content.dataset.bannerContentShown === "true") return null;
+    content.dataset.bannerContentShown = "true";
 
     if (typeof gsap === "undefined") {
-      contents.forEach((content) => {
-        content.style.opacity = "1";
-        content.style.visibility = "visible";
-        content.style.transform = "none";
-      });
+      content.style.opacity = "1";
+      content.style.visibility = "visible";
+      content.style.transform = "none";
       return null;
     }
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      gsap.set(contents, { autoAlpha: 1, y: 0 });
+      gsap.set(content, { autoAlpha: 1, y: 0 });
       return null;
     }
 
-    return gsap.to(contents, {
+    return gsap.to(content, {
       autoAlpha: 1,
       y: 0,
       duration: 0.5,
@@ -1284,24 +1285,44 @@ export function bannerContentFadeIn() {
     });
   };
 
-  const start = () => {
-    const loadingComplete =
-      document.documentElement.dataset.loadingComplete === "true" ||
-      loadingElement?.hidden;
+  const afterLoading = (callback) => {
+    const start = () => {
+      const loadingComplete =
+        document.documentElement.dataset.loadingComplete === "true" ||
+        loadingElement?.hidden;
 
-    if (loadingElement && !loadingComplete) {
-      window.addEventListener("pageLoadingComplete", () => play(0.1), {
-        once: true
-      });
-      return null;
-    }
+      if (loadingElement && !loadingComplete) {
+        window.addEventListener("pageLoadingComplete", callback, {
+          once: true
+        });
+        return;
+      }
 
-    return play();
+      callback();
+    };
+
+    if (document.readyState === "complete") return start();
+    window.addEventListener("load", start, { once: true });
   };
 
-  if (document.readyState === "complete") return start();
+  contents.forEach((content) => {
+    const shortBanner = content.closest(".short-banner");
+    const revealElement = shortBanner
+      ? content.closest(".reveal-element")
+      : null;
 
-  window.addEventListener("load", start, { once: true });
+    if (revealElement && revealElement.dataset.revealComplete !== "true") {
+      revealElement.addEventListener(
+        "revealAnimationComplete",
+        () => afterLoading(() => animateContent(content)),
+        { once: true }
+      );
+      return;
+    }
+
+    afterLoading(() => animateContent(content, shortBanner ? 0 : 0.1));
+  });
+
   return null;
 }
 
