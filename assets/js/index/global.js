@@ -1,6 +1,6 @@
 export function customDropdown(root = document) {
   const dropdowns = root.querySelectorAll(
-    ".dropdown-custom, .dropdown-custom-select"
+    ".dropdown-custom, .dropdown-custom-select",
   );
   if (!dropdowns.length) return;
   dropdowns.forEach((dropdown) => {
@@ -21,7 +21,7 @@ export function customDropdown(root = document) {
 
     if (isSelectType && hiddenInput && dropdown.dataset.defaultValue) {
       const defaultItem = dropdown.querySelector(
-        `.dropdown-custom-item[data-value="${dropdown.dataset.defaultValue}"]`
+        `.dropdown-custom-item[data-value="${dropdown.dataset.defaultValue}"]`,
       );
 
       if (defaultItem) {
@@ -130,7 +130,7 @@ export function headerScroll() {
       }
 
       lastScroll = currentScroll;
-    }
+    },
   });
 
   return trigger;
@@ -195,17 +195,13 @@ export function headerMenu() {
 
 export function reservationLinkModal() {
   document.addEventListener("click", (event) => {
-    const reservationLink = event.target.closest(
-      'a[href="#reservationForm"]'
-    );
+    const reservationLink = event.target.closest('a[href="#reservationForm"]');
 
     if (!reservationLink) return;
 
     event.preventDefault();
 
-    const reservationModal = document.getElementById(
-      "formReservationModal"
-    );
+    const reservationModal = document.getElementById("formReservationModal");
 
     if (!reservationModal || typeof bootstrap === "undefined") return;
 
@@ -231,7 +227,7 @@ export function bannerSlider() {
       iframe.allow = "autoplay; fullscreen; picture-in-picture";
       iframe.setAttribute("allowfullscreen", "");
       iframe.addEventListener("load", () => video.classList.add("is-loaded"), {
-        once: true
+        once: true,
       });
 
       video.appendChild(iframe);
@@ -253,17 +249,17 @@ export function bannerSlider() {
       speed: 900,
       loop: hasMultipleSlides,
       allowTouchMove: hasMultipleSlides,
-      watchOverflow: true
+      watchOverflow: true,
     };
 
     if (hasMultipleSlides) {
       options.navigation = {
         nextEl: nextArrow,
-        prevEl: prevArrow
+        prevEl: prevArrow,
       };
       options.autoplay = {
         delay: 6000,
-        disableOnInteraction: false
+        disableOnInteraction: false,
       };
     }
 
@@ -282,11 +278,11 @@ export function sectionTreatmentSlider() {
       const section = slider.closest(".sectionTreatment");
       const sectionLeft = Math.max(
         section?.getBoundingClientRect().left || 0,
-        0
+        0,
       );
       const sectionRight = Math.min(
         section?.getBoundingClientRect().right || window.innerWidth,
-        window.innerWidth
+        window.innerWidth,
       );
 
       swiper.slides.forEach((slide) => {
@@ -313,12 +309,12 @@ export function sectionTreatmentSlider() {
       breakpoints: {
         768: {
           slidesPerView: 2.4,
-          spaceBetween: 20
+          spaceBetween: 20,
         },
         1200: {
           slidesPerView: 2.65,
-          spaceBetween: 20
-        }
+          spaceBetween: 20,
+        },
       },
       on: {
         init: syncEndState,
@@ -327,8 +323,8 @@ export function sectionTreatmentSlider() {
         fromEdge: syncEndState,
         resize: syncEndState,
         setTranslate: syncEndState,
-        transitionEnd: syncEndState
-      }
+        transitionEnd: syncEndState,
+      },
     });
 
     let dragStartX = 0;
@@ -341,7 +337,7 @@ export function sectionTreatmentSlider() {
 
       return {
         x: point?.clientX || 0,
-        y: point?.clientY || 0
+        y: point?.clientY || 0,
       };
     };
 
@@ -354,7 +350,7 @@ export function sectionTreatmentSlider() {
         dragStartIndex = swiper.activeIndex;
         suppressPreviewClick = false;
       },
-      true
+      true,
     );
 
     slider.addEventListener(
@@ -370,7 +366,7 @@ export function sectionTreatmentSlider() {
           suppressPreviewClick = true;
         }
       },
-      true
+      true,
     );
 
     slider.addEventListener(
@@ -399,7 +395,7 @@ export function sectionTreatmentSlider() {
           swiper.slideNext();
         }
       },
-      true
+      true,
     );
 
     slider.addEventListener("click", (event) => {
@@ -444,12 +440,12 @@ export function sectionTestimonialSlider() {
       autoplay: {
         delay: 5000,
         disableOnInteraction: false,
-        pauseOnMouseEnter: true
+        pauseOnMouseEnter: true,
       },
       pagination: {
         el: pagination,
-        clickable: true
-      }
+        clickable: true,
+      },
     });
   });
 }
@@ -485,14 +481,14 @@ export function offerDetailSlider() {
       autoplay: {
         delay: 5000,
         disableOnInteraction: false,
-        pauseOnMouseEnter: false
+        pauseOnMouseEnter: false,
       },
       pagination: {
         el: pagination,
         clickable: true,
         renderBullet(index, className) {
           return `<button class="${className}" type="button" aria-label="Chuyển đến ảnh ${index + 1}"><span class="offerDetail-progressFill"></span></button>`;
-        }
+        },
       },
       on: {
         init: updateCaption,
@@ -502,13 +498,13 @@ export function offerDetailSlider() {
         },
         autoplayTimeLeft(swiper, timeLeft, percentage) {
           const activeProgress = pagination?.querySelector(
-            ".swiper-pagination-bullet-active .offerDetail-progressFill"
+            ".swiper-pagination-bullet-active .offerDetail-progressFill",
           );
           if (activeProgress) {
             activeProgress.style.transform = `scaleX(${1 - percentage})`;
           }
-        }
-      }
+        },
+      },
     });
   });
 }
@@ -533,16 +529,16 @@ export function sectionGalleryLightbox() {
   const swiper = new Swiper(swiperEl, {
     navigation: {
       nextEl: lightbox.querySelector(".swiper-button-next"),
-      prevEl: lightbox.querySelector(".swiper-button-prev")
+      prevEl: lightbox.querySelector(".swiper-button-prev"),
     },
     pagination: {
       el: lightbox.querySelector(".swiper-fraction"),
-      type: "fraction"
+      type: "fraction",
     },
     on: {
       init: updateTitle,
-      slideChange: updateTitle
-    }
+      slideChange: updateTitle,
+    },
   });
 
   const openLightbox = (index, trigger) => {
@@ -592,10 +588,10 @@ export function formReservation() {
     const submitButton = form.querySelector(".formReservation-submit");
     const successMessage = form.querySelector(".formReservation-success");
     const requiredInputs = form.querySelectorAll(
-      ".formReservation-input[required]"
+      ".formReservation-input[required]",
     );
     const requiredDropdowns = form.querySelectorAll(
-      ".formReservation-dropdown[data-required]"
+      ".formReservation-dropdown[data-required]",
     );
     let submitTimer = null;
     let successTimer = null;
@@ -620,7 +616,7 @@ export function formReservation() {
         const defaultValue = dropdown.dataset.defaultValue || "";
         const defaultItem = defaultValue
           ? dropdown.querySelector(
-              `.dropdown-custom-item[data-value="${defaultValue}"]`
+              `.dropdown-custom-item[data-value="${defaultValue}"]`,
             )
           : null;
 
@@ -640,7 +636,7 @@ export function formReservation() {
 
     const showSuccessModal = () => {
       const successModalElement = document.getElementById(
-        "formReservationSuccessModal"
+        "formReservationSuccessModal",
       );
       resetForm();
 
@@ -661,7 +657,7 @@ export function formReservation() {
 
       if (currentModal && currentModal !== successModalElement) {
         currentModal.addEventListener("hidden.bs.modal", openSuccessModal, {
-          once: true
+          once: true,
         });
         bootstrap.Modal.getOrCreateInstance(currentModal).hide();
         return;
@@ -707,7 +703,7 @@ export function formReservation() {
         if (isEmpty) {
           isValid = false;
           firstInvalidControl ||= dropdown.querySelector(
-            ".dropdown-custom-btn"
+            ".dropdown-custom-btn",
           );
         }
       });
@@ -963,10 +959,10 @@ export function createFilterTab() {
 
     const getVisibleRevealBoxes = () => {
       const visibleItems = [...result.querySelectorAll(".filter-item")].filter(
-        (item) => item.style.display !== "none"
+        (item) => item.style.display !== "none",
       );
       return visibleItems.flatMap((item) => [
-        ...item.querySelectorAll(".reveal-element-item")
+        ...item.querySelectorAll(".reveal-element-item"),
       ]);
     };
 
@@ -982,7 +978,7 @@ export function createFilterTab() {
         gsap.set(overlay, {
           scaleY: 0,
           transformOrigin: "top",
-          overwrite: "auto"
+          overwrite: "auto",
         });
         gsap.set(media, { opacity: 0, scale: 1.05, overwrite: "auto" });
       });
@@ -1000,13 +996,13 @@ export function createFilterTab() {
           scaleY: 1,
           transformOrigin: "top",
           duration: 0.5,
-          ease: "power2.out"
+          ease: "power2.out",
         })
         .to(overlay, {
           scaleY: 0,
           transformOrigin: "bottom",
           duration: 0.5,
-          ease: "power2.inOut"
+          ease: "power2.inOut",
         })
         .set(media, { opacity: 1 }, 0.5)
         .to(media, { scale: 1, duration: 0.6, ease: "none" }, 0.5);
@@ -1041,7 +1037,7 @@ export function createFilterTab() {
             trigger: box,
             start: "top 85%",
             once: true,
-            onEnter: () => revealBox(box)
+            onEnter: () => revealBox(box),
           });
         }
       });
@@ -1108,7 +1104,7 @@ export function getDateLightPick() {
         datepicker.classList.remove("is-invalid");
         datepicker.dispatchEvent(new Event("input", { bubbles: true }));
         datepicker.dispatchEvent(new Event("change", { bubbles: true }));
-      }
+      },
     });
 
     datepicker.lightpickInstance = picker;
@@ -1135,20 +1131,20 @@ export function revealAnimationBox() {
       scrollTrigger: {
         trigger: element,
         start: "top 85%",
-        once: true
+        once: true,
         // markers: true,
       },
       onComplete: () => {
         element.dataset.revealComplete = "true";
         element.dispatchEvent(new Event("revealAnimationComplete"));
-      }
+      },
     });
 
     tl.to(overlay, {
       scaleY: 1,
       transformOrigin: "top",
       duration: 0.8,
-      ease: "power2.out"
+      ease: "power2.out",
     })
       .to(
         overlay,
@@ -1156,9 +1152,9 @@ export function revealAnimationBox() {
           scaleY: 0,
           transformOrigin: "bottom",
           duration: 0.6,
-          ease: "power2.inOut"
+          ease: "power2.inOut",
         },
-        ">"
+        ">",
       )
       .set(media, { opacity: 1 }, 0.8)
       .to(media, { scale: 1, duration: 0.7, ease: "power2.out" }, 0.8);
@@ -1178,7 +1174,7 @@ export function fadeInOnScroll() {
   gsap.registerPlugin(ScrollTrigger);
 
   const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
+    "(prefers-reduced-motion: reduce)",
   ).matches;
 
   return Array.from(elements).map((element) => {
@@ -1203,7 +1199,7 @@ export function fadeInOnScroll() {
       y: 0,
       duration: 0.4,
       delay,
-      ease: "power2.out"
+      ease: "power2.out",
     };
 
     if (isWithinInitialViewport) {
@@ -1215,8 +1211,8 @@ export function fadeInOnScroll() {
       scrollTrigger: {
         trigger: element,
         start: "top 70%",
-        once: true
-      }
+        once: true,
+      },
     });
   });
 }
@@ -1248,9 +1244,9 @@ export function parallaxImagesOnScroll() {
           trigger: image.parentElement,
           start: "top bottom",
           end: "bottom top",
-          scrub: true
-        }
-      }
+          scrub: true,
+        },
+      },
     );
   });
 }
@@ -1281,7 +1277,7 @@ export function bannerContentFadeIn() {
       y: 0,
       duration: 0.5,
       delay,
-      ease: "power2.out"
+      ease: "power2.out",
     });
   };
 
@@ -1293,7 +1289,7 @@ export function bannerContentFadeIn() {
 
       if (loadingElement && !loadingComplete) {
         window.addEventListener("pageLoadingComplete", callback, {
-          once: true
+          once: true,
         });
         return;
       }
@@ -1315,7 +1311,7 @@ export function bannerContentFadeIn() {
       revealElement.addEventListener(
         "revealAnimationComplete",
         () => afterLoading(() => animateContent(content)),
-        { once: true }
+        { once: true },
       );
       return;
     }
@@ -1346,7 +1342,7 @@ export function menuFlipbook() {
     const buffer = audioContext.createBuffer(
       1,
       frameCount,
-      audioContext.sampleRate
+      audioContext.sampleRate,
     );
     const channel = buffer.getChannelData(0);
 
@@ -1366,7 +1362,7 @@ export function menuFlipbook() {
     gain.gain.setValueAtTime(0.055, audioContext.currentTime);
     gain.gain.exponentialRampToValueAtTime(
       0.001,
-      audioContext.currentTime + duration
+      audioContext.currentTime + duration,
     );
 
     source.connect(filter);
@@ -1394,11 +1390,11 @@ export function menuFlipbook() {
     const currentLabel = viewer.querySelector("[data-menu-current]");
     const totalLabel = viewer.querySelector("[data-menu-total]");
     const mobileFullscreenMedia = window.matchMedia(
-      "(max-width: 767px), (hover: none) and (pointer: coarse)"
+      "(max-width: 767px), (hover: none) and (pointer: coarse)",
     );
 
     let activeGroup = groups.find((group) =>
-      group.classList.contains("is-active")
+      group.classList.contains("is-active"),
     );
     let soundEnabled = true;
     let zoomScale = 1;
@@ -1417,12 +1413,12 @@ export function menuFlipbook() {
     const getTouchDistance = (touches) =>
       Math.hypot(
         touches[0].clientX - touches[1].clientX,
-        touches[0].clientY - touches[1].clientY
+        touches[0].clientY - touches[1].clientY,
       );
 
     const getTouchCenter = (touches) => ({
       x: (touches[0].clientX + touches[1].clientX) / 2,
-      y: (touches[0].clientY + touches[1].clientY) / 2
+      y: (touches[0].clientY + touches[1].clientY) / 2,
     });
 
     const applyZoom = () => {
@@ -1464,17 +1460,17 @@ export function menuFlipbook() {
       fullscreenRoot.classList.toggle("is-menu-fullscreen", isActive);
       fullscreenRoot.classList.toggle(
         "is-menu-mobile-fullscreen",
-        isActive && isMobile
+        isActive && isMobile,
       );
       document.body.classList.toggle("menu-page-fullscreen", isActive);
       document.body.classList.toggle(
         "menu-page-mobile-fullscreen",
-        isActive && isMobile
+        isActive && isMobile,
       );
       fullscreenButton?.setAttribute("aria-pressed", String(isActive));
       fullscreenButton?.setAttribute(
         "aria-label",
-        isActive ? "Thu nhỏ menu" : "Phóng to menu"
+        isActive ? "Thu nhỏ menu" : "Phóng to menu",
       );
       if (!isActive) resetZoom();
       redrawActiveFlipbook();
@@ -1519,12 +1515,12 @@ export function menuFlipbook() {
               x: touch.clientX,
               y: touch.clientY,
               offsetX: zoomX,
-              offsetY: zoomY
+              offsetY: zoomY,
             };
             zoomStage.classList.add("is-panning");
           }
         },
-        { passive: false, capture: true }
+        { passive: false, capture: true },
       );
 
       zoomStage.addEventListener(
@@ -1542,7 +1538,7 @@ export function menuFlipbook() {
             zoomScale = clamp(
               pinchStartScale * (distance / pinchStartDistance),
               1,
-              3
+              3,
             );
             zoomX = pinchStartX + center.x - pinchStartCenter.x;
             zoomY = pinchStartY + center.y - pinchStartCenter.y;
@@ -1559,7 +1555,7 @@ export function menuFlipbook() {
             applyZoom();
           }
         },
-        { passive: false, capture: true }
+        { passive: false, capture: true },
       );
 
       zoomStage.addEventListener(
@@ -1578,7 +1574,7 @@ export function menuFlipbook() {
           }
           if (zoomScale <= 1.02) resetZoom();
         },
-        { capture: true }
+        { capture: true },
       );
     }
 
@@ -1652,7 +1648,7 @@ export function menuFlipbook() {
             pageElement.setAttribute("data-density", "soft");
             pageElement.setAttribute(
               "aria-label",
-              `Trang ${index + 1} / ${pdf.numPages}`
+              `Trang ${index + 1} / ${pdf.numPages}`,
             );
             canvas.width = Math.ceil(viewport.width);
             canvas.height = Math.ceil(viewport.height);
@@ -1661,7 +1657,7 @@ export function menuFlipbook() {
 
             await pdfPage.render({ canvasContext: context, viewport }).promise;
             return pageElement;
-          })
+          }),
         );
 
         book.replaceChildren(...pageElements);
@@ -1683,7 +1679,7 @@ export function menuFlipbook() {
           useMouseEvents: true,
           mobileScrollSupport: false,
           clickEventForward: true,
-          autoSize: true
+          autoSize: true,
         });
 
         let isInteractive = false;
@@ -1746,7 +1742,7 @@ export function menuFlipbook() {
 
         const target = filter.dataset.menuFilter;
         const nextGroup = groups.find(
-          (group) => group.dataset.menuGroup === target
+          (group) => group.dataset.menuGroup === target,
         );
         if (!nextGroup || nextGroup === activeGroup) return;
 
@@ -1782,7 +1778,7 @@ export function menuFlipbook() {
       soundButton.setAttribute("aria-pressed", String(soundEnabled));
       soundButton.setAttribute(
         "aria-label",
-        soundEnabled ? "Tắt âm thanh lật trang" : "Bật âm thanh lật trang"
+        soundEnabled ? "Tắt âm thanh lật trang" : "Bật âm thanh lật trang",
       );
     });
 
@@ -1817,7 +1813,7 @@ export function menuFlipbook() {
       fullscreenButton?.setAttribute("aria-pressed", String(isFullscreen));
       fullscreenButton?.setAttribute(
         "aria-label",
-        isFullscreen ? "Thoát toàn màn hình" : "Xem toàn màn hình"
+        isFullscreen ? "Thoát toàn màn hình" : "Xem toàn màn hình",
       );
       redrawActiveFlipbook();
     });
@@ -1877,8 +1873,8 @@ export function loading() {
         {
           clipPath: "inset(0% 0% 0% 0%)",
           duration: 0.6,
-          ease: "power2.inOut"
-        }
+          ease: "power2.inOut",
+        },
       );
     }
 
@@ -1888,8 +1884,8 @@ export function loading() {
       {
         clipPath: "inset(0% 0% 100% 0%)",
         duration: 0.8,
-        ease: "power2.inOut"
-      }
+        ease: "power2.inOut",
+      },
     );
   };
 
@@ -1899,4 +1895,19 @@ export function loading() {
   }
 
   window.addEventListener("load", completeLoading, { once: true });
+}
+export function ctaToggle() {
+  const cta = document.getElementById("cta");
+  if (!cta) return;
+
+  if (cta.dataset.scriptInitialized) return;
+  cta.dataset.scriptInitialized = "true";
+
+  const wrapper = cta.querySelector(".cta-wrapper");
+  const globalBtn = cta.querySelector(".cta-global");
+  if (!wrapper || !globalBtn) return;
+
+  globalBtn.addEventListener("click", () => {
+    wrapper.classList.toggle("is-open");
+  });
 }

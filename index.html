@@ -76,6 +76,16 @@
   </head>
 
   <body>
+    <!-- cta -->
+    <script>
+      fetch("./components/cta.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("cta").innerHTML = data;
+        });
+    </script>
+    <div id="cta"></div>
+    <!-- end cta -->
     <div class="loading" aria-hidden="true">
       <div class="logo">
         <img src="./assets/images/logo.svg" alt="" fetchpriority="high" />
