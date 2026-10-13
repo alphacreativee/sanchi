@@ -4887,7 +4887,7 @@ body.menu-page-mobile-fullscreen #header {
   position: relative;
 }
 #cta .cta-wrapper.is-open .cta-global {
-  background-color: var(--color-black);
+  background-color: var(--color-text);
 }
 #cta .cta-wrapper.is-open .cta-global img:first-child {
   transform: scale(1);
@@ -4908,10 +4908,10 @@ body.menu-page-mobile-fullscreen #header {
   position: absolute;
   top: 0;
   transform: translateY(-100%);
-  margin-top: -12px;
+  margin-top: -4px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 4px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -4945,23 +4945,19 @@ body.menu-page-mobile-fullscreen #header {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: var(--color-primary-2);
+  background-color: var(--color-text);
   transition: all 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#cta .cta-item a img {
-  width: 18px;
-  height: 18px;
-}
 #cta .cta-item a:hover {
-  background-color: var(--color-black);
+  background-color: var(--color-bg-2);
 }
 #cta .cta-global {
   width: 36px;
   height: 36px;
-  background-color: var(--color-black);
+  background-color: var(--color-text);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -4986,7 +4982,7 @@ body.menu-page-mobile-fullscreen #header {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: var(--color-black);
+  background-color: var(--color-text);
   display: none;
 }
 @media (max-width: 991px) {
@@ -4998,5 +4994,5 @@ body.menu-page-mobile-fullscreen #header {
   }
 }
 #cta .cta-booking:hover {
-  background-color: var(--color-black);
+  background-color: var(--color-text);
 }
