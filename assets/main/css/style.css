@@ -1041,6 +1041,9 @@ input:-webkit-autofill:active {
   margin-bottom: 16px;
   margin-left: auto;
 }
+.formReservation-modal .formReservation-submit:hover {
+  background-color: var(--color-text);
+}
 
 .formSuccess-modal .modal-dialog {
   display: flex;
@@ -1929,9 +1932,15 @@ input:-webkit-autofill:active {
   .banner.short-banner {
     height: 350px;
     min-height: 350px;
+    padding: 0;
   }
   .banner.short-banner .banner-content {
     padding: 0 16px;
+  }
+  .banner.short-height-mobile {
+    height: 270px;
+    min-height: 270px;
+    padding: 0;
   }
 }
 .sectionIntro {
@@ -3233,7 +3242,7 @@ input:-webkit-autofill:active {
 
 .footer-main {
   display: grid;
-  grid-template-columns: minmax(320px, 1.4fr) minmax(230px, 1.05fr) minmax(190px, 0.85fr) minmax(230px, 1fr);
+  grid-template-columns: minmax(300px, 1.3fr) minmax(250px, 1.2fr) minmax(190px, 0.85fr) minmax(230px, 1fr);
   max-width: 1240px;
   margin: 0 auto;
   padding: 64px 20px 48px;
@@ -4892,6 +4901,9 @@ body.menu-page-mobile-fullscreen #header {
 }
 #cta .cta-wrapper {
   position: relative;
+}
+#cta .cta-wrapper:hover .cta-global {
+  background-color: var(--color-bg-2);
 }
 #cta .cta-wrapper.is-open .cta-global {
   background-color: var(--color-text);

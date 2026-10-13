@@ -125,6 +125,12 @@ input:-webkit-autofill:active {
     margin-bottom: 16px;
     margin-left: auto;
   }
+
+  .formReservation-submit {
+    &:hover {
+      background-color: var(--color-text);
+    }
+  }
 }
 
 .formSuccess-modal {
@@ -555,4 +561,3 @@ input:-webkit-autofill:active {
     }
   }
 }
-

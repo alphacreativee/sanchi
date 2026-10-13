@@ -235,9 +235,16 @@
   .banner.short-banner {
     height: 350px;
     min-height: 350px;
+    padding: 0;
 
     .banner-content {
       padding: 0 16px;
     }
+  }
+
+  .banner.short-height-mobile {
+    height: 270px;
+    min-height: 270px;
+    padding: 0;
   }
 }

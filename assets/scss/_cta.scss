@@ -15,6 +15,12 @@
     &-wrapper {
       position: relative;
 
+      &:hover {
+        .cta-global {
+          background-color: var(--color-bg-2);
+        }
+      }
+
       // Trạng thái MỞ (JS thêm class is-open)
       &.is-open {
         .cta-global {
