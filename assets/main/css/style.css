@@ -4107,11 +4107,18 @@ html.gallery-lightbox-open body {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px;
 }
+.sectionAbout-layout1 .sectionAbout-content {
+  min-width: 0;
+}
 .sectionAbout-layout1 .sectionAbout-image {
-  grid-column: 2/4;
+  grid-column: 2/span 2;
+  width: 100%;
+  max-width: 100%;
 }
 .sectionAbout-layout4 > .sectionAbout-image {
   grid-column: 1/3;
+  width: 100%;
+  max-width: 100%;
 }
 .sectionAbout-layout2 {
   display: grid;
@@ -4239,7 +4246,7 @@ html.gallery-lightbox-open body {
     padding: 0 16px var(--section-spacing);
   }
   .sectionAbout-layout1, .sectionAbout-layout2, .sectionAbout-layout4, .sectionAbout-layout3Inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 16px;
   }
   .sectionAbout-layout1 .sectionAbout-image, .sectionAbout-layout4 .sectionAbout-image {

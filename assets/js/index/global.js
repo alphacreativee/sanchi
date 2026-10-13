@@ -194,15 +194,12 @@ export function headerMenu() {
 }
 
 export function reservationLinkModal() {
-  document.addEventListener("click", (event) => {
-    const reservationLink = event.target.closest(
-      'a[href="#reservationForm"]'
-    );
+  const reservationHashes = new Set([
+    "#reservationForm",
+    "#formReservationModal",
+  ]);
 
-    if (!reservationLink) return;
-
-    event.preventDefault();
-
+  const showReservationModal = () => {
     const reservationModal = document.getElementById(
       "formReservationModal"
     );
@@ -210,6 +207,33 @@ export function reservationLinkModal() {
     if (!reservationModal || typeof bootstrap === "undefined") return;
 
     bootstrap.Modal.getOrCreateInstance(reservationModal).show();
+  };
+
+  document.addEventListener("click", (event) => {
+    const reservationLink = event.target.closest("a[href]");
+
+    if (!reservationLink) return;
+
+    const reservationUrl = new URL(reservationLink.href, window.location.href);
+    const isCurrentPage =
+      reservationUrl.origin === window.location.origin &&
+      reservationUrl.pathname === window.location.pathname &&
+      reservationUrl.search === window.location.search;
+
+    if (!isCurrentPage || !reservationHashes.has(reservationUrl.hash)) return;
+
+    event.preventDefault();
+    showReservationModal();
+  });
+
+  if (reservationHashes.has(window.location.hash)) {
+    showReservationModal();
+  }
+
+  window.addEventListener("hashchange", () => {
+    if (reservationHashes.has(window.location.hash)) {
+      showReservationModal();
+    }
   });
 }
 
@@ -1634,8 +1658,10 @@ export function menuFlipbook() {
         }
         if (!source || !book) throw new Error("Chưa thiết lập file PDF menu");
 
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-          "./assets/libs/pdf.worker.min.js";
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+          "../../libs/pdf.worker.min.js",
+          import.meta.url,
+        ).href;
 
         const pdf = await window.pdfjsLib.getDocument(source).promise;
         const firstPage = await pdf.getPage(1);

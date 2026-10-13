@@ -22,13 +22,21 @@
     gap: 32px;
   }
 
+  &-layout1 &-content {
+    min-width: 0;
+  }
+
   &-layout1 &-image {
-    grid-column: 2 / 4;
+    grid-column: 2 / span 2;
+    width: 100%;
+    max-width: 100%;
   }
 
   &-layout4 {
     & > .sectionAbout-image {
       grid-column: 1 / 3;
+      width: 100%;
+      max-width: 100%;
     }
   }
 
@@ -195,7 +203,7 @@
     &-layout2,
     &-layout4,
     &-layout3Inner {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 16px;
     }
 
