@@ -17,6 +17,7 @@ import {
   bannerContentFadeIn,
   menuFlipbook,
   loading,
+  ctaToggle,
 } from "../../main/js/global.min.js";
 
 loading();
@@ -109,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   init();
   initSwiper();
   revealAnimationBox();
+  ctaToggle();
 });
 
 let isLinkClicked = false;

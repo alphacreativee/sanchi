@@ -196,13 +196,11 @@ export function headerMenu() {
 export function reservationLinkModal() {
   const reservationHashes = new Set([
     "#reservationForm",
-    "#formReservationModal",
+    "#formReservationModal"
   ]);
 
   const showReservationModal = () => {
-    const reservationModal = document.getElementById(
-      "formReservationModal"
-    );
+    const reservationModal = document.getElementById("formReservationModal");
 
     if (!reservationModal || typeof bootstrap === "undefined") return;
 
@@ -1660,7 +1658,7 @@ export function menuFlipbook() {
 
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
           "../../libs/pdf.worker.min.js",
-          import.meta.url,
+          import.meta.url
         ).href;
 
         const pdf = await window.pdfjsLib.getDocument(source).promise;
@@ -1925,4 +1923,19 @@ export function loading() {
   }
 
   window.addEventListener("load", completeLoading, { once: true });
+}
+export function ctaToggle() {
+  const cta = document.getElementById("cta");
+  if (!cta) return;
+
+  if (cta.dataset.scriptInitialized) return;
+  cta.dataset.scriptInitialized = "true";
+
+  const wrapper = cta.querySelector(".cta-wrapper");
+  const globalBtn = cta.querySelector(".cta-global");
+  if (!wrapper || !globalBtn) return;
+
+  globalBtn.addEventListener("click", () => {
+    wrapper.classList.toggle("is-open");
+  });
 }
