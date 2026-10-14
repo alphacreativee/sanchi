@@ -1422,7 +1422,7 @@ export function menuFlipbook() {
     let activeGroup = groups.find((group) =>
       group.classList.contains("is-active")
     );
-    let soundEnabled = true;
+    let soundEnabled = false;
     let zoomScale = 1;
     let zoomX = 0;
     let zoomY = 0;

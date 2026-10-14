@@ -1723,6 +1723,20 @@ input:-webkit-autofill:active {
   .header-lang-dropdown {
     font-size: 16px;
   }
+  .header-lang-dropdown .dropdown-custom-btn,
+  .header-lang-dropdown .dropdown-custom-item {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .header-lang-dropdown .dropdown-custom-menu {
+    right: auto;
+    width: 100%;
+    min-width: max-content;
+    padding: 2px 0;
+  }
+  .header-lang-dropdown .dropdown-custom-item {
+    padding: 6px 10px;
+  }
 }
 @media (max-width: 767px) {
   .header-main::before {
@@ -4897,6 +4911,12 @@ body.menu-page-mobile-fullscreen #header {
 @media (max-width: 991px) {
   #cta {
     right: 24px;
+    bottom: 60px;
+  }
+}
+@media (max-width: 767px) {
+  #cta {
+    right: 16px;
   }
 }
 #cta .cta-wrapper {

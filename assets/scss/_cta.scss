@@ -9,6 +9,11 @@
 
   @media (max-width: 991px) {
     right: 24px;
+    bottom: 60px;
+  }
+
+  @media (max-width: 767px) {
+    right: 16px;
   }
 
   .cta {
