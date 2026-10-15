@@ -393,6 +393,20 @@ body.menu-page-mobile-fullscreen {
     color: var(--color-text);
     line-height: 1;
   }
+
+  &-pagination {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &-openLabel {
+    font-size: 10px;
+    line-height: 1.2;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
 }
 
 .menuPage {
