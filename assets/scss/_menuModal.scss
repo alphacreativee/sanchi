@@ -387,24 +387,11 @@ body.menu-page-mobile-fullscreen {
     }
   }
 
-  &-counter {
-    flex: 0 0 auto;
-    margin: 0;
-    color: var(--color-text);
-    line-height: 1;
-  }
-
-  &-pagination {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 2px;
-  }
-
   &-openLabel {
-    font-size: 10px;
-    line-height: 1.2;
-    letter-spacing: 0.8px;
+    flex: 0 0 auto;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
   }
 }
