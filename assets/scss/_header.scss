@@ -83,7 +83,9 @@
     font-weight: 600;
     letter-spacing: 1.8px;
     text-transform: uppercase;
-    transition: color 0.3s ease, background-color 0.3s ease;
+    transition:
+      color 0.3s ease,
+      background-color 0.3s ease;
 
     &::after {
       display: none;
@@ -147,7 +149,9 @@
       opacity: 0;
       visibility: hidden;
       transform: translateY(-6px);
-      transition: opacity 0.25s ease, visibility 0.25s ease,
+      transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease,
         transform 0.25s ease;
 
       &.dropdown--active {
@@ -165,7 +169,9 @@
       text-align: left;
       white-space: nowrap;
       text-transform: uppercase;
-      transition: background-color 0.2s ease, color 0.2s ease;
+      transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
 
       span {
         position: relative;
@@ -266,7 +272,7 @@
       overflow: hidden;
       margin-left: 0;
       padding: 40px 20px;
-      gap: 40px;
+      gap: 24px;
       background-color: var(--color-text);
       opacity: 0;
       visibility: hidden;
@@ -275,7 +281,9 @@
         opacity 0.3s ease,
         visibility 0.3s ease,
         transform 0.3s ease;
-
+      &-right {
+        margin-left: auto;
+      }
       &::before {
         content: "";
         position: absolute;
@@ -300,6 +308,7 @@
 
     &-menu {
       width: 100%;
+      margin-block: auto; // canh giữa theo chiều dọc trong phần còn trống
 
       ul {
         align-items: flex-start;
@@ -343,6 +352,15 @@
       }
     }
 
+    &-lang {
+      margin-left: 0;
+      margin-top: 0;
+    }
+
+    &-lang-dropdown {
+      font-size: 16px;
+    }
+
     &-booking {
       display: inline-flex;
       align-items: center;
@@ -375,14 +393,6 @@
     &-hamburger {
       display: flex;
       margin-left: auto;
-    }
-
-    &-lang {
-      margin-left: 0;
-    }
-
-    &-lang-dropdown {
-      font-size: 16px;
     }
   }
 }
