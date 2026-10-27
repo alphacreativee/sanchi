@@ -4914,12 +4914,9 @@ body.menu-page-mobile-fullscreen #header {
 }
 #cta .cta-wrapper {
   position: relative;
-}
-#cta .cta-wrapper:hover .cta-global {
-  background-color: var(--color-bg-2);
-}
-#cta .cta-wrapper.is-open .cta-global {
-  background-color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 #cta .cta-wrapper.is-open .cta-global img:first-child {
   transform: scale(1);
@@ -4986,6 +4983,24 @@ body.menu-page-mobile-fullscreen #header {
 #cta .cta-item a:hover {
   background-color: var(--color-bg-2);
 }
+#cta .cta-call {
+  width: 36px;
+  height: 36px;
+  display: flex;
+}
+#cta .cta-call a {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--color-text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+#cta .cta-call a:hover {
+  background-color: var(--color-bg-2);
+}
 #cta .cta-global {
   width: 36px;
   height: 36px;
@@ -4997,6 +5012,9 @@ body.menu-page-mobile-fullscreen #header {
   position: relative;
   transition: all 0.3s ease;
   cursor: pointer;
+}
+#cta .cta-global:hover {
+  background-color: var(--color-bg-2);
 }
 #cta .cta-global img {
   transition: all 0.3s ease;
