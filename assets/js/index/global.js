@@ -136,33 +136,109 @@ export function headerScroll() {
   return trigger;
 }
 
+// export function headerMenu() {
+//   const header = document.getElementById("header");
+//   const loadLanguageDropdown = () => {
+//     const mount = header?.querySelector("[data-header-lang-mount]");
+//     if (!mount || mount.dataset.loaded === "true") return Boolean(mount);
+
+//     mount.dataset.loaded = "true";
+//     fetch("./components/lang.html")
+//       .then((response) => {
+//         if (!response.ok) throw new Error("Không thể tải bộ chọn ngôn ngữ");
+//         return response.text();
+//       })
+//       .then((html) => {
+//         mount.innerHTML = html;
+//         customDropdown(mount);
+//       })
+//       .catch((error) => {
+//         delete mount.dataset.loaded;
+//         console.warn(error);
+//       });
+
+//     return true;
+//   };
+
+//   if (!loadLanguageDropdown() && header) {
+//     const headerObserver = new MutationObserver(() => {
+//       if (loadLanguageDropdown()) headerObserver.disconnect();
+//     });
+//     headerObserver.observe(header, { childList: true, subtree: true });
+//   }
+
+//   document.addEventListener("click", (event) => {
+//     const toggle = event.target.closest("[data-header-toggle]");
+//     if (!toggle) return;
+
+//     const navigation = document.getElementById("header-navigation");
+//     if (!navigation) return;
+
+//     const isOpen = navigation.classList.toggle("show");
+//     toggle.setAttribute("aria-expanded", String(isOpen));
+//     toggle.setAttribute("aria-label", isOpen ? "Đóng menu" : "Mở menu");
+//   });
+
+//   document.addEventListener("keydown", (event) => {
+//     if (event.key !== "Escape") return;
+
+//     const navigation = document.getElementById("header-navigation");
+//     const toggle = document.querySelector("[data-header-toggle]");
+//     if (!navigation?.classList.contains("show") || !toggle) return;
+
+//     navigation.classList.remove("show");
+//     toggle.setAttribute("aria-expanded", "false");
+//     toggle.setAttribute("aria-label", "Mở menu");
+//     toggle.focus();
+//   });
+// }
 export function headerMenu() {
   const header = document.getElementById("header");
-  const loadLanguageDropdown = () => {
-    const mount = header?.querySelector("[data-header-lang-mount]");
-    if (!mount || mount.dataset.loaded === "true") return Boolean(mount);
 
-    mount.dataset.loaded = "true";
-    fetch("./components/lang.html")
-      .then((response) => {
-        if (!response.ok) throw new Error("Không thể tải bộ chọn ngôn ngữ");
-        return response.text();
-      })
-      .then((html) => {
-        mount.innerHTML = html;
-        customDropdown(mount);
-      })
-      .catch((error) => {
-        delete mount.dataset.loaded;
-        console.warn(error);
-      });
-
-    return true;
+  // Tải lang.html đúng 1 lần, dùng lại cho mọi mount
+  let langPromise = null;
+  const fetchLang = () => {
+    if (!langPromise) {
+      langPromise = fetch("./components/lang.html")
+        .then((response) => {
+          if (!response.ok) throw new Error("Không thể tải bộ chọn ngôn ngữ");
+          return response.text();
+        })
+        .catch((error) => {
+          langPromise = null; // cho phép thử lại lần sau
+          throw error;
+        });
+    }
+    return langPromise;
   };
 
-  if (!loadLanguageDropdown() && header) {
+  // Xử lý tất cả mount chưa được nạp
+  const loadLanguageDropdowns = () => {
+    const mounts = header?.querySelectorAll("[data-header-lang-mount]") || [];
+    const pending = Array.from(mounts).filter(
+      (mount) => mount.dataset.loaded !== "true",
+    );
+
+    pending.forEach((mount) => {
+      mount.dataset.loaded = "true";
+      fetchLang()
+        .then((html) => {
+          mount.innerHTML = html;
+          customDropdown(mount);
+        })
+        .catch((error) => {
+          delete mount.dataset.loaded;
+          console.warn(error);
+        });
+    });
+
+    return mounts.length > 0;
+  };
+
+  // Chưa có mount nào thì chờ DOM render thêm, rồi tiếp tục theo dõi mount mới
+  if (!loadLanguageDropdowns() && header) {
     const headerObserver = new MutationObserver(() => {
-      if (loadLanguageDropdown()) headerObserver.disconnect();
+      if (loadLanguageDropdowns()) headerObserver.disconnect();
     });
     headerObserver.observe(header, { childList: true, subtree: true });
   }
@@ -192,7 +268,6 @@ export function headerMenu() {
     toggle.focus();
   });
 }
-
 export function reservationLinkModal() {
   const reservationHashes = new Set([
     "#reservationForm",

@@ -121,7 +121,7 @@
       </ul>
     </nav>
 
-    <div class="header-lang" data-header-lang-mount></div>
+    <div class="header-lang d-none d-lg-block" data-header-lang-mount></div>
 
     <button
       class="header-booking b-tag hover-underline-white"
@@ -134,16 +134,18 @@
       Đặt lịch
     </button>
   </div>
-
-  <button
-    class="header-hamburger"
-    type="button"
-    aria-label="Mở menu"
-    aria-controls="header-navigation"
-    aria-expanded="false"
-    data-header-toggle
-  >
-    <span></span>
-    <span></span>
-  </button>
+  <div class="header-main-right d-flex align-items-center gap-24">
+    <div class="header-lang d-block d-lg-none" data-header-lang-mount></div>
+    <button
+      class="header-hamburger"
+      type="button"
+      aria-label="Mở menu"
+      aria-controls="header-navigation"
+      aria-expanded="false"
+      data-header-toggle
+    >
+      <span></span>
+      <span></span>
+    </button>
+  </div>
 </div>

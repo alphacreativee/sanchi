@@ -272,7 +272,7 @@
       overflow: hidden;
       margin-left: 0;
       padding: 40px 20px;
-      gap: 40px;
+      gap: 24px;
       background-color: var(--color-text);
       opacity: 0;
       visibility: hidden;
@@ -281,7 +281,9 @@
         opacity 0.3s ease,
         visibility 0.3s ease,
         transform 0.3s ease;
-
+      &-right {
+        margin-left: auto;
+      }
       &::before {
         content: "";
         position: absolute;
@@ -306,6 +308,7 @@
 
     &-menu {
       width: 100%;
+      margin-block: auto; // canh giữa theo chiều dọc trong phần còn trống
 
       ul {
         align-items: flex-start;
@@ -349,6 +352,15 @@
       }
     }
 
+    &-lang {
+      margin-left: 0;
+      margin-top: 0;
+    }
+
+    &-lang-dropdown {
+      font-size: 16px;
+    }
+
     &-booking {
       display: inline-flex;
       align-items: center;
@@ -381,31 +393,6 @@
     &-hamburger {
       display: flex;
       margin-left: auto;
-    }
-
-    &-lang {
-      margin-left: 0;
-    }
-
-    &-lang-dropdown {
-      font-size: 16px;
-
-      .dropdown-custom-btn,
-      .dropdown-custom-item {
-        font-size: 16px;
-        line-height: 24px;
-      }
-
-      .dropdown-custom-menu {
-        right: auto;
-        width: 100%;
-        min-width: max-content;
-        padding: 2px 0;
-      }
-
-      .dropdown-custom-item {
-        padding: 6px 10px;
-      }
     }
   }
 }
