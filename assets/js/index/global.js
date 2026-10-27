@@ -216,7 +216,7 @@ export function headerMenu() {
   const loadLanguageDropdowns = () => {
     const mounts = header?.querySelectorAll("[data-header-lang-mount]") || [];
     const pending = Array.from(mounts).filter(
-      (mount) => mount.dataset.loaded !== "true",
+      (mount) => mount.dataset.loaded !== "true"
     );
 
     pending.forEach((mount) => {
@@ -682,6 +682,25 @@ export function sectionGalleryLightbox() {
 }
 
 export function formReservation() {
+  // `type="tel"` opens a phone-friendly keyboard but still accepts letters.
+  // Sanitize all phone fields, including fields added to the page later.
+  document.addEventListener("input", (event) => {
+    const input = event.target;
+    if (!(input instanceof HTMLInputElement) || input.type !== "tel") return;
+
+    const start = input.selectionStart;
+    const before = input.value;
+    const cleaned = before.replace(/[^\d+().\-\s]/g, "");
+    if (cleaned === before) return;
+
+    input.value = cleaned;
+    const removedBeforeCaret = before
+      .slice(0, start)
+      .replace(/[\d+().\-\s]/g, "").length;
+    const caret = Math.max(0, start - removedBeforeCaret);
+    input.setSelectionRange(caret, caret);
+  });
+
   const forms = document.querySelectorAll("[data-form-type]");
   if (!forms.length) return [];
 

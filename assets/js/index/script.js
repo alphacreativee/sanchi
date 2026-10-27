@@ -17,7 +17,7 @@ import {
   bannerContentFadeIn,
   menuFlipbook,
   loading,
-  ctaToggle,
+  ctaToggle
 } from "../../main/js/global.min.js";
 
 loading();
@@ -67,8 +67,8 @@ function initParallaxSwiper(swiperEl, options = {}) {
           if (image) image.style.transition = `${speed}ms ${easing}`;
         });
       },
-      ...(options.on || {}),
-    },
+      ...(options.on || {})
+    }
   });
 }
 
@@ -82,8 +82,8 @@ function initSwiper() {
   const swiperParallax = initParallaxSwiper(swiperEl, {
     navigation: {
       nextEl: containerSwiperEl.querySelector(".swiper-button-next"),
-      prevEl: containerSwiperEl.querySelector(".swiper-button-prev"),
-    },
+      prevEl: containerSwiperEl.querySelector(".swiper-button-prev")
+    }
   });
 }
 
