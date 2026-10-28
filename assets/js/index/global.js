@@ -314,28 +314,44 @@ export function bannerSlider() {
   const sliders = document.querySelectorAll(".banner-slider");
   if (!sliders.length || typeof Swiper === "undefined") return [];
 
-  return Array.from(sliders).map((slider) => {
-    slider.querySelectorAll(".banner-slide[data-vimeo-id]").forEach((slide) => {
-      const vimeoId = slide.dataset.vimeoId?.trim();
-      if (!vimeoId || slide.querySelector(".banner-video")) return;
+  const isMobile = window.matchMedia("(max-width: 767px)").matches;
+  const loadBannerVideos = () => {
+    sliders.forEach((slider) => {
+      slider.querySelectorAll(".banner-slide[data-vimeo-id]").forEach((slide) => {
+        const vimeoId = slide.dataset.vimeoId?.trim();
+        if (!vimeoId || slide.querySelector(".banner-video")) return;
 
-      const video = document.createElement("div");
-      const iframe = document.createElement("iframe");
+        const video = document.createElement("div");
+        const iframe = document.createElement("iframe");
 
-      video.className = "banner-video";
-      iframe.src = `https://player.vimeo.com/video/${encodeURIComponent(vimeoId)}?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1`;
-      iframe.title = slide.dataset.vimeoTitle || "Video banner Sanchi Privé";
-      iframe.allow = "autoplay; fullscreen; picture-in-picture";
-      iframe.setAttribute("allowfullscreen", "");
-      iframe.addEventListener("load", () => video.classList.add("is-loaded"), {
-        once: true
+        video.className = "banner-video";
+        iframe.src = `https://player.vimeo.com/video/${encodeURIComponent(vimeoId)}?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1`;
+        iframe.title = slide.dataset.vimeoTitle || "Video banner Sanchi Privé";
+        iframe.allow = "autoplay; fullscreen; picture-in-picture";
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.addEventListener("load", () => video.classList.add("is-loaded"), {
+          once: true
+        });
+
+        video.appendChild(iframe);
+        slide.appendChild(video);
+        slide.classList.add("has-vimeo");
       });
-
-      video.appendChild(iframe);
-      slide.appendChild(video);
-      slide.classList.add("has-vimeo");
     });
+  };
 
+  if (isMobile) {
+    const scheduleBannerVideos = () => window.setTimeout(loadBannerVideos, 3000);
+    if (document.readyState === "complete") {
+      scheduleBannerVideos();
+    } else {
+      window.addEventListener("load", scheduleBannerVideos, { once: true });
+    }
+  } else {
+    loadBannerVideos();
+  }
+
+  return Array.from(sliders).map((slider) => {
     const slides = slider.querySelectorAll(".swiper-slide");
     const prevArrow = slider.querySelector(".swiper-button-prev");
     const nextArrow = slider.querySelector(".swiper-button-next");
@@ -345,27 +361,29 @@ export function bannerSlider() {
       if (arrow) arrow.hidden = !hasMultipleSlides;
     });
 
+    if (!hasMultipleSlides) return null;
+
     const options = {
       effect: "slide",
       speed: 900,
-      loop: hasMultipleSlides,
-      allowTouchMove: hasMultipleSlides,
+      loop: true,
+      allowTouchMove: true,
       watchOverflow: true
     };
 
-    if (hasMultipleSlides) {
-      options.navigation = {
-        nextEl: nextArrow,
-        prevEl: prevArrow
-      };
-      options.autoplay = {
-        delay: 6000,
-        disableOnInteraction: false
-      };
-    }
+    options.navigation = {
+      nextEl: nextArrow,
+      prevEl: prevArrow
+    };
+    options.autoplay = {
+      delay: 6000,
+      disableOnInteraction: false
+    };
 
     return new Swiper(slider, options);
   });
+
+  return initializeSliders();
 }
 
 export function sectionTreatmentSlider() {
@@ -684,22 +702,37 @@ export function sectionGalleryLightbox() {
 export function formReservation() {
   // `type="tel"` opens a phone-friendly keyboard but still accepts letters.
   // Sanitize all phone fields, including fields added to the page later.
+  const phoneMinLength = 10;
+  const phoneMaxLength = 13;
+  document.querySelectorAll('input[type="tel"]').forEach((input) => {
+    input.minLength = phoneMinLength;
+    input.maxLength = phoneMaxLength;
+  });
+
   document.addEventListener("input", (event) => {
     const input = event.target;
     if (!(input instanceof HTMLInputElement) || input.type !== "tel") return;
 
-    const start = input.selectionStart;
+    input.minLength = phoneMinLength;
+    input.maxLength = phoneMaxLength;
     const before = input.value;
-    const cleaned = before.replace(/[^\d+().\-\s]/g, "");
+    const start = input.selectionStart ?? before.length;
+    const hasLeadingPlus = before.startsWith("+");
+    const digits = before.replace(/\D/g, "");
+    const cleaned = `${hasLeadingPlus ? "+" : ""}${digits}`.slice(
+      0,
+      phoneMaxLength
+    );
     if (cleaned === before) return;
 
     input.value = cleaned;
-    const removedBeforeCaret = before
-      .slice(0, start)
-      .replace(/[\d+().\-\s]/g, "").length;
-    const caret = Math.max(0, start - removedBeforeCaret);
+    const digitsBeforeCaret = before.slice(0, start).replace(/\D/g, "").length;
+    const caret = Math.min(
+      cleaned.length,
+      digitsBeforeCaret + (hasLeadingPlus && start > 0 ? 1 : 0)
+    );
     input.setSelectionRange(caret, caret);
-  });
+  }, true);
 
   const forms = document.querySelectorAll("[data-form-type]");
   if (!forms.length) return [];
@@ -788,7 +821,18 @@ export function formReservation() {
 
     requiredInputs.forEach((input) => {
       input.addEventListener("input", () => {
-        input.classList.remove("is-invalid");
+        const phoneLengthInvalid =
+          input.type === "tel" &&
+          (input.value.length < phoneMinLength ||
+            input.value.length > phoneMaxLength) &&
+          (input.value.length > 0 ||
+            input.dataset.validationAttempted === "true");
+
+        if (input.type === "tel") {
+          input.classList.toggle("is-invalid", phoneLengthInvalid);
+        } else {
+          input.classList.remove("is-invalid");
+        }
         hideSuccess();
       });
     });
@@ -809,8 +853,16 @@ export function formReservation() {
 
       requiredInputs.forEach((input) => {
         const isEmpty = !input.value.trim();
-        input.classList.toggle("is-invalid", isEmpty);
-        if (isEmpty) {
+        const isPhoneLengthInvalid =
+          input.type === "tel" &&
+          (input.value.length < phoneMinLength ||
+            input.value.length > phoneMaxLength);
+        const isInputInvalid = isEmpty || isPhoneLengthInvalid;
+        input.classList.toggle("is-invalid", isInputInvalid);
+        if (isInputInvalid) {
+          if (input.type === "tel") {
+            input.dataset.validationAttempted = "true";
+          }
           isValid = false;
           firstInvalidControl ||= input;
         }
